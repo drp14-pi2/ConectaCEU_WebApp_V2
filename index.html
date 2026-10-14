@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <script type="module">
+        import { storageKeys } from '/shared/constants/storage-keys.js'
+        import { pageRouting } from '/shared/constants/page-routing.js'
+
+        const authToken = sessionStorage.getItem(storageKeys.authToken)
+        
+        if (authToken) {
+            location.href = pageRouting.home
+        }
+        else {
+            location.href = pageRouting.login
+        }
+    </script>
+</body>
+</html>

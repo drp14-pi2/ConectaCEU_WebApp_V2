@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/shared/components/dynamic-content.js" defer></script>
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/login/login.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/pages/login/login.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <div class="background-shape"></div>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <main class="login-container">
+        <form id="curved-corner-topright">
+            <h1>Acessar conta</h1>
+
+            <div class="input-container">
+                <label for="user-document">CPF<span class="color-red">*</span></label>
+                <input type="text" name="user-document" id="user-document" placeholder="ex: 123.456.789-00">
+            </div>
+
+            <div class="input-container">
+                <label for="user-password">Senha<span class="color-red">*</span></label>
+                <input type="password" name="user-password" id="user-password" placeholder="***********">
+            </div>
+
+            <div class="other-actions smaller-font-size">
+                <p class="basic-spacing">Esqueceu sua senha? Solicite a troca <a href="#">aqui</a>.</p>
+                <p class="basic-spacing">Não tem conta? Crie uma <a href="#">aqui</a>.</p>
+                <p class="basic-spacing">Consultar <a href="#">Política de Privacidade</a> e <a href="#">Termos de Uso.</a></p>
+            </div>
+
+            <div class="button-row" id="button-submit-form">
+                <button type="button">Entrar</button>
+            </div>
+        </form>
+    </main>
+    <footer></footer>
+</body>
+</html>

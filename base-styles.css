@@ -1,0 +1,113 @@
+@font-face {
+  font-family: 'OpenSansRegular';
+  src: url('shared/assets/fonts/OpenSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSansSemiBold';
+  src: url('shared/assets/fonts/OpenSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSansBold';
+  src: url('shared/assets/fonts/OpenSans-Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+:root {
+    --dark-blue: #003251;
+    --medium-blue: #1383C9;
+    --light-blue: #eaf7ff;
+    --red: #ff0000;
+    --black: #000;
+    --white: #fff;
+    --base-font-size: 14pt;
+    --smaller-font-size: 12pt;
+    --base-transation: 150ms linear;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'OpenSansRegular';
+    font-size: var(--base-font-size);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'OpenSansBold';
+    text-align: center;
+    color: var(--dark-blue);
+}
+
+.color-red {
+    color: var(--red);
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.input-container input {
+    border: none;
+    border-radius: 5px;
+    height: 2.5em;
+    padding: 10px;
+    font-size: var(--base-font-size);
+}
+
+.input-container input:focus {
+    outline: 3px solid var(--medium-blue);
+}
+
+a {
+    color: var(--medium-blue);
+}
+
+a:hover {
+    color: var(--dark-blue);
+    transition: var(--base-transation);
+}
+
+.smaller-font-size {
+    font-size: var(--smaller-font-size);
+}
+
+.basic-spacing {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: var(--medium-blue);
+    border: none;
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'OpenSansSemiBold';
+    font-size: var(--base-font-size);
+    height: 2.5em;
+    width: 8em;
+}
+
+button:hover {
+    background-color: var(--dark-blue);
+    transition: var(--base-transation);
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}

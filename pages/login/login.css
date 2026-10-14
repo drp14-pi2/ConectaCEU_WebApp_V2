@@ -1,0 +1,32 @@
+.background-shape {
+    background-color: #1383c9;
+    border-radius: 0 0 0 100px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    min-height: 95%;
+    width: 90%;
+    z-index: -1;
+}
+
+.login-container {
+    border-radius: 30px;
+    display: flex;
+    max-width: 95%;
+    margin: auto;
+    margin-top: 100px;
+    background-image: url(/shared/assets/img/Biblioteca-2.jpeg);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: cover;
+}
+
+.login-container form {
+    background-color: #eaf7ff;
+    border-radius: 30px 80px 80px 30px;
+    padding: 25px;
+    padding-bottom: 35px;
+    width: 30%;
+    height: 100%;
+}
