@@ -18,8 +18,14 @@
             <h1>Acessar conta</h1>
 
             <div class="input-container">
-                <label for="user-document">CPF<span class="color-red">*</span></label>
-                <input type="text" name="user-document" id="user-document" placeholder="ex: 123.456.789-00">
+                <label for="user-document">Documento (CPF ou CNH)<span class="color-red">*</span></label>
+                <input
+                    type="text"
+                    name="user-document"
+                    id="user-document"
+                    inputmode="numeric"
+                    maxlength="14"
+                    autocomplete="off">
             </div>
 
             <div class="input-container">
