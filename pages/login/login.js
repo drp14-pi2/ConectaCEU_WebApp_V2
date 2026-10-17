@@ -2,6 +2,7 @@ import { storageKeys } from '/shared/constants/storage-keys.js'
 import { pageRouting } from '/shared/constants/page-routing.js'
 import { config } from '/config.js'
 
+// Submit form
 const submitButton = document.getElementById('button-submit-form')
 submitButton.addEventListener('click', async () => {
     const userDocument = document.getElementById('user-document').value
