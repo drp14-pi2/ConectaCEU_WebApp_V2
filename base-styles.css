@@ -47,7 +47,7 @@ body {
 }
 
 main {
-    min-height: 80vh;
+    min-height: 82vh;
 }
 
 footer {
@@ -56,13 +56,40 @@ footer {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'OpenSansBold';
-    text-align: center;
     color: var(--dark-blue);
+    padding-top: 10px;
+    font-family: 'OpenSansBold';
+}
+
+h1 {
+    font-size: 25pt;
+}
+
+h2 {
+    font-size: 20pt;
+}
+
+h1, h2 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+h3, h4, h5, h6 {
+    font-size: var(--base-font-size);
+    padding-bottom: 5px;
+}
+
+p {
+    line-height: 2em;
 }
 
 .color-red {
     color: var(--red);
+}
+
+.bold {
+    color: var(--dark-blue);
+    font-family: 'OpenSansBold';
 }
 
 .input-container {
@@ -86,6 +113,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
     color: var(--medium-blue);
+    text-decoration: underline;
 }
 
 a:hover {
