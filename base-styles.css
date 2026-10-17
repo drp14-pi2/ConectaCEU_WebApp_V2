@@ -1,21 +1,24 @@
 @font-face {
   font-family: 'OpenSansRegular';
   src: url('shared/assets/fonts/OpenSans-Regular.ttf') format('truetype');
-  font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'OpenSansSemiBold';
   src: url('shared/assets/fonts/OpenSans-SemiBold.ttf') format('truetype');
-  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'OpenSansBold';
   src: url('shared/assets/fonts/OpenSans-Bold.ttf') format('truetype');
-  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSansLight';
+  src: url('shared/assets/fonts/OpenSans-Light.ttf') format('truetype');
   font-style: normal;
 }
 
@@ -40,6 +43,16 @@
 body {
     font-family: 'OpenSansRegular';
     font-size: var(--base-font-size);
+    min-height: 100vh;
+}
+
+main {
+    min-height: 80vh;
+}
+
+footer {
+    font-family: 'OpenSansLight';
+    margin-top: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {

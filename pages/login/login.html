@@ -13,37 +13,39 @@
 <body>
     <div class="background-shape"></div>
     <dynamic-content src="/shared/components/header.html"></dynamic-content>
-    <main class="login-container">
-        <form id="curved-corner-topright">
-            <h1>Acessar conta</h1>
+    <main>
+        <div class="login-container">
+            <form id="curved-corner-topright">
+                <h1>Acessar conta</h1>
 
-            <div class="input-container">
-                <label for="user-document">Documento (CPF ou CNH)<span class="color-red">*</span></label>
-                <input
-                    type="text"
-                    name="user-document"
-                    id="user-document"
-                    inputmode="numeric"
-                    maxlength="14"
-                    autocomplete="off">
-            </div>
+                <div class="input-container">
+                    <label for="user-document">Documento (CPF ou CNH)<span class="color-red">*</span></label>
+                    <input
+                        type="text"
+                        name="user-document"
+                        id="user-document"
+                        inputmode="numeric"
+                        maxlength="14"
+                        autocomplete="off">
+                </div>
 
-            <div class="input-container">
-                <label for="user-password">Senha<span class="color-red">*</span></label>
-                <input type="password" name="user-password" id="user-password" placeholder="***********">
-            </div>
+                <div class="input-container">
+                    <label for="user-password">Senha<span class="color-red">*</span></label>
+                    <input type="password" name="user-password" id="user-password" placeholder="***********">
+                </div>
 
-            <div class="other-actions smaller-font-size">
-                <p class="basic-spacing">Esqueceu sua senha? Solicite a troca <a href="#">aqui</a>.</p>
-                <p class="basic-spacing">Não tem conta? Crie uma <a href="#">aqui</a>.</p>
-                <p class="basic-spacing">Consultar <a href="#">Política de Privacidade</a> e <a href="#">Termos de Uso.</a></p>
-            </div>
+                <div class="other-actions smaller-font-size">
+                    <p class="basic-spacing">Esqueceu sua senha? Solicite a troca <a href="#">aqui</a>.</p>
+                    <p class="basic-spacing">Não tem conta? Crie uma <a href="#">aqui</a>.</p>
+                    <p class="basic-spacing">Consultar <a href="#">Política de Privacidade</a> e <a href="#">Termos de Uso.</a></p>
+                </div>
 
-            <div class="button-row" id="button-submit-form">
-                <button type="button">Entrar</button>
-            </div>
-        </form>
+                <div class="button-row" id="button-submit-form">
+                    <button type="button">Entrar</button>
+                </div>
+            </form>
+        </div>
     </main>
-    <footer></footer>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
 </body>
 </html>
