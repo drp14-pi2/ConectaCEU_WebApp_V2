@@ -1,6 +1,6 @@
-const openPopupBtn = document.getElementById('openPopupBtn')
+const openPrivacyPolicyBtn = document.getElementById('openPrivacyPolicyBtn')
 
-function open() {
+function openPrivacyPolicy() {
     const html = `
     <style>
         .popup {
@@ -72,20 +72,20 @@ function open() {
     document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', html)
 
     // Close on backdrop click
-    popup.querySelector('.popup-backdrop').addEventListener('click', close)
+    popup.querySelector('.popup-backdrop').addEventListener('click', closePrivacyPolicy)
 
     // Close on Escape
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && document.getElementById('popup')) close()
+        if (e.key === 'Escape' && document.getElementById('popup')) closePrivacyPolicy()
     })
 
     // Close button
     const closePopupBtn = document.getElementById('closePopupBtn')
-    closePopupBtn.addEventListener('click', close)
+    closePopupBtn.addEventListener('click', closePrivacyPolicy)
 }
 
-function close() {
+function closePrivacyPolicy() {
     document.getElementById('popup').remove()
 }
 
-openPopupBtn.addEventListener('click', open)
+openPrivacyPolicyBtn.addEventListener('click', openPrivacyPolicy)
