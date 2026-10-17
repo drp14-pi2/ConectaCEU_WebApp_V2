@@ -30,3 +30,18 @@
     width: 30%;
     height: 100%;
 }
+
+@media screen and (max-width: 1000px) {
+    .login-container {
+        background-image: none;
+        display: block;
+        padding: 10px;
+    }
+
+    .login-container form {
+        border-radius: 30px;
+        margin: auto;
+        width: 50%;
+        min-width: 300px;
+    }
+}
