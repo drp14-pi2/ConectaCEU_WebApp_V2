@@ -2,9 +2,13 @@ import { pageRouting } from '/shared/constants/page-routing.js'
 import { config } from '/config.js'
 import { showMessage } from '/shared/components/toast.component.js'
 
-// Submit form
-const submitButton = document.getElementById('button-submit-form')
-submitButton.addEventListener('click', async () => {
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return re.test(String(email).trim());
+}
+
+async function sendRecoveryRequest() {
     const emailInput = document.getElementById('email')
     const emailString = emailInput.value
 
@@ -33,10 +37,24 @@ submitButton.addEventListener('click', async () => {
             location.href = pageRouting.root
         }
     }
-})
-
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    return re.test(String(email).trim());
 }
+
+// Submit form with Enter key
+document.addEventListener('keydown', async (e) => {
+  let sending = false;
+  if (sending) return;
+  if (e.key !== 'Enter') return;
+  if (e.isComposing) return;
+
+  e.preventDefault();
+  sending = true;
+  try {
+    await sendRecoveryRequest(email);
+  } catch (err) {
+    console.error('Recovery request failed', err);
+  } finally {
+    sending = false;
+  }
+})
+const submitButton = document.getElementById('button-submit-form')
+submitButton.addEventListener('click', async () => await sendRecoveryRequest())
