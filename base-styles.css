@@ -41,8 +41,10 @@
 }
 
 body {
+    display: flex;
     font-family: 'OpenSansRegular';
     font-size: var(--base-font-size);
+    flex-direction: column;
     min-height: 100vh;
 }
 
@@ -52,7 +54,8 @@ main {
 
 footer {
     font-family: 'OpenSansLight';
-    margin-top: auto;
+    margin-top: 30px;
+    z-index: 9999;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -151,4 +154,14 @@ button:hover {
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+}
+
+@media screen and (max-width: 1100px) {
+    h1 {
+    font-size: 20pt;
+    }
+
+    h2 {
+        font-size: 15pt;
+    }
 }
