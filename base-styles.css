@@ -48,13 +48,29 @@ body {
     min-height: 100vh;
 }
 
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+header picture img {
+    max-width: 250px;
+}
+
 main {
     min-height: 82vh;
 }
 
 footer {
+    background-color: var(--medium-blue);
+    color: var(--white);
     font-family: 'OpenSansLight';
-    margin-top: 30px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
     z-index: 9999;
 }
 
