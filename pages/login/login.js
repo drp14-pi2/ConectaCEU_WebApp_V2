@@ -29,6 +29,7 @@ submitButton.addEventListener('click', async () => {
 
         if (responseBody.access_token) {
             sessionStorage.setItem(storageKeys.authToken, responseBody.access_token)
+            sessionStorage.setItem(storageKeys.loggedUser, JSON.stringify(responseBody.user))
             location.href = pageRouting.home
         }
         
