@@ -5,6 +5,7 @@ import { config } from '/config.js'
 // Submit form
 const submitButton = document.getElementById('button-submit-form')
 submitButton.addEventListener('click', async () => {
+    submitButton.setAttribute('disabled', true)
     const userDocument = document.getElementById('user-document').value
     const password = document.getElementById('user-password').value
 
@@ -20,6 +21,7 @@ submitButton.addEventListener('click', async () => {
     })
 
     if (!response.ok) {
+        submitButton.removeAttribute('disabled')
         throw new Error(`HTTP ${response.status}: ${await response.text()}`);
     }
     else {
@@ -29,5 +31,7 @@ submitButton.addEventListener('click', async () => {
             sessionStorage.setItem(storageKeys.authToken, responseBody.access_token)
             location.href = pageRouting.home
         }
+        
+        submitButton.removeAttribute('disabled')
     }
 })

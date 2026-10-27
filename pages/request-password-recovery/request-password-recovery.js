@@ -9,11 +9,13 @@ function isValidEmail(email) {
 }
 
 async function sendRecoveryRequest() {
+    submitButton.setAttribute('disabled', true)
     const emailInput = document.getElementById('email')
     const emailString = emailInput.value
 
     if (!isValidEmail(emailString)) {
-        await showMessage("E-mail inválido")
+        submitButton.removeAttribute('disabled')
+        showMessage("E-mail inválido")
 
         return
     }
@@ -27,7 +29,8 @@ async function sendRecoveryRequest() {
     emailInput.value = ''
 
     if (!response.ok) {
-        await showMessage(await response.text());
+        submitButton.removeAttribute('disabled')
+        showMessage(await response.text());
     }
     else {
         const responseBody = await response.json()
@@ -41,20 +44,21 @@ async function sendRecoveryRequest() {
 
 // Submit form with Enter key
 document.addEventListener('keydown', async (e) => {
-  let sending = false;
-  if (sending) return;
-  if (e.key !== 'Enter') return;
-  if (e.isComposing) return;
+    let sending = false;
+    if (sending) return;
+    if (e.key !== 'Enter') return;
+    if (e.isComposing) return;
 
-  e.preventDefault();
-  sending = true;
-  try {
-    await sendRecoveryRequest(email);
-  } catch (err) {
-    console.error('Recovery request failed', err);
-  } finally {
-    sending = false;
-  }
+    e.preventDefault();
+    sending = true;
+
+    try {
+        await sendRecoveryRequest(email);
+    } catch (err) {
+        console.error('Recovery request failed', err);
+    } finally {
+        sending = false;
+    }
 })
 const submitButton = document.getElementById('button-submit-form')
 submitButton.addEventListener('click', async () => await sendRecoveryRequest())
