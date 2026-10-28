@@ -7,6 +7,16 @@ class DynamicContent extends HTMLElement {
         const response = await fetch(src)
         this.innerHTML = await response.text()
 
+        // Re-run any <script> tags — innerHTML-inserted scripts don't execute
+        this.querySelectorAll('script').forEach((oldScript) => {
+            const newScript = document.createElement('script');
+            for (const { name, value } of oldScript.attributes) {
+                newScript.setAttribute(name, value);
+            }
+            newScript.textContent = oldScript.textContent;
+            oldScript.replaceWith(newScript);
+        });
+
         const token = sessionStorage.getItem(storageKeys.authToken)
         const header = this.querySelector('header')
 
