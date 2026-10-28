@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/create-user/create-user.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
+    <script type="module" src="/pages/create-user/create-user.js" defer></script>
+    <script type="module" src="/pages/privacy-policy/privacy-policy.js" defer></script>
+    <script type="module" src="/pages/terms-of-use/terms-of-use.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <main>
+        <div class="background-shape"></div>
+        <div class="form-container">
+            <form>
+                <h1>Cadastrar usuário</h1>
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="user-document">Documento <span class="color-red">*</span></label>
+                        <div class="input-with-select-container">
+                            <select name="select-document-type" id="select-document-type">
+                                <option selected>Selecionar</option>
+                                <option value="cpf">CPF</option>
+                                <option value="cin">CIN</option>
+                                <option value="cnh">CNH</option>
+                            </select>
+                            <input type="text" name="user-document" id="user-document" placeholder="ex: 12345678900" required>
+                        </div>
+                    </div>
+                    <div class="input-container file-input-container">
+                        <label>Carregar documento (frente) <span class="color-red">*</span></label>
+                        <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label>Carregar documento (verso) <span class="color-red">*</span></label>
+                        <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                    </div>
+                    <div class="input-container">
+                        <label>Carregar foto do aluno <span class="color-red">*</span></label>
+                        <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="email">E-mail <span class="color-red">*</span></label>
+                        <input type="text" name="email" id="email" placeholder="ex: meu.nome@gmail.com" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="userName">Nome completo <span class="color-red">*</span></label>
+                        <input type="text" name="userName" id="userName" placeholder="ex: Joana da Silva" required>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="birthdate">Data de nascimento <span class="color-red">*</span></label>
+                        <input type="date" name="birthdate" id="birthdate" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="phone">Celular <span class="color-red">*</span></label>
+                        <input type="text" name="phone" id="phone" placeholder="ex: (11) 91234-5678" required>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="secondPhone">Celular secundário</label>
+                        <input type="text" name="secondPhone" id="secondPhone" placeholder="ex: (11) 91234-5678">
+                    </div>
+                    <div class="input-container">
+                        <label for="sex">Sexo <span class="color-red">*</span></label>
+                        <select name="sex" id="sex">
+                            <option selected>Selecionar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="gender">Gênero <span class="color-red">*</span></label>
+                        <select name="gender" id="gender">
+                            <option selected>Selecionar</option>
+                        </select>
+                    </div>
+                    <div class="input-container">
+                        <label for="school">Escola</label>
+                        <input type="text" name="school" id="school" placeholder="ex: EMEF Alceu Amoroso Lima">
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="password">Senha <span class="color-red">*</span></label>
+                        <input type="password" name="password" id="password" placeholder="********" required>
+                        <div class="password-requirements">
+                            <p>Deve conter:</p>
+                            <ul>
+                                <li>Entre 8 e 128 caracteres.</li>
+                                <li>Pelo menos uma letra maíúscula e uma minúscula.</li>
+                                <li>Pelo menos um número.</li>
+                                <li>Pelo menos um caractere especial (&excl;, &commat;, #, &dollar;, &amp;, &ast;)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <label for="repeatedPassword">Repetir senha <span class="color-red">*</span></label>
+                        <input type="password" name="repeatedPassword" id="repeatedPassword" placeholder="********" required>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="zipCode">CEP <span class="color-red">*</span></label>
+                        <input type="text" name="zipCode" id="zipCode" placeholder="ex: 01014-900" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="street">Logradouro <span class="color-red">*</span></label>
+                        <input type="text" name="street" id="street" placeholder="ex: Rua João Brícola" required>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="addressNumber">Número <span class="color-red">*</span></label>
+                        <input type="text" name="addressNumber" id="addressNumber" placeholder="ex: 24" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="addressComplement">Complemento</label>
+                        <input type="text" name="street" id="addressComplement" placeholder="ex: 2º andar, Sala 15">
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="neighborhood">Bairro <span class="color-red">*</span></label>
+                        <input type="text" name="neighborhood" id="neighborhood" placeholder="ex: Centro" required>
+                    </div>
+                </div>
+
+                <section class="extra-form-data">
+                    <h2>Área do responsável (obrigatória somente se o aluno for menor de idade)</h2>
+
+                    <div class="inner-extra-form-data">
+                        <h3>Responsável 1</h3>
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container">
+                                <label for="representative-1-name">Nome completo <span class="color-red">*</span></label>
+                                <input type="text" name="representative-1-name" id="representative-1-name" placeholder="ex: Joana da Silva" required>
+                            </div>
+                            <div class="input-container">
+                                <label for="representative-1-degree">Grau <span class="color-red">*</span></label>
+                                <select name="representative-1-degree" id="representative-1-degree">
+                                    <option selected>Selecionar</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container">
+                                <label for="representative-1-document">Documento <span class="color-red">*</span></label>
+                                <div class="input-with-select-container">
+                                    <select name="select-document-type" id="select-document-type">
+                                        <option selected>Selecionar</option>
+                                        <option value="cpf">CPF</option>
+                                        <option value="cin">CIN</option>
+                                        <option value="cnh">CNH</option>
+                                    </select>
+                                    <input type="text" name="representative-1-document" id="representative-1-document" placeholder="ex: 12345678900" required>
+                                </div>
+                            </div>
+                            <div class="input-container file-input-container">
+                                <label>Carregar documento (frente) <span class="color-red">*</span></label>
+                                <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                            </div>
+                        </div>
+
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container file-input-container">
+                                <label>Carregar documento (verso) <span class="color-red">*</span></label>
+                                <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                            </div>
+                            <div class="input-container file-input-container">
+                                <label>Carregar autorização <span class="color-red">*</span></label>
+                                <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="inner-extra-form-data">
+                        <h3>Responsável 2</h3>
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container">
+                                <label for="representative-2-name">Nome completo <span class="color-red">*</span></label>
+                                <input type="text" name="representative-2-name" id="representative-2-name" placeholder="ex: Joana da Silva" required>
+                            </div>
+                            <div class="input-container">
+                                <label for="representative-2-degree">Grau <span class="color-red">*</span></label>
+                                <select name="representative-2-degree" id="representative-2-degree">
+                                    <option selected>Selecionar</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container">
+                                <label for="representative-2-document">Documento <span class="color-red">*</span></label>
+                                <div class="input-with-select-container">
+                                    <select name="select-document-type" id="select-document-type">
+                                        <option selected>Selecionar</option>
+                                        <option value="cpf">CPF</option>
+                                        <option value="cin">CIN</option>
+                                        <option value="cnh">CNH</option>
+                                    </select>
+                                    <input type="text" name="representative-2-document" id="representative-2-document" placeholder="ex: 12345678900" required>
+                                </div>
+                            </div>
+                            <div class="input-container file-input-container">
+                                <label>Carregar documento (frente) <span class="color-red">*</span></label>
+                                <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                            </div>
+                        </div>
+
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container file-input-container">
+                                <label>Carregar documento (verso) <span class="color-red">*</span></label>
+                                <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                            </div>
+                            <div class="input-container file-input-container">
+                                <label>Carregar autorização <span class="color-red">*</span></label>
+                                <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="extra-form-data">
+                    <h2>Atestado de saúde (obrigatória somente se o aluno tiver 70+ anos)</h2>
+
+                    <div class="inner-extra-form-data">
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container file-input-container">
+                                <label>Carregar atestado <span class="color-red">*</span></label>
+                                <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="checkbox-container">
+                    <div class="checkbox-input-container">
+                        <input type="checkbox" name="consent" id="consent">
+                        <label for="consent">O aluno declara estar ciente da <a id="openPrivacyPolicyBtn">Política de Privacidade</a> e dos <a id="openTermsOfUseBtn">Termos de Uso</a>.</label>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="button" id="button-submit-form">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
+</body>
+</html>

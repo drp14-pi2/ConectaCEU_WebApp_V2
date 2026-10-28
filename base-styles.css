@@ -126,6 +126,10 @@ p {
     font-size: var(--base-font-size);
 }
 
+.file-input-container > :last-child {
+    margin-top: auto;
+}
+
 .input-container input:focus {
     outline: 3px solid var(--medium-blue);
 }
@@ -170,6 +174,128 @@ button:hover {
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-row-col-2 .input-container {
+    width: 45%;
+}
+
+.input-with-select-container {
+    display: flex;
+}
+
+select:not(.input-with-select-container select) {
+    background-color: var(--white);
+    border: none;
+    border-radius: 5px;
+    height: 2.5em;
+    padding: 10px;
+    font-size: var(--base-font-size);
+}
+
+select > option {
+    background-color: var(--white);
+}
+
+.input-with-select-container select {
+    border: none;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--medium-blue);
+    color: var(--white);
+    padding: 0.35rem 0.75rem;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    font-size: 1em;
+    height: 100%;
+}
+
+.input-with-select-container input {
+    flex: 1 1 auto;
+    display: inline-flex;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+input[type="date"] {
+    font-family: 'OpenSansRegular';
+}
+
+.extra-form-data, .inner-extra-form-data {
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.extra-form-data  {
+    background-color: var(--white);
+    margin: 20px auto;
+}
+
+.inner-extra-form-data {
+    background-color: var(--light-blue);
+    margin: 20px auto;
+}
+
+.checkbox-container {
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.checkbox-input-container {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.checkbox-input-container input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--white);
+    border: 1px solid var(--medium-blue);
+    outline: none;
+    height: 3em;
+    width: 3em;
+    border-radius: 10px;
+
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.checkbox-input-container input[type="checkbox"]:checked {
+    background: var(--medium-blue);
+}
+
+.checkbox-input-container input[type="checkbox"]::before {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  transform: scale(0);
+  transition: transform 0.15s ease-in-out;
+  background: #fff;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.checkbox-input-container input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+@media screen and (max-width: 650px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row .input-container {
+        align-self: center;
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 1100px) {
