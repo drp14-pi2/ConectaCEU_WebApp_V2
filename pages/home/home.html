@@ -5,11 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
     <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/home/home.css">
     <script type="module" src="/shared/functions/auth-guard.js"></script>
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
     <script type="module" src="/pages/home/home.js" defer></script>
     <title>ConectaCEU</title>
 </head>
 <body>
-    <button id="button-submit-form">Sair</button>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <main>
+        <div class="background">
+            <div class="background-shape"></div>
+            <div class="background-photo"></div>
+        </div>
+        <p class="user-greetings"></p>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
 </body>
 </html>

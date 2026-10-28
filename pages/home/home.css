@@ -1,0 +1,115 @@
+header {
+    background-color: var(--medium-blue);
+}
+
+main {
+    position: relative;
+    height: 100vh;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.background-shape {
+  background-color: var(--medium-blue);
+  flex: 0 0 70%;
+  height: 100%;
+  transform: skew(-25deg);
+  transform-origin: center;
+  margin-left: -20%;
+  margin-right: -25%;
+  z-index: 0;
+}
+
+.background-photo {
+  flex: 0 0 90%;
+  height: 100%;
+  background: url(/shared/assets/img/pexels-jorge-fakhouri-filho-861811-2531025_g.jpg) center / cover no-repeat;
+  position: relative;
+  z-index: -1;
+}
+
+.user-greetings, .home-buttons {
+    font-family: 'OpenSansSemiBold';
+}
+
+.user-greetings {
+    position: relative;
+    z-index: 1;
+    margin-left: 4rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.home-buttons {
+    line-height: 0.5em;
+    margin-top: 10rem;
+    margin-left: 4rem;
+    overflow: scroll;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+
+.home-buttons-row {
+    display: flex;
+}
+
+.home-button {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light-blue);
+    border-radius: 40px;
+    min-height: 170px;
+    max-height: 170px;
+    margin: 10px;
+    padding: 10px;
+    min-width: 170px;
+    max-width: 170px;
+}
+
+.home-button:hover {
+    background-color: var(--dark-blue);
+    transition: 150ms linear;
+}
+
+.home-button:hover p,
+.home-button:hover .home-button-icon path {
+    color: var(--light-blue);
+}
+
+.home-button p {
+    line-height: 1.2em;
+}
+
+.home-button p, .home-button-icon path {
+    color: var(--dark-blue);
+}
+
+.home-button-icon path {
+    font-family: 'OpenSansRegular';
+}
+
+.home-button-icon {
+    height: 70%;
+    width: 70%;
+}
+
+@media screen and (max-width: 900px) {
+    .background-shape {
+        display: none;
+    }
+
+    .background-photo {
+        flex: 1 1 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+}
