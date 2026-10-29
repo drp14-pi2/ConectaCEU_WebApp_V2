@@ -198,7 +198,7 @@ select:not(.input-with-select-container select) {
     font-size: var(--base-font-size);
 }
 
-select > option {
+select:not(.input-with-select-container select) > option {
     background-color: var(--white);
 }
 
