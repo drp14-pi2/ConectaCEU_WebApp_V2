@@ -288,6 +288,10 @@ input[type="date"] {
 }
 
 @media screen and (max-width: 650px) {
+    body {
+        font-size: var(--smaller-font-size);
+    }
+
     .form-row {
         flex-direction: column;
     }
@@ -295,6 +299,22 @@ input[type="date"] {
     .form-row .input-container {
         align-self: center;
         width: 100%;
+    }
+
+    .input-with-select-container {
+        flex-direction: column;
+    }
+
+    .input-with-select-container select {
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 0;
+    }
+
+    .input-with-select-container input {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
     }
 }
 
