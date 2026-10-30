@@ -25,13 +25,14 @@
                         <div class="input-with-select-container">
                             <select name="select-document-type" id="select-document-type">
                                 <option selected>Selecionar</option>
-                                <option value="cpf">CPF</option>
-                                <option value="cin">CIN</option>
-                                <option value="cnh">CNH</option>
+                                <option value="1">CPF</option>
+                                <option value="2">RG</option>
+                                <option value="3">CIN</option>
                             </select>
                             <input type="text" name="user-document" id="user-document" placeholder="ex: 12345678900" required>
                         </div>
                     </div>
+
                     <div class="input-container file-input-container">
                         <label>Carregar documento (frente) <span class="color-red">*</span></label>
                         <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
@@ -43,6 +44,7 @@
                         <label>Carregar documento (verso) <span class="color-red">*</span></label>
                         <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
                     </div>
+
                     <div class="input-container">
                         <label>Carregar foto do aluno <span class="color-red">*</span></label>
                         <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
@@ -54,6 +56,7 @@
                         <label for="email">E-mail <span class="color-red">*</span></label>
                         <input type="text" name="email" id="email" placeholder="ex: meu.nome@gmail.com" required>
                     </div>
+
                     <div class="input-container">
                         <label for="userName">Nome completo <span class="color-red">*</span></label>
                         <input type="text" name="userName" id="userName" placeholder="ex: Joana da Silva" required>
@@ -65,6 +68,7 @@
                         <label for="birthdate">Data de nascimento <span class="color-red">*</span></label>
                         <input type="date" name="birthdate" id="birthdate" required>
                     </div>
+
                     <div class="input-container">
                         <label for="phone">Celular <span class="color-red">*</span></label>
                         <input type="text" name="phone" id="phone" placeholder="ex: (11) 91234-5678" required>
@@ -76,6 +80,7 @@
                         <label for="secondPhone">Celular secundário</label>
                         <input type="text" name="secondPhone" id="secondPhone" placeholder="ex: (11) 91234-5678">
                     </div>
+
                     <div class="input-container">
                         <label for="sex">Sexo <span class="color-red">*</span></label>
                         <select name="sex" id="sex">
@@ -91,6 +96,7 @@
                             <option selected>Selecionar</option>
                         </select>
                     </div>
+
                     <div class="input-container">
                         <label for="school">Escola</label>
                         <input type="text" name="school" id="school" placeholder="ex: EMEF Alceu Amoroso Lima">
@@ -111,6 +117,7 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="input-container">
                         <label for="repeatedPassword">Repetir senha <span class="color-red">*</span></label>
                         <input type="password" name="repeatedPassword" id="repeatedPassword" placeholder="********" required>
@@ -122,6 +129,7 @@
                         <label for="zipCode">CEP <span class="color-red">*</span></label>
                         <input type="text" name="zipCode" id="zipCode" placeholder="ex: 01014-900" required>
                     </div>
+
                     <div class="input-container">
                         <label for="street">Logradouro <span class="color-red">*</span></label>
                         <input type="text" name="street" id="street" placeholder="ex: Rua João Brícola" required>
@@ -133,9 +141,10 @@
                         <label for="addressNumber">Número <span class="color-red">*</span></label>
                         <input type="text" name="addressNumber" id="addressNumber" placeholder="ex: 24" required>
                     </div>
+
                     <div class="input-container">
                         <label for="addressComplement">Complemento</label>
-                        <input type="text" name="street" id="addressComplement" placeholder="ex: 2º andar, Sala 15">
+                        <input type="text" name="addressComplement" id="addressComplement" placeholder="ex: 2º andar, Sala 15">
                     </div>
                 </div>
 
@@ -143,6 +152,13 @@
                     <div class="input-container">
                         <label for="neighborhood">Bairro <span class="color-red">*</span></label>
                         <input type="text" name="neighborhood" id="neighborhood" placeholder="ex: Centro" required>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="educationalUnit">CEU <span class="color-red">*</span></label>
+                        <select name="educationalUnit" id="educationalUnit" required>
+                            <option selected>Selecionar</option>
+                        </select>
                     </div>
                 </div>
 
@@ -156,6 +172,7 @@
                                 <label for="representative-1-name">Nome completo <span class="color-red">*</span></label>
                                 <input type="text" name="representative-1-name" id="representative-1-name" placeholder="ex: Joana da Silva" required>
                             </div>
+
                             <div class="input-container">
                                 <label for="representative-1-degree">Grau <span class="color-red">*</span></label>
                                 <select name="representative-1-degree" id="representative-1-degree">
@@ -168,15 +185,16 @@
                             <div class="input-container">
                                 <label for="representative-1-document">Documento <span class="color-red">*</span></label>
                                 <div class="input-with-select-container">
-                                    <select name="select-document-type" id="select-document-type">
+                                    <select name="select-document-type" id="select-rep-1-document-type">
                                         <option selected>Selecionar</option>
-                                        <option value="cpf">CPF</option>
-                                        <option value="cin">CIN</option>
-                                        <option value="cnh">CNH</option>
+                                        <option value="1">CPF</option>
+                                        <option value="2">RG</option>
+                                        <option value="3">CIN</option>
                                     </select>
                                     <input type="text" name="representative-1-document" id="representative-1-document" placeholder="ex: 12345678900" required>
                                 </div>
                             </div>
+
                             <div class="input-container file-input-container">
                                 <label>Carregar documento (frente) <span class="color-red">*</span></label>
                                 <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
@@ -188,6 +206,7 @@
                                 <label>Carregar documento (verso) <span class="color-red">*</span></label>
                                 <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
                             </div>
+
                             <div class="input-container file-input-container">
                                 <label>Carregar autorização <span class="color-red">*</span></label>
                                 <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
@@ -202,6 +221,7 @@
                                 <label for="representative-2-name">Nome completo <span class="color-red">*</span></label>
                                 <input type="text" name="representative-2-name" id="representative-2-name" placeholder="ex: Joana da Silva" required>
                             </div>
+
                             <div class="input-container">
                                 <label for="representative-2-degree">Grau <span class="color-red">*</span></label>
                                 <select name="representative-2-degree" id="representative-2-degree">
@@ -214,15 +234,16 @@
                             <div class="input-container">
                                 <label for="representative-2-document">Documento <span class="color-red">*</span></label>
                                 <div class="input-with-select-container">
-                                    <select name="select-document-type" id="select-document-type">
+                                    <select name="select-rep-2-document-type" id="select-rep-2-document-type">
                                         <option selected>Selecionar</option>
-                                        <option value="cpf">CPF</option>
-                                        <option value="cin">CIN</option>
-                                        <option value="cnh">CNH</option>
+                                        <option value="1">CPF</option>
+                                        <option value="2">RG</option>
+                                        <option value="3">CIN</option>
                                     </select>
                                     <input type="text" name="representative-2-document" id="representative-2-document" placeholder="ex: 12345678900" required>
                                 </div>
                             </div>
+
                             <div class="input-container file-input-container">
                                 <label>Carregar documento (frente) <span class="color-red">*</span></label>
                                 <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
@@ -234,6 +255,7 @@
                                 <label>Carregar documento (verso) <span class="color-red">*</span></label>
                                 <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
                             </div>
+
                             <div class="input-container file-input-container">
                                 <label>Carregar autorização <span class="color-red">*</span></label>
                                 <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
@@ -248,7 +270,7 @@
                     <div class="inner-extra-form-data">
                         <div class="form-row form-row-col-2">
                             <div class="input-container file-input-container">
-                                <label>Carregar atestado <span class="color-red">*</span></label>
+                                <label>Carregar atestado</label>
                                 <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
                             </div>
                         </div>
