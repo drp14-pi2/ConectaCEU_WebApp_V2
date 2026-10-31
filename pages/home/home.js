@@ -1,11 +1,11 @@
 import { AuthService } from '/shared/services/auth-service.js'
-import { StringExtensions } from '/shared/extensions/string-extensions.js'
+import { StringHelper } from '/shared/helpers/string-helper.js'
 import { UserType } from '/shared/constants/user-type.js'
 
 function getUserGreetings(fullName) {
     const firstName = fullName.split(' ')[0]
 
-    return `Olá, ${StringExtensions.capitalize(firstName)}!`
+    return `Olá, ${StringHelper.capitalize(firstName)}!`
 }
 
 const loggedUser = AuthService.getLoggedUser()
