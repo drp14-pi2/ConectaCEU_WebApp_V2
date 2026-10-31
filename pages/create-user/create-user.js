@@ -325,7 +325,6 @@ function validateFormData(formData) {
 }
 
 async function getCreateUserBody(formData, userType) {
-    console.log(formData)
     return new CreateUser(
         formData.userDocument,
         formData.userName,
@@ -434,7 +433,6 @@ async function submitForm() {
 
     // Register user
     const createUser = await getCreateUserBody(formData, UserType.STUDENT)
-    console.log(JSON.stringify(createUser))
     const createUserResponse = await AuthService.publicUserRegister(createUser)
     
     if (!createUserResponse.ok) {
