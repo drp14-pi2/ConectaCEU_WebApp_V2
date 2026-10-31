@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/create-unit/create-unit.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/security/auth-guard.js"></script>
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
+    <script type="module" src="/pages/create-unit/create-unit.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <main>
+        <div class="base-background-shape"></div>
+        <div class="base-form-container">
+            <form>
+                <h1>Cadastrar CEU</h1>
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="unitName">Nome do CEU <span class="color-red">*</span></label>
+                        <input type="text" name="unitName" id="unitName" placeholder="ex: CEU São Rafael" required>
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="zipCode">CEP <span class="color-red">*</span></label>
+                        <input type="text" name="zipCode" id="zipCode" size="9" placeholder="ex: 08395-320" required>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="street">Logradouro <span class="color-red">*</span></label>
+                        <input type="text" name="street" id="street" placeholder="ex: Rua Cinira Polônio" required>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="addressNumber">Número <span class="color-red">*</span></label>
+                        <input type="text" name="addressNumber" id="addressNumber" placeholder="ex: 100" required>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="addressComplement">Complemento</label>
+                        <input type="text" name="addressComplement" id="addressComplement" placeholder="ex: Bloco 3">
+                    </div>
+
+                    <div class="input-container">
+                        <label for="neighborhood">Bairro <span class="color-red">*</span></label>
+                        <input type="text" name="neighborhood" id="neighborhood" placeholder="ex: Conjunto Promorar Rio Claro" required>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="button" id="button-submit-form">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
+</body>
+</html>
