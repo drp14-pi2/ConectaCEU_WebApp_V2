@@ -1,12 +1,10 @@
 export class ArrayHelper {
     static arrayToString(array) {
         let result = ''
-
+        
         if (!array) return result
 
-        for (let i; i < array.length; i++) {
-            const item = array[i]
-
+        function processItem(item, index) {
             if (typeof item == 'object') {
                 result += JSON.stringify(item)
             }
@@ -17,8 +15,22 @@ export class ArrayHelper {
                 result += String(item)
             }
 
-            if (result.length != 0 && i < array.length - 1) {
-                result += '\n'
+            if (result.length != 0 && index < array.length - 1) {
+                result += '<br>'
+            }
+        }
+
+        for (let i = 0; i < array.length; i++) {
+            const item = array[i]
+
+            if (Array.isArray(item)) {
+                for (let j = 0; j < item.length; j++) {
+                    const subItem = item[j]
+                    processItem(subItem, j)
+                }
+            }
+            else {
+                processItem(item, i)
             }
         }
 
