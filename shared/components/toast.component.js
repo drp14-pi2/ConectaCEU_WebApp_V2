@@ -31,7 +31,7 @@ export function showMessage(text, duration = 5000) {
     document.body.insertAdjacentHTML('beforeend', html);
 
     const toast = document.getElementById('toast');
-    toast.textContent = text;   // textContent, not innerHTML — no XSS
+    toast.innerHTML = text;
 
     // Trigger the fade-in after the element is in the DOM
     requestAnimationFrame(() => toast.classList.add('toast--visible'));
