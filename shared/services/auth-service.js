@@ -16,32 +16,52 @@ export class AuthService {
         })
     }
 
-    static async publicUserRegister(createUserForm) {
+    static async publicUserRegister(createUser) {
         return await fetch(`${config.apiUrl}/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                document: createUserForm.userDocument,
-                name: createUserForm.userName,
-                email: createUserForm.email,
-                cellphone_number: createUserForm.phone,
-                contact_cellphone_number: createUserForm.secondPhone,
-                birthdate: createUserForm.birthdate,
-                school: createUserForm.school,
-                sex_id: createUserForm.sex,
-                gender_id: createUserForm.gender,
-                user_type_id: UserType.STUDENT,
-                password: createUserForm.password,
+                document: createUser.document,
+                name: createUser.name,
+                email: createUser.email,
+                cellphone_number: createUser.cellphoneNumber,
+                contact_cellphone_number: createUser.contactCellphoneNumber,
+                birthdate: createUser.birthdate,
+                school: createUser.school,
+                sex_id: createUser.sexId,
+                gender_id: createUser.genderId,
+                user_type_id: createUser.userTypeId,
+                password: createUser.password,
+                educational_unit_id: createUser.educationalUnitId,
+                id_document_front: createUser.idDocumentFront,
+                id_document_back: createUser.idDocumentBack,
+                user_photo: createUser.userPhoto,
+                health_certificate: createUser.healthCertificate,
                 address: {
-                    zip_code: createUserForm.zipCode,
-                    street: createUserForm.street,
-                    number: createUserForm.addressNumber,
-                    complement: createUserForm.addressComplement,
-                    neighborhood: createUserForm.neighborhood
+                    zip_code: createUser.address.zipCode,
+                    street: createUser.address.street,
+                    number: createUser.address.number,
+                    complement: createUser.address.complement,
+                    neighborhood: createUser.address.neighborhood
                 },
-                educational_unit_id: createUserForm.educationalUnitId
+                legal_representative_1: {
+                    name: createUser.legalRepresentative1.name,
+                    document: createUser.legalRepresentative1.document,
+                    legal_representative_degree_id: createUser.legalRepresentative1.legalRepresentativeDegreeId,
+                    id_document_front: createUser.legalRepresentative1.idDocumentFront,
+                    id_document_back: createUser.legalRepresentative1.idDocumentBack,
+                    student_registry_authorization: createUser.legalRepresentative1.studentRegistryAuthorization
+                },
+                legal_representative_2: {
+                    name: createUser.legalRepresentative2.name,
+                    document: createUser.legalRepresentative2.document,
+                    legal_representative_degree_id: createUser.legalRepresentative2.legalRepresentativeDegreeId,
+                    id_document_front: createUser.legalRepresentative2.idDocumentFront,
+                    id_document_back: createUser.legalRepresentative2.idDocumentBack,
+                    student_registry_authorization: createUser.legalRepresentative2.studentRegistryAuthorization
+                }
             })
         })
     }

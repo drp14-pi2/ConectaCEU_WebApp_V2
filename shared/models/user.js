@@ -135,3 +135,66 @@ export class CreateUserForm {
         this.healthCertificate = healthCertificate
     }
 }
+
+export class CreateUser {
+    document
+    name
+    email
+    cellphoneNumber
+    contactCellphoneNumber
+    birthdate
+    school
+    sexId
+    genderId
+    userTypeId
+    password
+    educationalUnitId
+    idDocumentFront
+    idDocumentBack
+    userPhoto
+    healthCertificate
+    address
+    legalRepresentative1
+    legalRepresentative2
+
+    constructor(
+        document,
+        name,
+        email,
+        cellphoneNumber,
+        contactCellphoneNumber,
+        birthdate,
+        school,
+        sexId,
+        genderId,
+        userTypeId,
+        password,
+        educationalUnitId,
+        idDocumentFront,
+        idDocumentBack,
+        userPhoto,
+        healthCertificate,
+        address,
+        legalRepresentative1,
+        legalRepresentative2) {
+        this.document = document
+        this.name = name
+        this.email = email
+        this.cellphoneNumber = cellphoneNumber
+        this.contactCellphoneNumber = contactCellphoneNumber
+        this.birthdate = birthdate
+        this.school = school
+        this.sexId = sexId
+        this.genderId = genderId
+        this.userTypeId = userTypeId
+        this.password = password
+        this.educationalUnitId = educationalUnitId
+        this.idDocumentFront = idDocumentFront 
+        this.idDocumentBack = idDocumentBack
+        this.userPhoto = userPhoto
+        this.healthCertificate = healthCertificate
+        this.address = address
+        this.legalRepresentative1 = legalRepresentative1
+        this.legalRepresentative2 = legalRepresentative2
+    }
+}

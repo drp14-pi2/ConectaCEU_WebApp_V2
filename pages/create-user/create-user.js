@@ -1,18 +1,21 @@
 import { ReferenceService } from '/shared/services/reference-service.js'
 import { EducationalUnitService } from '/shared/services/educational-unit-service.js'
 import { AuthService } from '/shared/services/auth-service.js'
-import { LegalRepresentativeService } from '/shared/services/legal-representative-service.js'
-import { DocumentService } from '/shared/services/document-service.js'
 import { DocumentType } from '/shared/constants/document-type.js'
 import { SexType } from '/shared/constants/sex-type.js'
 import { GenderType } from '/shared/constants/gender-type.js'
+import { UserType } from '/shared/constants/user-type.js'
 import { LegalRepresentativeDegree } from '/shared/constants/legal-representative-degree.js'
-import { CreateUserForm } from '/shared/models/user.js'
+import { CreateUserForm, CreateUser } from '/shared/models/user.js'
+import { CreateLegalRepresentative } from '/shared/models/legal-representative.js'
+import { CreateDocument } from '/shared/models/document.js'
+import { CreateAddress } from '/shared/models/address.js'
 import { DateHelper } from '/shared/helpers/date-helper.js'
 import { Validator } from '/shared/validation/validator.js'
 import { showMessage } from '/shared/components/toast.component.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { FileHelper } from '/shared/helpers/file-helper.js'
+import { StringHelper } from '/shared/helpers/string-helper.js'
 
 // Assign select items
 async function setSexTypes() {
@@ -141,21 +144,21 @@ function getFormData() {
 
     return new CreateUserForm(
         document.querySelector('#select-document-type').value,
-        document.querySelector('#user-document').value,
+        StringHelper.removeNotNumber(document.querySelector('#user-document').value),
         fileInputs[0].files[0] || null,
         fileInputs[1].files[0] || null,
         fileInputs[2].files[0] || null,
         document.querySelector('#email').value,
         document.querySelector('#userName').value,
         document.querySelector('#birthdate').value,
-        document.querySelector('#phone').value,
-        document.querySelector('#secondPhone').value,
+        StringHelper.removeNotNumber(document.querySelector('#phone').value),
+        StringHelper.removeNotNumber(document.querySelector('#secondPhone').value),
         document.querySelector('#sex').value,
         document.querySelector('#gender').value,
         document.querySelector('#school').value,
         document.querySelector('#password').value,
         document.querySelector('#repeatedPassword').value,
-        document.querySelector('#zipCode').value,
+        StringHelper.removeNotNumber(document.querySelector('#zipCode').value),
         document.querySelector('#street').value,
         document.querySelector('#addressNumber').value,
         document.querySelector('#addressComplement').value,
@@ -163,24 +166,24 @@ function getFormData() {
         document.querySelector('#representative-1-name').value,
         document.querySelector('#representative-1-degree').value,
         document.querySelector('#select-rep-1-document-type').value,
-        document.querySelector('#representative-1-document').value,
+        StringHelper.removeNotNumber(document.querySelector('#representative-1-document').value),
         fileInputs[3].files[0] || null,
         fileInputs[4].files[0] || null,
         fileInputs[5].files[0] || null,
         document.querySelector('#representative-2-name').value,
         document.querySelector('#representative-2-degree').value,
         document.querySelector('#select-rep-2-document-type').value,
-        document.querySelector('#representative-2-document').value,
+        StringHelper.removeNotNumber(document.querySelector('#representative-2-document').value),
         fileInputs[6].files[0] || null,
         fileInputs[7].files[0] || null,
         fileInputs[8].files[0] || null,
         document.querySelector('#consent').checked,
-        document.querySelector('#educationalUnit').value)
+        document.querySelector('#educationalUnit').value,
+        fileInputs[9].files[0] || null)
 }
 
 function validateFormData(formData) {
     const errors = []
-    console.log(JSON.stringify(formData))
 
     if (!formData.selectDocumentType || !DocumentType.isIdentityDocumentType(formData.selectDocumentType)) {
         errors.push('Tipo de documento de identificação inválido')
@@ -321,6 +324,101 @@ function validateFormData(formData) {
     return errors
 }
 
+async function getCreateUserBody(formData, userType) {
+    console.log(formData)
+    return new CreateUser(
+        formData.userDocument,
+        formData.userName,
+        formData.email,
+        formData.phone,
+        formData.secondPhone,
+        formData.birthdate,
+        formData.school,
+        formData.sex,
+        formData.gender,
+        userType,
+        formData.password,
+        formData.educationalUnitId,
+        // ID doc front
+        new CreateDocument(
+            await FileHelper.fileToBase64(formData.userDocumentFrontFile),
+            formData.selectDocumentType,
+            true
+        ),
+        // ID doc back
+        new CreateDocument(
+            await FileHelper.fileToBase64(formData.userDocumentBackFile),
+            formData.selectDocumentType,
+            false
+        ),
+        // User photo
+        new CreateDocument(
+            await FileHelper.fileToBase64(formData.userPhotoFile),
+            DocumentType.ProfilePicture
+        ),
+        // Health certificate
+        new CreateDocument(
+            await FileHelper.fileToBase64(formData.healthCertificate),
+            DocumentType.HealthCertificate
+        ),
+        new CreateAddress(
+            formData.zipCode,
+            formData.street,
+            formData.addressNumber,
+            formData.addressComplement,
+            formData.neighborhood
+        ),
+        // Legal representative 1
+        new CreateLegalRepresentative(
+            formData.representative1Name,
+            formData.representative1Document,
+            formData.representative1Degree,
+            null,
+            // ID doc front
+            new CreateDocument(
+                await FileHelper.fileToBase64(formData.rep1DocumentFrontFile),
+                formData.selectRep1DocumentType,
+                true
+            ),
+            // ID doc back
+            new CreateDocument(
+                await FileHelper.fileToBase64(formData.rep1DocumentBackFile),
+                formData.selectDocumentType,
+                false
+            ),
+            // Authorization
+            new CreateDocument(
+                await FileHelper.fileToBase64(formData.rep1AuthorizationFile),
+                DocumentType.MinorEnrollmentAuthorization
+            )
+        ),
+        // Legal representative 2
+        new CreateLegalRepresentative(
+            formData.representative2Name,
+            formData.representative2Document,
+            formData.representative2Degree,
+            null,
+            // ID doc front
+            new CreateDocument(
+                await FileHelper.fileToBase64(formData.rep2DocumentFrontFile),
+                formData.selectRep2DocumentType,
+                true
+            ),
+            // ID doc back
+            new CreateDocument(
+                await FileHelper.fileToBase64(formData.rep2DocumentBackFile),
+                formData.selectDocumentType,
+                false
+            ),
+            // Authorization
+            new CreateDocument(
+                await FileHelper.fileToBase64(formData.rep2AuthorizationFile),
+                DocumentType.MinorEnrollmentAuthorization
+            )
+        )
+    )
+}
+
 const submitButton = document.querySelector('#button-submit-form')
 async function submitForm() {
     submitButton.setAttribute('disabled', true)
@@ -328,187 +426,26 @@ async function submitForm() {
     const formDataErrors = validateFormData(formData)
 
     if (formDataErrors.length > 0) {
-        console.log('valida form')
-        console.log(JSON.stringify(formDataErrors))
-        await showMessage(ArrayHelper.arrayToString(formDataErrors))
+        showMessage(ArrayHelper.arrayToString(formDataErrors))
         submitButton.removeAttribute('disabled')
 
         return
     }
 
     // Register user
-    const createUserResponse = await AuthService.publicUserRegister(formData)
+    const createUser = await getCreateUserBody(formData, UserType.STUDENT)
+    console.log(JSON.stringify(createUser))
+    const createUserResponse = await AuthService.publicUserRegister(createUser)
     
     if (!createUserResponse.ok) {
-        console.log('cria usuario')
-        await showMessage(await createUserResponse.text())
+        showMessage(await createUserResponse.text())
         submitButton.removeAttribute('disabled')
 
         return
     }
     
     const createUserResponseBody = await createUserResponse.json()
-    const userId = createUserResponseBody.user_id
-    console.log(JSON.stringify(createUserResponseBody))
-
-    // Upload identity document front
-    const identityDocumentFrontUploadResponse = await DocumentService.upload(
-        await FileHelper.fileToBase64(formData.userDocumentFrontFile),
-        formData.selectDocumentType,
-        userId,
-        true
-    )
-
-    if (!identityDocumentFrontUploadResponse.ok) {
-        console.log('sobe frente ident')
-        await showMessage(await identityDocumentFrontUploadResponse.text())
-    }
-
-    // Upload identity document back
-    const identityDocumentBackUploadResponse = await DocumentService.upload(
-        await FileHelper.fileToBase64(formData.userDocumentBackFile),
-        formData.selectDocumentType,
-        userId,
-        false
-    )
-
-    if (!identityDocumentBackUploadResponse.ok) {
-        console.log('sobe verso ident')
-        await showMessage(await identityDocumentBackUploadResponse.text())
-    }
-
-    // Create legal representative 1
-    if (formData.representative1Name){
-        const legalRepresentative1CreationResponse = await LegalRepresentativeService.create(
-            formData.representative1Name,
-            formData.representative1Document,
-            formData.representative1Degree,
-            userId
-        )
-    
-        if (!legalRepresentative1CreationResponse.ok) {
-            console.log('cria rep 1')
-            await showMessage(await legalRepresentative1CreationResponse.text())
-        }
-        
-        const legalRepresentative1CreationResponseBody = await legalRepresentative1CreationResponse.json()
-    
-        // Upload legal representative 1 identity document front
-        const rep1IdentityDocumentFrontUploadResponse = await DocumentService.upload(
-            await FileHelper.fileToBase64(formData.rep1DocumentFrontFile),
-            formData.selectRep1DocumentType,
-            userId,
-            true,
-            legalRepresentative1CreationResponseBody.id
-        )
-        
-        if (!rep1IdentityDocumentFrontUploadResponse.ok) {
-            console.log('sobe frente ident rep 1')
-            await showMessage(await rep1IdentityDocumentFrontUploadResponse.text())
-        }
-
-        // Upload legal representative 1 identity document back
-        const rep2IdentityDocumentBackUploadResponse = await DocumentService.upload(
-            await FileHelper.fileToBase64(formData.rep1DocumentBackFile),
-            formData.selectRep1DocumentType,
-            userId,
-            false,
-            legalRepresentative1CreationResponseBody.id
-        )
-        
-        if (!rep2IdentityDocumentBackUploadResponse.ok) {
-            console.log('sobe verso ident rep 1')
-            await showMessage(await rep2IdentityDocumentBackUploadResponse.text())
-        }
-
-        // Upload legal representative 1 authorization file
-        const rep1AuthFileUploadResponse = await DocumentService.upload(
-            await FileHelper.fileToBase64(formData.rep1AuthorizationFile),
-            DocumentType.MinorEnrollmentAuthorization,
-            userId,
-            null,
-            legalRepresentative1CreationResponseBody.id
-        )
-        
-        if (!rep1AuthFileUploadResponse.ok) {
-            console.log('sobe auth rep 1')
-            await showMessage(await rep1AuthFileUploadResponse.text())
-        }
-    }
-
-    // Create legal representative 1
-    if (formData.representative2Name){
-        const legalRepresentative2CreationResponse = await LegalRepresentativeService.create(
-            formData.representative2Name,
-            formData.representative2Document,
-            formData.representative2Degree,
-            userId
-        )
-    
-        if (!legalRepresentative2CreationResponse.ok) {
-            console.log('cria rep 2')
-            await showMessage(await legalRepresentative2CreationResponse.text())
-        }
-        
-        const legalRepresentative2CreationResponseBody = await legalRepresentative2CreationResponse.json()
-    
-        // Upload legal representative 2 identity document front
-        const rep2IdentityDocumentFrontUploadResponse = await DocumentService.upload(
-            await FileHelper.fileToBase64(formData.rep2DocumentFrontFile),
-            formData.selectRep2DocumentType,
-            userId,
-            true,
-            legalRepresentative2CreationResponseBody.id
-        )
-        
-        if (!rep2IdentityDocumentFrontUploadResponse.ok) {
-            console.log('sobre frente ident rep 2')
-            await showMessage(await rep2IdentityDocumentFrontUploadResponse.text())
-        }
-
-        // Upload legal representative 2 identity document back
-        const rep2IdentityDocumentBackUploadResponse = await DocumentService.upload(
-            await FileHelper.fileToBase64(formData.rep2DocumentBackFile),
-            formData.selectRep2DocumentType,
-            userId,
-            false,
-            legalRepresentative2CreationResponseBody.id
-        )
-        
-        if (!rep2IdentityDocumentBackUploadResponse.ok) {
-            console.log('sobre verso ident rep 2')
-            await showMessage(await rep2IdentityDocumentBackUploadResponse.text())
-        }
-
-        // Upload legal representative 1 authorization file
-        const rep2AuthFileUploadResponse = await DocumentService.upload(
-            await FileHelper.fileToBase64(formData.rep2AuthorizationFile),
-            DocumentType.MinorEnrollmentAuthorization,
-            userId,
-            null,
-            legalRepresentative2CreationResponseBody.id
-        )
-        
-        if (!rep2AuthFileUploadResponse.ok) {
-            console.log('sobre auth repo 2')
-            await showMessage(await rep2AuthFileUploadResponse.text())
-        }
-    }
-
-    // Upload health certificate
-    if (formData.healthCertificate) {
-        const healthCertificateUploadResponse = await DocumentService.upload(
-            await FileHelper.fileToBase64(formData.healthCertificate),
-            DocumentType.HealthCertificate,
-            userId
-        )
-        
-        if (!healthCertificateUploadResponse.ok) {
-            console.log('sobre atestado')
-            await showMessage(await healthCertificateUploadResponse.text())
-        }
-    }
-
+    showMessage(createUserResponseBody.message)
     submitButton.removeAttribute('disabled')
 
     return
