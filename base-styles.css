@@ -137,6 +137,10 @@ p {
 
 a {
     color: var(--medium-blue);
+    text-decoration: none;
+}
+
+.underline {
     text-decoration: underline;
 }
 
