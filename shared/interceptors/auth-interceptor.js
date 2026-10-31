@@ -14,7 +14,7 @@ if (!window[INSTALLED]) {
             const headers = new Headers(init.headers)
 
             if (!headers.has('Authorization')) {
-            headers.set('Authorization', `Bearer ${authToken}`)
+                headers.set('Authorization', `Bearer ${authToken}`)
             }
 
             init = { ...init, headers }

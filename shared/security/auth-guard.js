@@ -1,3 +1,4 @@
+import '/shared/interceptors/unauthorized-interceptor.js'
 import { AuthService } from '/shared/services/auth-service.js'
 import { storageKeys } from '/shared/constants/storage-keys.js'
 
