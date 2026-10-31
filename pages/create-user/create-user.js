@@ -17,6 +17,32 @@ import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { FileHelper } from '/shared/helpers/file-helper.js'
 import { StringHelper } from '/shared/helpers/string-helper.js'
 
+// Control blocks diplay based on user age
+const birthdateElement = document.querySelector('#birthdate')
+birthdateElement.addEventListener('change', () => {
+    const birthdate = birthdateElement.value
+    const legalRepresentativesContainerElement = document.querySelector('.legal-representatives-container')
+    const healthCertificateContainerElement = document.querySelector('.health-certificate-container')
+
+    if (DateHelper.isMinor(birthdate)) {
+        // Display legal representatives block if user is minor
+        legalRepresentativesContainerElement.style.display = 'block'
+    }
+    else {
+        // Fallback if date changed again
+        legalRepresentativesContainerElement.style.display = 'none'
+    }
+
+    if (DateHelper.isAgeEqualOrAbove(birthdate, 70)) {
+        // Display health certificate block if user is 70 years old or older
+        healthCertificateContainerElement.style.display = 'block'
+    }
+    else {
+        // Fallback if date changed again
+        healthCertificateContainerElement.style.display = 'none'
+    }
+})
+
 // Assign select items
 async function setSexTypes() {
     const response = await ReferenceService.getSexTypes()
