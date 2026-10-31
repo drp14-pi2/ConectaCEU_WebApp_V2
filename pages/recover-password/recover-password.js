@@ -14,7 +14,7 @@ const tokenValidationResponse = await fetch(`${config.apiUrl}/password/reset/val
 const tokenValidation = await tokenValidationResponse.json()
 
 if (!tokenValidation?.valid) {
-    location.href = pageRouting.home
+    location.href = pageRouting.root
 }
 
 // Submit form
