@@ -24,7 +24,7 @@ birthdateElement.addEventListener('change', () => {
     const legalRepresentativesContainerElement = document.querySelector('.legal-representatives-container')
     const healthCertificateContainerElement = document.querySelector('.health-certificate-container')
 
-    if (DateHelper.isMinor(birthdate)) {
+    if (DateHelper.isAgeEqualOrBelow(birthdate, 17)) {
         // Display legal representatives block if user is minor
         legalRepresentativesContainerElement.style.display = 'block'
     }
@@ -277,7 +277,7 @@ function validateFormData(formData) {
         errors.push('Bairro inválido')
     }
 
-    const isUserMinor = DateHelper.isMinor(formData.birthdate)
+    const isUserMinor = DateHelper.isAgeEqualOrBelow(formData.birthdate, 17)
 
     if (isUserMinor) {
         if (!formData.representative1Name || formData.representative1Name.length < 5) {

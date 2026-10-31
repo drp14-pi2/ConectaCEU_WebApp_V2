@@ -20,12 +20,12 @@ export class DateHelper {
         return years;
     }
 
-    static isMinor(date) {
+    static isAgeEqualOrBelow(date, age) {
         const today = new Date()
         const parsedBirthdate = new Date(`${date}T00:00:00`)
         const diffInYears = DateHelper.diffInYears(parsedBirthdate, today)
 
-        return diffInYears < 18
+        return diffInYears <= age
     }
 
     static isAgeEqualOrAbove(date, age) {
