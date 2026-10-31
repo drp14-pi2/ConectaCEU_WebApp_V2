@@ -23,7 +23,8 @@ export class DateHelper {
     static isMinor(date) {
         const today = new Date()
         const parsedBirthdate = new Date(`${date}T00:00:00`)
+        const diffInYears = DateHelper.diffInYears(parsedBirthdate, today)
 
-        return DateHelper.diffInYears(today, parsedBirthdate) < 18
+        return diffInYears < 18
     }
 }
