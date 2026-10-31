@@ -1,6 +1,6 @@
+import { AuthService } from '/shared/services/auth-service.js'
 import { storageKeys } from '/shared/constants/storage-keys.js'
-import { logout } from '/shared/functions/logout.js'
 
 const authToken = sessionStorage.getItem(storageKeys.authToken)
 
-if (!authToken) logout()
+if (!authToken) AuthService.logout()

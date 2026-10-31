@@ -1,6 +1,6 @@
 import { config } from '/config.js'
+import { pageRouting } from '/shared/constants/page-routing.js'
 import { storageKeys } from '/shared/constants/storage-keys.js'
-import { UserType } from '/shared/constants/user-type.js'
 
 export class AuthService {
     static async login(userDocument, password) {
@@ -70,5 +70,10 @@ export class AuthService {
         const userString = sessionStorage.getItem(storageKeys.loggedUser)
 
         return JSON.parse(userString)
+    }
+
+    static logout() {
+        sessionStorage.removeItem(storageKeys.authToken)
+        location.href = pageRouting.root
     }
 }

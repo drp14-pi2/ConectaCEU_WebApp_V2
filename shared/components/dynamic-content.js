@@ -1,4 +1,4 @@
-import { logout } from '/shared/functions/logout.js'
+import { AuthService } from '/shared/services/auth-service.js'
 import { storageKeys } from '/shared/constants/storage-keys.js'
 
 class DynamicContent extends HTMLElement {
@@ -29,7 +29,7 @@ class DynamicContent extends HTMLElement {
                 right: '10px',
                 top: '10px',
             })
-            button.addEventListener('click', () => logout())
+            button.addEventListener('click', () => AuthService.logout())
             header.appendChild(button)
         }
     }
