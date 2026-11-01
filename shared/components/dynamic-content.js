@@ -29,7 +29,7 @@ class DynamicContent extends HTMLElement {
                 right: '10px',
                 top: '10px',
             })
-            button.addEventListener('click', () => AuthService.logout())
+            button.addEventListener('click', () => AuthService.logout(true))
             header.appendChild(button)
         }
     }

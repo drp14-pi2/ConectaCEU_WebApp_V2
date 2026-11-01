@@ -1,6 +1,7 @@
 import { config } from '/config.js'
 import { pageRouting } from '/shared/constants/page-routing.js'
 import { storageKeys } from '/shared/constants/storage-keys.js'
+import { showMessage } from '/shared/components/toast.component.js'
 
 export class AuthService {
     static async login(userDocument, password) {
@@ -72,8 +73,11 @@ export class AuthService {
         return JSON.parse(userString)
     }
 
-    static logout() {
+    static async logout(manualRequest) {
         sessionStorage.removeItem(storageKeys.authToken)
+
+        if (!manualRequest) await showMessage('Sessão expirada', 3000)
+        
         location.href = pageRouting.root
     }
 }
