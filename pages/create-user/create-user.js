@@ -16,6 +16,7 @@ import { showMessage } from '/shared/components/toast.component.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { FileHelper } from '/shared/helpers/file-helper.js'
 import { StringHelper } from '/shared/helpers/string-helper.js'
+import { setLoading } from '/shared/components/loading-button.js'
 
 // Control blocks diplay based on user age
 const birthdateElement = document.querySelector('#birthdate')
@@ -446,13 +447,13 @@ async function getCreateUserBody(formData, userType) {
 
 const submitButton = document.querySelector('#button-submit-form')
 async function submitForm() {
-    submitButton.setAttribute('disabled', true)
+    setLoading(submitButton, true)
     const formData = getFormData()
     const formDataErrors = validateFormData(formData)
 
     if (formDataErrors.length > 0) {
         showMessage(ArrayHelper.arrayToString(formDataErrors))
-        submitButton.removeAttribute('disabled')
+        setLoading(submitButton, false)
 
         return
     }
@@ -463,14 +464,14 @@ async function submitForm() {
     
     if (!createUserResponse.ok) {
         showMessage(await createUserResponse.text())
-        submitButton.removeAttribute('disabled')
+        setLoading(submitButton, false)
 
         return
     }
     
     const createUserResponseBody = await createUserResponse.json()
     showMessage(createUserResponseBody.message)
-    submitButton.removeAttribute('disabled')
+    setLoading(submitButton, false)
 
     return
 }

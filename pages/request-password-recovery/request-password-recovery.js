@@ -1,6 +1,7 @@
 import { pageRouting } from '/shared/constants/page-routing.js'
 import { config } from '/config.js'
 import { showMessage } from '/shared/components/toast.component.js'
+import { setLoading } from '/shared/components/loading-button.js'
 
 function isValidEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -9,12 +10,12 @@ function isValidEmail(email) {
 }
 
 async function sendRecoveryRequest() {
-    submitButton.setAttribute('disabled', true)
+    setLoading(submitButton, true)
     const emailInput = document.getElementById('email')
     const emailString = emailInput.value
 
     if (!isValidEmail(emailString)) {
-        submitButton.removeAttribute('disabled')
+        setLoading(submitButton, false)
         showMessage("E-mail inválido")
 
         return
@@ -29,7 +30,7 @@ async function sendRecoveryRequest() {
     emailInput.value = ''
 
     if (!response.ok) {
-        submitButton.removeAttribute('disabled')
+        setLoading(submitButton, false)
         showMessage(await response.text());
     }
     else {

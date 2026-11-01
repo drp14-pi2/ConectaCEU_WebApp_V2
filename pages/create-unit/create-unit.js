@@ -4,6 +4,7 @@ import { showMessage } from '/shared/components/toast.component.js'
 import { EducationalUnitService } from "/shared/services/educational-unit-service.js"
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { StringHelper } from '/shared/helpers/string-helper.js'
+import { setLoading } from '/shared/components/loading-button.js'
 
 function getCreateEducationalUnit() {
     return new CreateEducationalUnit(
@@ -52,13 +53,13 @@ function validateFormData(formData) {
 // Submit form
 const submitButton = document.querySelector('#button-submit-form')
 async function submitForm() {
-    submitButton.setAttribute('disabled', true)
+    setLoading(submitButton, true)
     const createUnitBody = getCreateEducationalUnit()
     const formDataErrors = validateFormData(createUnitBody)
     
     if (formDataErrors.length > 0) {
         showMessage(ArrayHelper.arrayToString(formDataErrors))
-        submitButton.removeAttribute('disabled')
+        setLoading(submitButton, false)
 
         return
     }
@@ -68,13 +69,13 @@ async function submitForm() {
     
     if (!createUnitResponse.ok) {
         showMessage(await createUnitResponse.text())
-        submitButton.removeAttribute('disabled')
+        setLoading(submitButton, false)
 
         return
     }
     
     showMessage('CEU criado com sucesso')
-    submitButton.removeAttribute('disabled')
+    setLoading(submitButton, false)
 
     return
 }

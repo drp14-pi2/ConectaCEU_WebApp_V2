@@ -326,6 +326,11 @@ input[type="date"] {
     margin-left: 2em;
 }
 
+.button-loading {
+    background-color: #3b3b3b;
+    color: var(--white);
+}
+
 @media screen and (max-width: 650px) {
     body {
         font-size: var(--smaller-font-size);
