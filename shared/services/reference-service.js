@@ -12,4 +12,8 @@ export class ReferenceService {
     static async getLegalRepresentativeDegreeTypes() {
         return await fetch(`${config.apiUrl}/reference/legal-representative-degrees`, { method: 'GET' })
     }
+
+    static async getUserTypes() {
+        return await fetch(`${config.apiUrl}/reference/user-types`, { method: 'GET' })
+    }
 }

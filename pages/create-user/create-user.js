@@ -17,6 +17,9 @@ import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { FileHelper } from '/shared/helpers/file-helper.js'
 import { StringHelper } from '/shared/helpers/string-helper.js'
 import { setLoading } from '/shared/components/loading-button.js'
+import { storageKeys } from '/shared/constants/storage-keys.js'
+import { UserService } from '/shared/services/user-service.js'
+import { pageRouting } from '/shared/constants/page-routing.js'
 
 // Control blocks diplay based on user age
 const birthdateElement = document.querySelector('#birthdate')
@@ -43,6 +46,20 @@ birthdateElement.addEventListener('change', () => {
         healthCertificateContainerElement.style.display = 'none'
     }
 })
+
+const authToken = sessionStorage.getItem(storageKeys.authToken)
+
+// Control user type selection based on logged user
+if (authToken) {
+    const selectUserTypeElement = document.querySelector('.select-user-type')
+    
+    if (getComputedStyle(selectUserTypeElement).display == 'none') {
+        selectUserTypeElement.style.display = 'block'
+    }
+    else {
+        selectUserTypeElement.style.display == 'none'
+    }
+}
 
 // Assign select items
 async function setSexTypes() {
@@ -142,10 +159,32 @@ async function setEducationalUnits() {
     }
 }
 
+async function setUserTypes() {
+    const response = await ReferenceService.getUserTypes()
+
+    if (!response.ok) {
+        await showMessage(await response.text())
+
+        return
+    }
+
+    const userSelectElement = document.querySelector('#userType')
+    const userTypes = await response.json()
+    
+    for (const user of userTypes) {
+        const userOption = document.createElement('option')
+        userOption.value = user.id
+        userOption.innerText = user.description
+        userSelectElement.appendChild(userOption)
+    }
+}
+
 await setSexTypes()
 await setGenderTypes()
 await setLegalRepresentativeDegrees()
 await setEducationalUnits()
+
+if (authToken) await setUserTypes()
 
 // Set date range for birthdate
 function setBirthdateRange() {
@@ -206,7 +245,8 @@ function getFormData() {
         fileInputs[8].files[0] || null,
         document.querySelector('#consent').checked,
         document.querySelector('#educationalUnit').value,
-        fileInputs[9].files[0] || null)
+        fileInputs[9].files[0] || null,
+        document.querySelector('#userType').value)
 }
 
 function validateFormData(formData) {
@@ -348,6 +388,10 @@ function validateFormData(formData) {
         errors.push('CEU inválido')
     }
 
+    if (formData.userType && !UserType.isValid(formData.userType)) {
+        errors.push('Tipo de usuário inválido')
+    }
+
     return errors
 }
 
@@ -362,7 +406,7 @@ async function getCreateUserBody(formData, userType) {
         formData.school,
         formData.sex,
         formData.gender,
-        userType,
+        userType ? userType : formData.userType,
         formData.password,
         formData.educationalUnitId,
         // ID doc front
@@ -383,7 +427,9 @@ async function getCreateUserBody(formData, userType) {
             DocumentType.ProfilePicture
         ),
         // Health certificate
-        new CreateDocument(
+        !formData.healthCertificate
+        ? null
+        : new CreateDocument(
             await FileHelper.fileToBase64(formData.healthCertificate),
             DocumentType.HealthCertificate
         ),
@@ -395,7 +441,9 @@ async function getCreateUserBody(formData, userType) {
             formData.neighborhood
         ),
         // Legal representative 1
-        new CreateLegalRepresentative(
+        !formData.representative1Name
+        ? null
+        : new CreateLegalRepresentative(
             formData.representative1Name,
             formData.representative1Document,
             formData.representative1Degree,
@@ -419,7 +467,9 @@ async function getCreateUserBody(formData, userType) {
             )
         ),
         // Legal representative 2
-        new CreateLegalRepresentative(
+        !formData.representative2Name
+        ? null
+        : new CreateLegalRepresentative(
             formData.representative2Name,
             formData.representative2Document,
             formData.representative2Degree,
@@ -445,6 +495,48 @@ async function getCreateUserBody(formData, userType) {
     )
 }
 
+function clearForm() {
+    const formElement = document.querySelector('form')
+    formElement.reset()
+
+    const fileInputs = document.querySelectorAll('.file-input');
+
+    if (fileInputs.length === 0) return;
+
+    for (const label of fileInputs) {
+        const input = label.querySelector('.file-input__native');
+        const filename = label.querySelector('.file-input__filename');
+        const clear = label.querySelector('.file-input__clear');
+
+        if (!input || !filename) continue;
+
+        function updateFilename() {
+            if (input.files.length) {
+                filename.textContent = input.files[0].name;
+
+                if (clear) clear.hidden = false;
+            } else {
+                filename.textContent = 'Nenhum arquivo escolhido';
+
+                if (clear) clear.hidden = true;
+            }
+        }
+
+        input.addEventListener('change', updateFilename);
+        updateFilename();
+
+        if (clear) {
+            clear.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                input.value = '';
+                updateFilename();
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+            });
+        }
+    }
+}
+
 const submitButton = document.querySelector('#button-submit-form')
 async function submitForm() {
     setLoading(submitButton, true)
@@ -458,19 +550,39 @@ async function submitForm() {
         return
     }
 
-    // Register user
-    const createUser = await getCreateUserBody(formData, UserType.STUDENT)
-    const createUserResponse = await AuthService.publicUserRegister(createUser)
-    
-    if (!createUserResponse.ok) {
-        showMessage(await createUserResponse.text())
-        setLoading(submitButton, false)
+    async function hangleResponse(createUserResponse) {
+        if (!createUserResponse.ok) {
+            showMessage(await createUserResponse.text())
+            setLoading(submitButton, false)
 
-        return
+            return
+        }
+        
+        const createUserResponseBody = await createUserResponse.json()
+
+        if (createUserResponseBody.message) {
+            showMessage(createUserResponseBody.message)
+        }
+        else {
+            showMessage('Usuário criado com sucesso')
+        }
+
+        clearForm()
+    }
+
+    // Register user
+    if (authToken) {
+        const createUser = await getCreateUserBody(formData)
+        const createUserResponse = await UserService.create(createUser)
+        hangleResponse(createUserResponse)
+    }
+    else {
+        const createUser = await getCreateUserBody(formData, UserType.STUDENT)
+        const createUserResponse = await AuthService.publicUserRegister(createUser)
+        hangleResponse(createUserResponse)
+        location.href = pageRouting.root
     }
     
-    const createUserResponseBody = await createUserResponse.json()
-    showMessage(createUserResponseBody.message)
     setLoading(submitButton, false)
 
     return

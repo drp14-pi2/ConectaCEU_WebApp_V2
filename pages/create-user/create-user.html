@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/base-styles.css">
     <link rel="stylesheet" href="/pages/create-user/create-user.css">
     <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/security/create-user-guard.js"></script>
     <script type="module" src="/shared/components/dynamic-content.js" defer></script>
     <script type="module" src="/pages/create-user/create-user.js" defer></script>
     <script type="module" src="/pages/privacy-policy/privacy-policy.js" defer></script>
@@ -162,6 +163,15 @@
                     </div>
                 </div>
 
+                <div class="form-row form-row-col-2 select-user-type">
+                    <div class="input-container">
+                        <label for="neighborhood">Tipo usuário <span class="color-red">*</span></label>
+                        <select name="userType" id="userType" required>
+                            <option selected>Selecionar</option>
+                        </select>
+                    </div>
+                </div>
+
                 <section class="extra-form-data legal-representatives-container">
                     <h2>Área do responsável (obrigatória somente se o aluno for menor de idade)</h2>
 
@@ -280,7 +290,7 @@
                 <div class="checkbox-container">
                     <div class="checkbox-input-container">
                         <input type="checkbox" name="consent" id="consent">
-                        <label for="consent">O aluno declara estar ciente da <a id="openPrivacyPolicyBtn">Política de Privacidade</a> e dos <a id="openTermsOfUseBtn">Termos de Uso</a>.</label>
+                        <label for="consent">O inscrito declara estar ciente da <a id="openPrivacyPolicyBtn">Política de Privacidade</a> e dos <a id="openTermsOfUseBtn">Termos de Uso</a>.</label>
                     </div>
                 </div>
 

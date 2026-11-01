@@ -1,7 +1,5 @@
-main {
-  position: relative;
-}
-
-.legal-representatives-container, .health-certificate-container {
+.legal-representatives-container,
+.health-certificate-container,
+.select-user-type {
     display: none;
 }

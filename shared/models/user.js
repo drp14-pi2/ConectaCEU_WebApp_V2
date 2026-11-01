@@ -57,6 +57,7 @@ export class CreateUserForm {
     consent
     educationalUnitId
     healthCertificate
+    userType
 
     constructor (
         selectDocumentType,
@@ -95,7 +96,8 @@ export class CreateUserForm {
         rep2AuthorizationFile,
         consent,
         educationalUnitId,
-        healthCertificate) {
+        healthCertificate,
+        userType) {
         this.selectDocumentType = Number(selectDocumentType)
         this.userDocument = userDocument
         this.userDocumentFrontFile = userDocumentFrontFile
@@ -133,6 +135,7 @@ export class CreateUserForm {
         this.consent = consent
         this.educationalUnitId = educationalUnitId
         this.healthCertificate = healthCertificate
+        this.userType = userType
     }
 }
 
