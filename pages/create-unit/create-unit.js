@@ -1,4 +1,3 @@
-import '/shared/interceptors/auth-interceptor.js'
 import { CreateEducationalUnit } from "/shared/models/educational-unit.js"
 import { showMessage } from '/shared/components/toast.component.js'
 import { EducationalUnitService } from "/shared/services/educational-unit-service.js"
