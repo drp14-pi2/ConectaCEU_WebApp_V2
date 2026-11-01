@@ -172,6 +172,8 @@ async function setUserTypes() {
     const userTypes = await response.json()
     
     for (const user of userTypes) {
+        if (user.id == UserType.ADMINISTRATOR) continue
+        
         const userOption = document.createElement('option')
         userOption.value = user.id
         userOption.innerText = user.description
