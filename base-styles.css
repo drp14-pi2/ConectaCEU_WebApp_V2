@@ -331,6 +331,16 @@ input[type="date"] {
     color: var(--white);
 }
 
+.return-button {
+    color: var(--white);
+    margin-left: 50px;
+    width: 100px;
+}
+
+.return-button svg {
+    width: 50%;
+}
+
 @media screen and (max-width: 650px) {
     body {
         font-size: var(--smaller-font-size);
