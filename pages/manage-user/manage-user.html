@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/manage-user/manage-user.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/security/auth-guard.js"></script>
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
+    <script type="module" src="/pages/manage-user/manage-user.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <dynamic-content src="/shared/components/return-button.html"></dynamic-content>
+    <main>
+        <div class="base-background-shape"></div>
+        <div class="base-form-container">
+            <form>
+                <h1>Reativar/desativar usuário</h1>
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="user-name">Nome completo</label>
+                        <input type="text" name="user-name" id="user-name" readonly>
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="user-document">Documento</label>
+                        <div class="input-with-select-container">
+                            <select name="select-document-type" id="select-document-type"></select>
+                            <input type="text" name="user-document" id="user-document" size="11" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="phone">Celular</label>
+                        <input type="text" name="phone" id="phone" readonly>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="email">E-mail</label>
+                        <input type="text" name="email" id="email" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="user-type">Tipo usuário</label>
+                        <select name="user-type" id="user-type"></select>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="user-status">Status</label>
+                        <select type="text" name="user-status" id="user-status"></select>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="justification">Justificativa <span class="color-red">*</span></label>
+                        <textarea name="justification" id="justification" placeholder="Providencie uma justificativa para a ação..."></textarea>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="button" id="button-submit-form">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
+</body>
+</html>

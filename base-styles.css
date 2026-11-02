@@ -332,7 +332,6 @@ select:not(.input-with-select-container select) > option {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     font-size: 1em;
-    height: 100%;
 }
 
 .input-with-select-container input {
@@ -492,6 +491,15 @@ input[type="date"] {
 
 .table-action-button-cell {
     display: flex;
+}
+
+textarea {
+    border: none;
+    border-radius: 5px;
+    font-family: 'OpenSansRegular';
+    min-height: 10em;
+    max-width: 100%;
+    padding: 10px;
 }
 
 @media screen and (max-width: 650px) {
