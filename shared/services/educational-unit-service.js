@@ -1,6 +1,10 @@
 import { config } from '/config.js'
 
 export class EducationalUnitService {
+    static async get(id) {
+        return await fetch(`${config.apiUrl}/unit/${id}`, { method: 'GET' })
+    }
+
     static async list() {
         return await fetch(`${config.apiUrl}/unit?active=true`, { method: 'GET' })
     }

@@ -140,22 +140,42 @@ async function setLegalRepresentativeDegrees() {
 }
 
 async function setEducationalUnits() {
-    const response = await EducationalUnitService.list()
+    const loggedUser = AuthService.getLoggedUser()
 
-    if (!response.ok) {
-        await showMessage(await response.text())
+    if (loggedUser && loggedUser.educationalUnitId) {
+        const response = await EducationalUnitService.get(loggedUser.educationalUnitId)
 
-        return
-    }
+        if (!response.ok) {
+            await showMessage(await response.text())
 
-    const educationalUnitSelectElement = document.querySelector('#educationalUnit')
-    const educationalUnits = await response.json()
+            return
+        }
 
-    for (const unit of educationalUnits) {
+        const educationalUnitSelectElement = document.querySelector('#educationalUnit')
+        const educationalUnit = await response.json()
         const unitOption = document.createElement('option')
-        unitOption.value = unit.id
-        unitOption.innerText = unit.name
+        unitOption.value = educationalUnit.id
+        unitOption.innerText = educationalUnit.name
         educationalUnitSelectElement.appendChild(unitOption)
+    }
+    else {
+        const response = await EducationalUnitService.list()
+
+        if (!response.ok) {
+            await showMessage(await response.text())
+
+            return
+        }
+
+        const educationalUnitSelectElement = document.querySelector('#educationalUnit')
+        const educationalUnits = await response.json()
+
+        for (const unit of educationalUnits) {
+            const unitOption = document.createElement('option')
+            unitOption.value = unit.id
+            unitOption.innerText = unit.name
+            educationalUnitSelectElement.appendChild(unitOption)
+        }
     }
 }
 
