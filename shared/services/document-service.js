@@ -20,4 +20,23 @@ export class DocumentService {
     static async getUserIdentityDocument(userId) {
         return await fetch(`${config.apiUrl}/document/user/${userId}/identity/type`, { method: 'GET' })
     }
+
+    // Document validation
+    static async validate(validationBody) {
+        return await fetch(`${config.apiUrl}/document/validate`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                document_id: validationBody.documentId,
+                document_validation_status_type_id: validationBody.documentValidationStatusTypeId,
+                rejection_reason: validationBody.rejectionReason
+            })
+        })
+    }
+
+    static async listPendingValidations(userId) {
+        return await fetch(`${config.apiUrl}/document/validate/user/${userId}/pending`, { method: 'GET' })
+    }
 }

@@ -18,3 +18,9 @@ export class CreateDocument {
         this.legal_representative_id = legalRepresentativeId
     }
 }
+
+export class ValidateDocument {
+    documentId
+    documentValidationStatusTypeId
+    rejectionReason
+}
