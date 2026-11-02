@@ -10,7 +10,7 @@ function isValidEmail(email) {
 }
 
 async function sendRecoveryRequest() {
-    setLoading(submitButton, true)
+    setLoading(submitButton, true, 'Enviando...')
     const emailInput = document.getElementById('email')
     const emailString = emailInput.value
 

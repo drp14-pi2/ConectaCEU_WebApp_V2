@@ -541,7 +541,7 @@ function clearForm() {
 
 const submitButton = document.querySelector('#button-submit-form')
 async function submitForm() {
-    setLoading(submitButton, true)
+    setLoading(submitButton, true, 'Enviando...')
     const formData = getFormData()
     const formDataErrors = validateFormData(formData)
 

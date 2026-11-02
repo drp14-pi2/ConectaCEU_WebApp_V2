@@ -1,14 +1,20 @@
-export function setLoading(button, isLoading) {
+export function setLoading(button, isLoading, replacementText = '') {
     if (isLoading) {
-        if (!button.dataset.originalText) {
-            button.dataset.originalText = button.textContent
+        if (!button.dataset.originalHtml) {
+            button.dataset.originalHtml = button.innerHTML
         }
-        
-        button.textContent = 'Carregando...'
+
+        if (replacementText) {
+            button.textContent = replacementText
+        }
+
         button.classList.add('button-loading')
         button.disabled = true
     } else {
-        button.textContent = button.dataset.originalText ?? button.textContent
+        if (button.dataset.originalHtml != null) {
+            button.innerHTML = button.dataset.originalHtml
+            delete button.dataset.originalHtml
+        }
         button.classList.remove('button-loading')
         button.disabled = false
     }

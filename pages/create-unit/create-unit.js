@@ -52,7 +52,7 @@ function validateFormData(formData) {
 // Submit form
 const submitButton = document.querySelector('#button-submit-form')
 async function submitForm() {
-    setLoading(submitButton, true)
+    setLoading(submitButton, true, 'Enviando...')
     const createUnitBody = getCreateEducationalUnit()
     const formDataErrors = validateFormData(createUnitBody)
     

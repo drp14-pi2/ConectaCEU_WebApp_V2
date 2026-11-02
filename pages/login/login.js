@@ -8,7 +8,7 @@ import { showMessage } from '/shared/components/toast.component.js'
 // Submit form
 const submitButton = document.getElementById('button-submit-form')
 submitButton.addEventListener('click', async () => {
-    setLoading(submitButton, true)
+    setLoading(submitButton, true, 'Enviando...')
     const userDocument = document.getElementById('user-document').value
     const password = document.getElementById('user-password').value
 
