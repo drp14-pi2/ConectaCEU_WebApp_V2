@@ -50,4 +50,26 @@ export class UserService {
             })
         })
     }
+
+    static async list(searchBody) {
+        return await fetch(`${config.apiUrl}/user/list`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: searchBody.name,
+                    document: searchBody.document,
+                    email: searchBody.email,
+                    phone_number: searchBody.phoneNumber,
+                    user_type_id: searchBody.userTypeId,
+                    active: searchBody.active,
+                    educational_units_ids: searchBody.educationalUnitsIds,
+                    page: searchBody.page,
+                    page_size: searchBody.pageSize
+                })
+            }
+        )
+    }
 }

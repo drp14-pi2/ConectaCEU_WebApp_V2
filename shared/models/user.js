@@ -201,3 +201,36 @@ export class CreateUser {
         this.legalRepresentative2 = legalRepresentative2
     }
 }
+
+export class ListUsers {
+    name
+    document
+    email
+    phoneNumber
+    userTypeId
+    active
+    educationalUnitsIds
+    page
+    pageSize
+
+    constructor(
+        name,
+        document,
+        email,
+        phoneNumber,
+        userTypeId,
+        active,
+        educationalUnitsIds,
+        page,
+        pageSize) {
+        this.name = name
+        this.document = document
+        this.email = email
+        this.phoneNumber = phoneNumber
+        this.userTypeId = userTypeId
+        this.active = active
+        this.educationalUnitsIds = educationalUnitsIds
+        this.page = page
+        this.pageSize = pageSize
+    }
+}
