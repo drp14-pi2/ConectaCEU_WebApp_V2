@@ -167,7 +167,7 @@ async function renderResults(users) {
         // Create anchor and append button
         const anchorElement = document.createElement('a')
         anchorElement.style.margin = 'auto'
-        anchorElement.href = `/pages/validate-user/validate-user.html?id=${user.id}`
+        anchorElement.href = `/pages/validate-document/validate-document.html?id=${user.id}`
         anchorElement.appendChild(actionButtonElement)
 
         // Create button cell and append anchor
