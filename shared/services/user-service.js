@@ -51,6 +51,10 @@ export class UserService {
         })
     }
 
+    static async get(userId) {
+        return fetch(`${config.apiUrl}/user/${userId}`, { method: 'GET' })
+    }
+
     static async list(searchBody) {
         return await fetch(`${config.apiUrl}/user/list`,
             {
