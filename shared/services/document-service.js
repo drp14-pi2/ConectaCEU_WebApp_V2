@@ -16,4 +16,8 @@ export class DocumentService {
             })
         })
     }
+
+    static async getUserIdentityDocument(userId) {
+        return await fetch(`${config.apiUrl}/document/user/${userId}/identity/type`, { method: 'GET' })
+    }
 }
