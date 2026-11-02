@@ -4,6 +4,8 @@ export class StringHelper {
     }
 
     static removeNotNumber(str) {
+        if (typeof str !== 'string') return str
+
         return str.replace(/\D/g, '');
     }
 }
