@@ -8,5 +8,7 @@ export const pageRouting = {
     createUser: `${config.appUrl}/pages/create-user/create-user.html`,
     createUnit: `${config.appUrl}/pages/create-unit/create-unit.html`,
     manageUsers: `${config.appUrl}/pages/manage-users/manage-users.html`,
-    manageUser: `${config.appUrl}/pages/manage-user/manage-user.html`
+    manageUser: `${config.appUrl}/pages/manage-user/manage-user.html`,
+    validateDocuments: `${config.appUrl}/pages/validate-documents/validate-documents.html`,
+    validateUserDocuments: `${config.appUrl}/pages/validate-user-documents/validate-user-documents.html`
 }

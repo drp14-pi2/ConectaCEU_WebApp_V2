@@ -1,0 +1,36 @@
+.pending-documents-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+}
+
+.pending-document {
+    display: flex;
+    max-height: 2em;
+    width: 30%;
+}
+
+.pending-document-type {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: var(--white);
+    padding: 5px 20px 5px 20px;
+    width: 85%;
+}
+
+.pending-document-view {
+    background-color: var(--medium-blue);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 15%;
+}
+
+.pending-document-view svg {
+    color: var(--white);
+    width: 1.5em;
+}
