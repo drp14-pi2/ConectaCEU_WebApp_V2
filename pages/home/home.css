@@ -115,4 +115,9 @@ main {
         background-size: cover;
         background-position: center;
     }
+
+    .home-buttons {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
