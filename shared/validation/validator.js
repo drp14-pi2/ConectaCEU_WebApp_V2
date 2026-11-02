@@ -1,4 +1,14 @@
 export class Validator {
+    static isValidEmail(email) {
+        if (typeof email !== 'string') return false;
+
+        if (email.length > 254) return false;
+
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        return re.test(email);
+    }
+
     static validatePassword(password) {
         const errors = [];
 
