@@ -14,4 +14,23 @@ export class UserType {
             || value == UserType.STUDENT
             || value == UserType.MANAGER
     }
+
+    static getName(value) {
+        switch (value) {
+            case UserType.ADMINISTRATOR:
+                return 'Administrador'
+            case UserType.SECRETARY:
+                return 'Secretário'
+            case UserType.COORDINATOR:
+                return 'Coordenador'
+            case UserType.EDUCATOR:
+                return 'Educador'
+            case UserType.STUDENT:
+                return 'Estudante'
+            case UserType.MANAGER:
+                return 'Gestor'
+            default:
+                return 'N/A'
+        }
+    }
 }
