@@ -154,9 +154,69 @@ async function addResponseDataToTable(users) {
     }
 }
 
+// Pagination
 const pageSize = 10
 let pageNumber = 1
+let totalItems = 0
 
+// Get total pages count
+function totalPages() {
+    return Math.ceil(totalItems / pageSize)
+}
+
+// Update the page number display
+function updatePageNumberDisplay() {
+    const tablePageControlPageNumber = document.querySelector('.table-page-control-page-number')
+
+    if (tablePageControlPageNumber) tablePageControlPageNumber.textContent = pageNumber
+}
+
+// Set the page number
+function setPage(n) {
+    const last = totalPages();
+    pageNumber = Math.min(Math.max(1, n), Math.max(last, 1));
+    updatePageNumberDisplay();
+}
+
+// Start button
+const tablePageControlStart = document.querySelector('.table-page-control-start')
+tablePageControlStart.addEventListener('click', async () => {
+    if (pageNumber <= 1) return
+
+    setPage(1)
+    await searchItems()
+})
+
+// Previous button
+const tablePageControlPrevious = document.querySelector('.table-page-control-previous')
+tablePageControlPrevious.addEventListener('click', async () => {
+    if (pageNumber <= 1) return
+    
+    setPage(pageNumber - 1)
+    await searchItems()
+})
+
+// Forward button
+const tablePageControlForward = document.querySelector('.table-page-control-forward')
+tablePageControlForward.addEventListener('click', async () => {
+    if (pageNumber >= totalPages()) return
+    
+    setPage(pageNumber + 1)
+    await searchItems()
+})
+
+// End button
+const tablePageControlLast = document.querySelector('.table-page-control-last')
+tablePageControlLast.addEventListener('click', async () => {
+    const last = totalPages();
+
+    if (last < 1 || pageNumber >= last) return;
+
+    setPage(last);
+    await searchItems()
+})
+
+// Submit form
 const submitButton = document.querySelector('.search-button')
 async function searchItems() {
     setLoading(submitButton, true)
@@ -187,9 +247,11 @@ async function searchItems() {
         showMessage('Nenhum usuário encontrado')
     }
     else {
-        await addResponseDataToTable(responseBody)
+        totalItems = responseBody.total
+        await addResponseDataToTable(responseBody.users)
     }
-    
+
+    updatePageNumberDisplay()
     setLoading(submitButton, false)
 
     return
