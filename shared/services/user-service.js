@@ -76,4 +76,20 @@ export class UserService {
             }
         )
     }
+
+    static async activate(userId) {
+        return await fetch(`${config.apiUrl}/user/${userId}/activate`, { method: 'PATCH' })
+    }
+
+    static async deactivate(userId, reason) {
+        return await fetch(`${config.apiUrl}/user/${userId}/deactivate`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                reason: reason
+            })
+        })
+    }
 }

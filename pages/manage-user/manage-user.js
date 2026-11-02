@@ -2,7 +2,6 @@ import { UserService } from '/shared/services/user-service.js'
 import { DocumentService } from '/shared/services/document-service.js'
 import { showMessage } from '/shared/components/toast.component.js'
 import { pageRouting } from '/shared/constants/page-routing.js'
-import { ListUsers } from '/shared/models/user.js'
 import { UserType } from '/shared/constants/user-type.js'
 import { DocumentType } from '/shared/constants/document-type.js'
 
@@ -11,6 +10,7 @@ const userId = params.get('id');
 
 if (!userId) location.href = pageRouting.manageUsers
 
+// Get user data
 async function getUserIdentityDocument(userId) {
     const response = await DocumentService.getUserIdentityDocument(userId)
 
@@ -31,6 +31,7 @@ async function setUserData() {
 
     if (!response.ok) {
         showMessage(await response.text())
+        location.href = pageRouting.manageUsers
 
         return
     }
@@ -68,13 +69,78 @@ async function setUserData() {
     // Status
     const userStatusElement = document.querySelector('#user-status')
     const statusOptionElement = document.createElement('option')
-    statusOptionElement.textContent = user.active ? 'Ativo' : 'Inativo'
+    const isActive = user.active
+    statusOptionElement.textContent = isActive ? 'Ativo' : 'Inativo'
+    statusOptionElement.value = isActive ? 'true' : 'false'
     userStatusElement.appendChild(statusOptionElement)
+
+    if (isActive) {
+        const reasonContainerElement = document.querySelector('.reason-container')
+
+        if (reasonContainerElement && getComputedStyle(reasonContainerElement).display != 'flex') {
+            reasonContainerElement.style.display = 'flex'
+        }
+    }
+
+    return
 }
 await setUserData()
 
 async function submitForm() {
+    const userStatusElement = document.querySelector('#user-status')
 
+    if (!userStatusElement || (userStatusElement.value != 'true' && userStatusElement.value != 'false')) {
+        showMessage('Status inválido')
+
+        return
+    }
+
+    const isUserActivate = userStatusElement.value === 'true'
+
+    if (isUserActivate) {
+        const reason = document.querySelector('#reason').value
+
+        if (!reason) {
+            showMessage('Uma justificativa de desativação é obrigatória')
+
+            return
+        }
+
+        if (reason.length < 10) {
+            showMessage('A justificativa precisa de pelo menos 10 caracteres')
+
+            return
+        }
+
+        const response = await UserService.deactivate(userId, reason)
+
+        if (!response.ok) {
+            showMessage(await response.text())
+
+            return
+        }
+
+        const responseBody = await response.json()
+        await showMessage(responseBody.message)
+        location.href = pageRouting.manageUsers
+
+        return
+    }
+    else {
+        const response = await UserService.activate(userId)
+
+        if (!response.ok) {
+            showMessage(await response.text())
+
+            return
+        }
+
+        const responseBody = await response.json()
+        await showMessage(responseBody.message)
+        location.href = pageRouting.manageUsers
+
+        return
+    }
 }
 const submitButton = document.querySelector('#button-submit-form')
 submitButton.addEventListener('click', async () => await submitForm())
