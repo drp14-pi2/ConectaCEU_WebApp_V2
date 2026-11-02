@@ -76,7 +76,7 @@ export class AuthService {
     static async logout(manualRequest) {
         sessionStorage.removeItem(storageKeys.authToken)
 
-        if (!manualRequest) await showMessage('Sessão expirada', 3000)
+        if (!manualRequest) showMessage('Sessão expirada', 3000)
         
         location.href = pageRouting.root
     }
