@@ -74,7 +74,7 @@ export class AuthService {
     }
 
     static async logout(manualRequest) {
-        sessionStorage.removeItem(storageKeys.authToken)
+        sessionStorage.clear()
 
         if (!manualRequest) showMessage('Sessão expirada', 3000)
         
