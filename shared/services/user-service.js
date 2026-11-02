@@ -70,6 +70,7 @@ export class UserService {
                     user_type_id: searchBody.userTypeId,
                     active: searchBody.active,
                     educational_units_ids: searchBody.educationalUnitsIds,
+                    has_pending_validations: searchBody.hasPendingValidations,
                     page: searchBody.page,
                     page_size: searchBody.pageSize
                 })

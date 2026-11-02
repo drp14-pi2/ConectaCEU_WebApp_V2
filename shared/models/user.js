@@ -210,6 +210,7 @@ export class ListUsers {
     userTypeId
     active
     educationalUnitsIds
+    hasPendingValidations
     page
     pageSize
 
@@ -221,6 +222,7 @@ export class ListUsers {
         userTypeId,
         active,
         educationalUnitsIds,
+        hasPendingValidations,
         page,
         pageSize) {
         this.name = name
@@ -230,6 +232,7 @@ export class ListUsers {
         this.userTypeId = userTypeId
         this.active = active
         this.educationalUnitsIds = educationalUnitsIds
+        this.hasPendingValidations = hasPendingValidations
         this.page = page
         this.pageSize = pageSize
     }
