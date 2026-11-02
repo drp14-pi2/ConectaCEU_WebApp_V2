@@ -184,14 +184,126 @@ button:hover {
 .form-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .form-row-col-2 .input-container {
     width: 45%;
 }
 
+.form-row-col-3 .input-container {
+    width: 30%;
+}
+
 .input-with-select-container {
     display: flex;
+}
+
+.item-listing-container {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding-top: 10px;
+}
+
+.search-form {
+    background-color: var(--light-blue);
+    border-radius: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 98%;
+}
+
+.search-button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 50px;
+    margin-top: 22px;
+    width: 50px;
+}
+
+.search-button svg {
+    width: 50%;
+}
+
+.table-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.table-scroll table {
+    min-width: 1200px;
+    border-collapse: collapse;
+}
+
+.table-page-control {
+    background-color: var(--medium-blue);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 2em;
+    width: 200px;
+    text-align: center;
+    margin: 10px auto;
+
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.table-page-control > * {
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.table-page-control svg {
+    color: var(--white);
+    padding-top: 7px;
+    width: 1em;
+}
+
+.table-page-control-page-number {
+    background-color: var(--white);
+}
+
+.item-listing-result {
+    display: flex;
+    flex-direction: column;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.item-listing-result table {
+    text-align: center;
+}
+
+.item-listing-result thead {
+    background-color: var(--medium-blue);
+    color: var(--white);
+}
+
+.item-listing-result td {
+    padding: 3px;
+}
+
+.item-listing-result td {
+    word-break: break-word;
+}
+
+.item-listing-result thead td + td {
+    border-left: 1px solid var(--white);
+}
+
+.item-listing-result tbody tr + tr {
+    border-top: 1px solid var(--black);
+}
+
+.item-listing-result tbody td + td {
+    border-left: 1px solid var(--black);
 }
 
 select:not(.input-with-select-container select) {
@@ -341,6 +453,27 @@ input[type="date"] {
     width: 50%;
 }
 
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--medium-blue);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    max-width: 90vw;
+}
+
+.toast.toast--visible {
+    opacity: 1;
+}
+
 @media screen and (max-width: 650px) {
     body {
         font-size: var(--smaller-font-size);
@@ -351,6 +484,17 @@ input[type="date"] {
     }
 
     .form-row .input-container {
+        align-self: center;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .form-row-col-3 {
+        flex-direction: column;
+    }
+
+    .form-row-col-3 .input-container {
         align-self: center;
         width: 100%;
     }
