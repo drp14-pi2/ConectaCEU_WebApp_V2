@@ -14,7 +14,7 @@ async function setUserTypes() {
     const response = await ReferenceService.getUserTypes()
 
     if (!response.ok) {
-        await showMessage(await response.text())
+        showMessage(await response.text())
 
         return
     }
@@ -104,8 +104,18 @@ async function getUserIdentityDocument(userId) {
     return ''
 }
 
-async function addResponseDataToTable(users) {
-    if (!users) return
+async function renderResults(users) {
+    const resultContainer = document.querySelector('.item-listing-result')
+
+    if (!users) {
+        if (getComputedStyle(resultContainer).display != 'none') {
+            resultContainer.style.display = 'none'
+        }
+        
+        return
+    }
+
+    resultContainer.style.display = 'flex'
 
     const tbodyElement = document.querySelector('.item-listing-result tbody')
     tbodyElement.replaceChildren()
@@ -148,6 +158,30 @@ async function addResponseDataToTable(users) {
         const userStatusCell = document.createElement('td')
         userStatusCell.textContent = user.active ? 'Ativo' : 'Inativo'
         trowElement.appendChild(userStatusCell)
+
+        // Action button
+        // Create button
+        const actionButtonElement = document.createElement('button')
+        actionButtonElement.classList.add('actionButton')
+
+        // Icons
+        const lockIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor"><path d="M256 160L256 224L384 224L384 160C384 124.7 355.3 96 320 96C284.7 96 256 124.7 256 160zM192 224L192 160C192 89.3 249.3 32 320 32C390.7 32 448 89.3 448 160L448 224C483.3 224 512 252.7 512 288L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 288C128 252.7 156.7 224 192 224z"/></svg>'
+        const lockOpenIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor"><path d="M416 160C416 124.7 444.7 96 480 96C515.3 96 544 124.7 544 160L544 192C544 209.7 558.3 224 576 224C593.7 224 608 209.7 608 192L608 160C608 89.3 550.7 32 480 32C409.3 32 352 89.3 352 160L352 224L192 224C156.7 224 128 252.7 128 288L128 512C128 547.3 156.7 576 192 576L448 576C483.3 576 512 547.3 512 512L512 288C512 252.7 483.3 224 448 224L416 224L416 160z"/></svg>'
+        actionButtonElement.innerHTML = user.active ? lockIcon : lockOpenIcon
+
+        // Create anchor and append button
+        const anchorElement = document.createElement('a')
+        anchorElement.style.margin = 'auto'
+        anchorElement.href = `/pages/manage-user/manage-user.html?id=${user.id}`
+        anchorElement.appendChild(actionButtonElement)
+
+        // Create button cell and append anchor
+        const actionButtonCell = document.createElement('td')
+        actionButtonCell.classList.add('table-action-button-cell')
+        actionButtonCell.appendChild(anchorElement)
+
+        // Append cell to row
+        trowElement.appendChild(actionButtonCell)
 
         // Append row to tbody
         tbodyElement.appendChild(trowElement)
@@ -248,7 +282,7 @@ async function searchItems() {
     }
     else {
         totalItems = responseBody.total
-        await addResponseDataToTable(responseBody.users)
+        await renderResults(responseBody.users)
     }
 
     updatePageNumberDisplay()

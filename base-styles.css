@@ -203,6 +203,7 @@ button:hover {
     background-color: var(--white);
     border-radius: 10px;
     padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .search-form {
@@ -271,7 +272,7 @@ button:hover {
 }
 
 .item-listing-result {
-    display: flex;
+    display: none;
     flex-direction: column;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -472,6 +473,25 @@ input[type="date"] {
 
 .toast.toast--visible {
     opacity: 1;
+}
+
+.actionButton {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.actionButton svg {
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-action-button-cell {
+    display: flex;
 }
 
 @media screen and (max-width: 650px) {
