@@ -144,6 +144,10 @@ a {
     text-decoration: underline;
 }
 
+.pointer-mouse-cursor:hover {
+    cursor: pointer;
+}
+
 a:hover {
     color: var(--dark-blue);
     transition: var(--base-transition);

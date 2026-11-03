@@ -20,6 +20,27 @@ import { setLoading } from '/shared/components/loading-button.js'
 import { storageKeys } from '/shared/constants/storage-keys.js'
 import { UserService } from '/shared/services/user-service.js'
 import { pageRouting } from '/shared/constants/page-routing.js'
+import { openPopup } from '/shared/components/popup.js'
+
+// Privacy policy
+const openPrivacyPolicyBtn = document.querySelector('#openPrivacyPolicyBtn')
+openPrivacyPolicyBtn.addEventListener('click', async () => {
+    const response = await fetch('/pages/privacy-policy/privacy-policy.html')
+    openPopup({
+        title: 'Política de Privacidade',
+        content: await response.text()
+    })
+})
+
+// Terms of use
+const openTermsOfUseBtn = document.querySelector('#openTermsOfUseBtn')
+openTermsOfUseBtn.addEventListener('click', async () => {
+    const response = await fetch('/pages/terms-of-use/terms-of-use.html')
+    openPopup({
+        title: 'Termos de Uso',
+        content: await response.text()
+    })
+})
 
 // Control blocks diplay based on user age
 const birthdateElement = document.querySelector('#birthdate')

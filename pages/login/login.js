@@ -4,13 +4,34 @@ import { User } from '/shared/models/user.js'
 import { storageKeys } from '/shared/constants/storage-keys.js'
 import { setLoading } from '/shared/components/loading-button.js'
 import { showMessage } from '/shared/components/toast.component.js'
+import { openPopup } from '/shared/components/popup.js'
+
+// Privacy policy
+const openPrivacyPolicyBtn = document.querySelector('#openPrivacyPolicyBtn')
+openPrivacyPolicyBtn.addEventListener('click', async () => {
+    const response = await fetch('/pages/privacy-policy/privacy-policy.html')
+    openPopup({
+        title: 'Política de Privacidade',
+        content: await response.text()
+    })
+})
+
+// Terms of use
+const openTermsOfUseBtn = document.querySelector('#openTermsOfUseBtn')
+openTermsOfUseBtn.addEventListener('click', async () => {
+    const response = await fetch('/pages/terms-of-use/terms-of-use.html')
+    openPopup({
+        title: 'Termos de Uso',
+        content: await response.text()
+    })
+})
 
 // Submit form
-const submitButton = document.getElementById('button-submit-form')
+const submitButton = document.querySelector('#button-submit-form')
 submitButton.addEventListener('click', async () => {
     setLoading(submitButton, true, 'Enviando...')
-    const userDocument = document.getElementById('user-document').value
-    const password = document.getElementById('user-password').value
+    const userDocument = document.querySelector('#user-document').value
+    const password = document.querySelector('#user-password').value
 
     if (!userDocument || !password) {
         setLoading(submitButton, false)
