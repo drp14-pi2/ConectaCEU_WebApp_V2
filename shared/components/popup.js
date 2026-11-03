@@ -17,7 +17,6 @@ function ensurePopup() {
     popup.setAttribute('role', 'dialog')
     popup.setAttribute('aria-modal', 'true')
     popup.setAttribute('aria-labelledby', 'popup-title')
-
     popup.innerHTML = `
         <h2 id="popup-title"></h2>
         <div class="popup-body"></div>
@@ -43,46 +42,68 @@ function ensurePopup() {
     })
 }
 
-/**
- * @param {Object} options
- * @param {string} [options.title]
- * @param {string|Node} [options.content]   — HTML string or a DOM node
- * @param {Function} [options.onClose]
- */
-export function openPopup({ title = '', content = '', buttons = [], onClose: cb } = {}) {
-    ensurePopup()
+const stack = []
 
+export function openPopup({ title = '', content = '', buttons = [], onClose: cb } = {}) {
+    const overlay = document.createElement('div')
+    overlay.className = 'popup-overlay'
+    overlay.style.zIndex = String(1000 + stack.length)
+
+    const popup = document.createElement('div')
+    popup.className = POPUP_CLASS
+    popup.setAttribute('role', 'dialog')
+    popup.setAttribute('aria-modal', 'true')
+    popup.setAttribute('aria-labelledby', 'popup-title')
+    popup.innerHTML = `
+        <h2 id="popup-title"></h2>
+        <div class="popup-body"></div>
+        <div class="popup-btn-row">
+        <button type="button" class="popup-close" aria-label="Fechar">Fechar</button>
+        </div>
+    `
+
+    // populate title
     popup.querySelector('#popup-title').textContent = title
 
+    // populate body
     const body = popup.querySelector('.popup-body')
-    body.replaceChildren()
     if (content instanceof Node) body.appendChild(content)
     else body.innerHTML = content
 
+    // populate action buttons (before the close button, or after — your choice)
     const btnRow = popup.querySelector('.popup-btn-row')
-
-    // remove only the dynamic buttons, keep the static close button
-    btnRow.querySelectorAll('.popup-action').forEach((el) => el.remove())
-
     for (const { label, onClick, variant } of buttons) {
         const b = document.createElement('button')
         b.type = 'button'
         b.textContent = label
-        b.classList.add('popup-action')        // ← marker
+        b.classList.add('popup-action')
         if (variant) b.classList.add(variant)
-        b.addEventListener('click', () => onClick?.())
+        b.addEventListener('click', async () => {
+        if (b.disabled) return
+        b.disabled = true
+        try { await onClick?.() } finally { b.disabled = false }
+        })
         btnRow.appendChild(b)
     }
 
-    onClose = cb ?? null
-    popup.parentElement.hidden = false
+    // wire close
+    popup.querySelector('.popup-close').addEventListener('click', () => closePopup())
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup() })
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePopup() })
+
+    const entry = { overlay, popup, onClose: cb ?? null }
+    stack.push(entry)
+
+    overlay.appendChild(popup)
+    document.body.appendChild(overlay)
+
     popup.querySelector('.popup-close')?.focus()
+    return entry
 }
 
 export function closePopup() {
-    if (!overlay || overlay.hidden) return;
-    overlay.hidden = true;
-    popup.querySelector('.popup-body').replaceChildren();
-    onClose?.();
-    onClose = null;
+    const entry = stack.pop()
+    if (!entry) return
+    entry.overlay.remove()
+    entry.onClose?.()
 }
