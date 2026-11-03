@@ -546,6 +546,13 @@ textarea {
     flex-shrink: 0;
 }
 
+.doc-render-pdf {
+    width: 80vw;
+    height: 80vh;
+    border: none;
+    border-radius: 8px;
+}
+
 @media screen and (max-width: 650px) {
     body {
         font-size: var(--smaller-font-size);
