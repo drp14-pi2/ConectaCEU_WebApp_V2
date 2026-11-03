@@ -30,6 +30,12 @@
     width: 15%;
 }
 
+.pending-document-view:hover {
+    background-color: var(--dark-blue);
+    cursor: pointer;
+    transition: var(--base-transition);
+}
+
 .pending-document-view svg {
     color: var(--white);
     width: 1.5em;
