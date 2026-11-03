@@ -11,7 +11,7 @@ import { setLoading } from '/shared/components/loading-button.js';
 const params = new URLSearchParams(window.location.search);
 const userId = params.get('id');
 
-// if (!userId) location.href = pageRouting.validateDocuments
+if (!userId) location.href = pageRouting.validateDocuments
 
 // Get user data
 async function getUserIdentityDocument(userId) {
@@ -33,7 +33,7 @@ async function setUserData() {
 
     if (!response.ok) {
         showMessage(await response.text())
-        // location.href = pageRouting.validateDocuments
+        location.href = pageRouting.validateDocuments
 
         return
     }
@@ -88,25 +88,48 @@ function reloadPage() {
 }
 
 async function rejectDocument(documentId) {
-    const buttons = document.getElementsByClassName('popup-action')
-    const button = buttons[buttons.length - 1]
+    async function reject() {
+        let buttons = document.getElementsByClassName('popup-action')
+        let button = buttons[buttons.length - 1]
+        setLoading(button, true, 'Enviando...')
+
+        const rejectionReason = document.querySelector('textarea').value
+
+        if (!rejectionReason || rejectionReason.length < 10) {
+            showMessage('Motivo da rejeição precisa de pelo menos 10 caracteres')
+            setLoading(button, false)
+
+            return
+        }
+
+        const validationBody = {
+            documentId: documentId,
+            documentValidationStatusTypeId: DocumentValidationStatusType.rejected,
+            rejectionReason: rejectionReason
+        }
+        const response = await DocumentService.validate(validationBody)
+
+        if (!response.ok) {
+            showMessage(await response.text())
+
+            return
+        }
+
+        await showMessage('Documento rejeitado', 3000)
+        reloadPage()
+    }
+
+    openPopup({
+        title: 'Motivo da rejeição',
+        content: '<textarea placeholder="Providencie uma justificativa para a rejeição..." require></textarea>',
+        buttons: [
+            { label: 'Rejeitar', onClick: async () => await reject() },
+        ]
+    })
+
+    buttons = document.getElementsByClassName('popup-action')
+    button = buttons[buttons.length - 1]
     setLoading(button, true, 'Enviando...')
-
-    const validationBody = {
-        documentId: documentId,
-        documentValidationStatusTypeId: DocumentValidationStatusType.rejected,
-        rejectionReason: ''
-    }
-    const response = await DocumentService.validate(validationBody)
-
-    if (!response.ok) {
-        showMessage(await response.text())
-
-        return
-    }
-
-    await showMessage('Documento rejeitado', 3000)
-    reloadPage()
 }
 
 async function acceptDocument(documentId) {
@@ -194,9 +217,3 @@ async function listPendingValidations() {
     }
 }
 await listPendingValidations()
-
-// async function submitForm() {
-    
-// }
-// const submitButton = document.querySelector('#button-submit-form')
-// submitButton.addEventListener('click', async () => await submitForm())
