@@ -47,7 +47,7 @@ export class AuthService {
                     complement: createUser.address.complement,
                     neighborhood: createUser.address.neighborhood
                 },
-                legal_representative_1: {
+                legal_representative_1: !createUser.legalRepresentative2 ? null : {
                     name: createUser.legalRepresentative1.name,
                     document: createUser.legalRepresentative1.document,
                     legal_representative_degree_id: createUser.legalRepresentative1.legalRepresentativeDegreeId,
@@ -55,7 +55,7 @@ export class AuthService {
                     id_document_back: createUser.legalRepresentative1.idDocumentBack,
                     student_registry_authorization: createUser.legalRepresentative1.studentRegistryAuthorization
                 },
-                legal_representative_2: {
+                legal_representative_2: !createUser.legalRepresentative2 ? null : {
                     name: createUser.legalRepresentative2.name,
                     document: createUser.legalRepresentative2.document,
                     legal_representative_degree_id: createUser.legalRepresentative2.legalRepresentativeDegreeId,
