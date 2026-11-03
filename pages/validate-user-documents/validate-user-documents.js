@@ -32,7 +32,7 @@ async function setUserData() {
     const response = await UserService.get(userId)
 
     if (!response.ok) {
-        showMessage(await response.text())
+        await showMessage(await response.text())
         location.href = pageRouting.validateDocuments
 
         return

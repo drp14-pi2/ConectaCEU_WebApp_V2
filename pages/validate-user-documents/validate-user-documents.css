@@ -8,7 +8,7 @@
 
 .pending-document {
     display: flex;
-    max-height: 2em;
+    min-height: 2em;
     width: 30%;
 }
 
@@ -39,4 +39,21 @@
 .pending-document-view svg {
     color: var(--white);
     width: 1.5em;
+}
+
+@media screen and (max-width: 1200px) {
+    .pending-documents-row {
+        flex-direction: column;
+    }
+
+    .pending-document {
+        margin-bottom: 10px;
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .pending-document {
+        width: 100%;
+    }
 }
