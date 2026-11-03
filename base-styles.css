@@ -502,6 +502,50 @@ textarea {
     padding: 10px;
 }
 
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.popup-overlay[hidden] { display: none; }
+
+.popup {
+    position: relative;
+    background-color: var(--light-blue);
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-body {
+    background-color: var(--white);
+    border-radius: 15px;
+    outline: 5px solid var(--medium-blue);
+    padding: 10px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+}
+
+.popup-btn-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-shrink: 0;
+}
+
 @media screen and (max-width: 650px) {
     body {
         font-size: var(--smaller-font-size);
