@@ -315,8 +315,8 @@ function validateFormData(formData) {
         errors.push('Foto de usuário é obrigatória')
     }
 
-    if (!formData.userName || formData.userName.length < 5) {
-        errors.push('Nome de usuário inválido')
+    if (!formData.userName || (formData.userName.length < 3 || formData.userName.length > 200)) {
+        errors.push('Nome precisa ter entre 3 e 200 caracteres')
     }
 
     if (!formData.birthdate) {
@@ -349,23 +349,23 @@ function validateFormData(formData) {
         errors.push('CEP inválido')
     }
 
-    if (!formData.street || formData.street.length < 5) {
-        errors.push('Logradouro inválido')
+    if (!formData.street || (formData.street.length < 3 || formData.street.length > 200)) {
+        errors.push('Logradouro precisa ter entre 3 e 200 caracteres')
     }
 
     if (!formData.addressNumber) {
-        formData.addressNumber = 'S/N'
+        errors.push('Número de endereço inválido')
     }
     
-    if (!formData.neighborhood || formData.neighborhood.length < 5) {
-        errors.push('Bairro inválido')
+    if (!formData.neighborhood || (formData.neighborhood.length < 3 || formData.neighborhood.length > 100)) {
+        errors.push('Bairro precisa ter entre 3 e 100 caracteres')
     }
 
     const isUserMinor = DateHelper.isAgeEqualOrBelow(formData.birthdate, 17)
 
     if (isUserMinor) {
-        if (!formData.representative1Name || formData.representative1Name.length < 5) {
-            errors.push('Nome do representante legal 1 inválido')
+        if (!formData.representative1Name || (formData.representative1Name.length < 3 || formData.representative1Name.length > 200)) {
+            errors.push('Nome do representante legal 1 precisa ter entre 3 e 200 caracteres')
         }
 
         if (!LegalRepresentativeDegree.isValid(formData.representative1Degree)) {
@@ -393,8 +393,8 @@ function validateFormData(formData) {
         }
 
         if (formData.representative2Name) {
-            if (formData.representative2Name.length < 5) {
-                errors.push('Nome do representante legal 2 inválido')
+            if (formData.representative2Name.length < 3 || formData.representative2Name.length > 200) {
+                errors.push('Nome do representante legal 2 precisa ter entre 3 e 200 caracteres')
             }
 
             if (!LegalRepresentativeDegree.isValid(formData.representative2Degree)) {
@@ -405,9 +405,9 @@ function validateFormData(formData) {
                 errors.push('Tipo de documento de representante legal 2 inválido')
             }
 
-        if (!formData.representative2Document || formData.representative2Document.length != 11) {
-            errors.push('Documento do representante legal 2 inválido')
-        }
+            if (!formData.representative2Document || formData.representative2Document.length != 11) {
+                errors.push('Documento do representante legal 2 inválido')
+            }
 
             if (!formData.rep2DocumentFrontFile) {
                 errors.push('Frente do documento de identificação do representante 2 não anexado')
