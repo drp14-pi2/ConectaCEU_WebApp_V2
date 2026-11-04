@@ -595,35 +595,37 @@ async function submitForm() {
 
     async function hangleResponse(createUserResponse) {
         if (!createUserResponse.ok) {
-            showMessage(await createUserResponse.text())
+            await showMessage(await createUserResponse.text())
             setLoading(submitButton, false)
 
-            return
+            return false
         }
         
         const createUserResponseBody = await createUserResponse.json()
+        clearForm()
 
         if (createUserResponseBody.message) {
-            showMessage(createUserResponseBody.message)
+            await showMessage(createUserResponseBody.message)
         }
         else {
-            showMessage('Usuário criado com sucesso')
+            await showMessage('Usuário criado com sucesso')
         }
 
-        clearForm()
+        return true
     }
 
     // Register user
     if (authToken) {
         const createUser = await getCreateUserBody(formData)
         const createUserResponse = await UserService.create(createUser)
-        hangleResponse(createUserResponse)
+        await hangleResponse(createUserResponse)
     }
     else {
         const createUser = await getCreateUserBody(formData, UserType.STUDENT)
         const createUserResponse = await AuthService.publicUserRegister(createUser)
-        hangleResponse(createUserResponse)
-        location.href = pageRouting.root
+        const success = await hangleResponse(createUserResponse)
+
+        if (success) location.href = pageRouting.root
     }
     
     setLoading(submitButton, false)
