@@ -16,4 +16,8 @@ export class ReferenceService {
     static async getUserTypes() {
         return await fetch(`${config.apiUrl}/reference/user-types`, { method: 'GET' })
     }
+
+    static async getShiftTypes() {
+        return await fetch(`${config.apiUrl}/reference/shift-types`, { method: 'GET' })
+    }
 }

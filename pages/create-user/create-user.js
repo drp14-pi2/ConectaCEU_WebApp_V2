@@ -236,7 +236,7 @@ function setBirthdateRange() {
 
     // Set min date
     const minDate = new Date(today);
-    minDate.setDate(minDate.getDate() - (30 * 12 * 110)); // max 110 years old
+    minDate.setDate(minDate.getDate() - (30 * 12 * 100)); // max 100 years old
     birthdateElement.min = DateHelper.toDateInputValue(minDate);
 
     // Set max date

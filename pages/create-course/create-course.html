@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/create-course/create-course.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/security/auth-guard.js"></script>
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
+    <script type="module" src="/pages/create-course/create-course.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <dynamic-content src="/shared/components/return-button.html"></dynamic-content>
+    <main>
+        <div class="base-background-shape"></div>
+        <div class="base-form-container">
+            <form>
+                <h1>Cadastrar cursos e atividades</h1>
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="course-name">Nome do curso/atividade <span class="color-red">*</span></label>
+                        <input type="text" name="course-name" id="course-name" placeholder="ex: Educação Física" required>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="seat-limit">Limite de vagas <span class="color-red">*</span></label>
+                        <input type="number" name="seat-limit" id="seat-limit" min="0" max="1000" placeholder="ex: 70" required>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="workload">Carga horária total <span class="color-red">*</span></label>
+                        <input type="number" name="workload" id="workload" min="0" max="1000" placeholder="ex: 500"  required>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="min-age">Idade mínima <span class="color-red">*</span></label>
+                        <input type="number" name="min-age" id="min-age" min="0" max="4" placeholder="ex: 15"  required>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="max-age">Idade máxima <span class="color-red">*</span></label>
+                        <input type="number" name="max-age" id="max-age" min="0" max="100" placeholder="ex: 15"  required>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="shift-type">Turno <span class="color-red">*</span></label>
+                        <select name="shift-type" id="shift-type">
+                            <option value="" selected>Selecionar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="educational-unit">CEU <span class="color-red">*</span></label>
+                        <select name="educational-unit" id="educational-unit" required>
+                            <option selected>Selecionar</option>
+                        </select>
+                    </div>
+
+                    <div class="input-container responsible-educator-1">
+                        <label for="responsible-educator-1">Docente responsável 1 <span class="color-red">*</span></label>
+                        <select name="responsible-educator-1" id="responsible-educator-1">
+                            <option value="" selected>Selecionar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container responsible-educator-2">
+                        <label for="responsible-educator-2">Docente responsável 2</label>
+                        <select name="responsible-educator-2" id="responsible-educator-2">
+                            <option value="" selected>Selecionar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <section class="extra-form-data">
+                    <h2>Cadastrar componentes</h2>
+
+                    <div class="inner-extra-form-data components-container"></div>
+                </section>
+
+                <div class="button-row">
+                    <button type="button" id="button-submit-form">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
+</body>
+</html>

@@ -364,6 +364,10 @@ input[type="date"] {
     margin: 20px auto;
 }
 
+.input-row-with-textarea {
+    align-items: flex-start;
+}
+
 .checkbox-container {
     margin: 20px auto;
     padding: 20px;
@@ -434,6 +438,40 @@ input[type="date"] {
     min-width: 300px;
 }
 
+.round-first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.round-last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.round {
+    border-radius: 5px;
+}
+
+.horizontal-action-button-row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.horizontal-action-button-row .action-button {
+    background-color: var(--medium-blue);
+    color: var(--white);
+    height: 2em;
+    width: 2em;
+}
+
+.horizontal-action-button-row .action-button:hover {
+    background-color: var(--dark-blue);
+    transition: var(--base-transition);
+}
+
 .password-requirements {
     font-size: .8em;
 }
@@ -501,6 +539,7 @@ textarea {
     border: none;
     border-radius: 5px;
     font-family: 'OpenSansRegular';
+    font-size: 1em;
     min-height: 10em;
     max-width: 100%;
     padding: 10px;
@@ -557,29 +596,17 @@ textarea {
     border-radius: 8px;
 }
 
-@media screen and (max-width: 650px) {
-    body {
-        font-size: var(--smaller-font-size);
-    }
-
-    .form-row {
+@media screen and (max-width: 1200px) {
+    .input-row-with-textarea {
         flex-direction: column;
     }
-
-    .form-row .input-container {
-        align-self: center;
+    
+    .input-row-with-textarea .input-container {
         width: 100%;
     }
-}
 
-@media screen and (max-width: 830px) {
-    .form-row-col-3 {
-        flex-direction: column;
-    }
-
-    .form-row-col-3 .input-container {
-        align-self: center;
-        width: 100%;
+    .horizontal-action-button-row {
+        margin: auto;
     }
 }
 
@@ -607,5 +634,31 @@ textarea {
         border-top-right-radius: 0;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .form-row-col-3 {
+        flex-direction: column;
+    }
+
+    .form-row-col-3 .input-container {
+        align-self: center;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    body {
+        font-size: var(--smaller-font-size);
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row .input-container {
+        align-self: center;
+        width: 100%;
     }
 }
