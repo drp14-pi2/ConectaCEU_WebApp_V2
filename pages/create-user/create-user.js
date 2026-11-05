@@ -444,7 +444,7 @@ async function getCreateUserBody(formData, userType) {
         formData.userName,
         formData.email,
         formData.phone,
-        formData.secondPhone,
+        formData.secondPhone.length ? formData.secondPhone : null,
         formData.birthdate,
         formData.school,
         formData.sex,
