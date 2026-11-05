@@ -21,4 +21,35 @@ export class CourseService {
             })
         })
     }
+
+    static async list(searchObject) {
+        const params = new URLSearchParams();
+
+        if (searchObject.name) {
+            params.set('name', searchObject.name);
+        }
+
+        if (searchObject.active) {
+            params.set('active', searchObject.active);
+        }
+
+        if (searchObject.educatorId) {
+            params.set('educator_id', searchObject.educatorId);
+        }
+
+        if (searchObject.shiftTypeId) {
+            params.set('shift_type_id', searchObject.shiftTypeId);
+        }
+
+        if (searchObject.educationalUnitId) {
+            params.set('educational_unit_id', searchObject.educationalUnitId);
+        }
+
+        params.set('page', searchObject.page);
+        params.set('page_size', searchObject.pageSize);
+
+        const resource = params.size ? `${config.apiUrl}/course` : `${config.apiUrl}/course?${params}`
+
+        return fetch(resource)
+    }
 }

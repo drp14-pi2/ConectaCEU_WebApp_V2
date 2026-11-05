@@ -33,3 +33,30 @@ export class CreateCourse {
         this.components = components
     }
 }
+
+export class ListCourses {
+    name
+    active
+    educatorId
+    shiftTypeId
+    educationalUnitId
+    page
+    pageSize
+
+    constructor(
+        name,
+        active,
+        educatorId,
+        shiftTypeId,
+        educationalUnitId,
+        page,
+        pageSize) {
+        this.name = name
+        this.active = active
+        this.educatorId = educatorId
+        this.shiftTypeId = shiftTypeId
+        this.educationalUnitId = educationalUnitId
+        this.page = page
+        this.pageSize = pageSize
+    }
+}
