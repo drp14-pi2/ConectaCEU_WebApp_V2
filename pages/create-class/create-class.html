@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/create-class/create-class.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/security/auth-guard.js"></script>
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
+    <script type="module" src="/pages/create-class/create-class.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <dynamic-content src="/shared/components/return-button.html"></dynamic-content>
+    <main>
+        <div class="base-background-shape"></div>
+        <div class="base-form-container">
+            <form>
+                <h1>Cadastrar aulas</h1>
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="course">Curso <span class="color-red">*</span></label>
+                        <select name="course" id="course" required>
+                            <option value="" selected>Selecionar</option>
+                        </select>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="course-component">Componente <span class="color-red">*</span></label>
+                        <select name="course-component" id="course-component" required>
+                            <option value="" selected>Selecionar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="initial-date">Data inicial <span class="color-red">*</span></label>
+                        <input type="date" name="initial-date" id="initial-date" required>
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="end-date">Data final <span class="color-red">*</span></label>
+                        <input type="date" name="end-date" id="end-date" required>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <fieldset class="week-days checkbox-input-container">
+                        <legend>Dias da semana <span class="color-red">*</span></legend>
+                        <label><input type="checkbox" name="week-day" value="0"> Segunda</label>
+                        <label><input type="checkbox" name="week-day" value="1"> Terça</label>
+                        <label><input type="checkbox" name="week-day" value="2"> Quarta</label>
+                        <label><input type="checkbox" name="week-day" value="3"> Quinta</label>
+                        <label><input type="checkbox" name="week-day" value="4"> Sexta</label>
+                        <label><input type="checkbox" name="week-day" value="5"> Sábado</label>
+                        <label><input type="checkbox" name="week-day" value="6"> Domingo</label>
+                    </fieldset>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="total-seats">Total de vagas do curso</label>
+                        <input type="text" name="total-seats" id="total-seats" readonly></input>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="take-seats">Reservar vagas <span class="color-red">*</span></label>
+                        <input type="number" name="take-seats" id="take-seats" min="0" required></input>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="button" id="button-submit-form">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
+</body>
+</html>
