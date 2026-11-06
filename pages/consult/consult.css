@@ -81,6 +81,10 @@ main {
     width: 70%;
 }
 
+#consult-educators-button {
+    display: none;
+}
+
 @media screen and (max-width: 620px) {
     .background-shape {
         height: 70vh;
