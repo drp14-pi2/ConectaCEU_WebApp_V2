@@ -67,6 +67,18 @@ export class AuthService {
         })
     }
 
+    static async refreshToken(token) {
+        return await fetch(`${config.apiUrl}/auth/refresh`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                refresh_token: token
+            })
+        })
+    }
+
     static getLoggedUser() {
         const userString = sessionStorage.getItem(storageKeys.loggedUser)
 

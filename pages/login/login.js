@@ -51,6 +51,7 @@ submitButton.addEventListener('click', async () => {
 
         if (responseBody.access_token) {
             sessionStorage.setItem(storageKeys.authToken, responseBody.access_token)
+            sessionStorage.setItem(storageKeys.refreshToken, responseBody.refresh_token)
             const responseUser = responseBody.user
             const user = new User(
                 responseUser.id,
