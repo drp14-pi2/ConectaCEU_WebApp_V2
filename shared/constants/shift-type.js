@@ -8,4 +8,17 @@ export class ShiftType {
             || value == ShiftType.AFTERNOON
             || value == ShiftType.EVENING
     }
+
+    static getName(value) {
+        switch (value) {
+            case ShiftType.MORNING:
+                return 'Manhã'
+            case ShiftType.AFTERNOON:
+                return 'Tarde'
+            case ShiftType.EVENING:
+                return 'Noite'
+            default:
+                return 'N/A'
+        }
+    }
 }
