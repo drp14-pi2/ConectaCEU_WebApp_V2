@@ -176,7 +176,7 @@ async function renderResults(classes) {
         // Create anchor and append button
         const anchorElement = document.createElement('a')
         anchorElement.style.margin = 'auto'
-        anchorElement.href = `/pages/attendance/attendance.html?id=${currentClass.id}`
+        anchorElement.href = `/pages/attendance/attendance.html?course=${selectedCourse.id}&class=${currentClass.id}`
         anchorElement.appendChild(actionButtonElement)
 
         // Create button cell and append anchor
