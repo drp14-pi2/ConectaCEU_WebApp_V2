@@ -4,6 +4,7 @@ import { showMessage } from '/shared/components/toast.component.js'
 import { pageRouting } from '/shared/constants/page-routing.js'
 import { UserType } from '/shared/constants/user-type.js'
 import { DocumentType } from '/shared/constants/document-type.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 const params = new URLSearchParams(window.location.search);
 const userId = params.get('id');
@@ -30,7 +31,7 @@ async function setUserData() {
     const response = await UserService.get(userId)
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
         location.href = pageRouting.manageUsers
 
         return
@@ -115,7 +116,7 @@ async function submitForm() {
         const response = await UserService.deactivate(userId, reason)
 
         if (!response.ok) {
-            showMessage(await response.text())
+            showMessage(ApiHelper.getResponseError(await response.text()))
 
             return
         }
@@ -130,7 +131,7 @@ async function submitForm() {
         const response = await UserService.activate(userId)
 
         if (!response.ok) {
-            showMessage(await response.text())
+            showMessage(ApiHelper.getResponseError(await response.text()))
 
             return
         }

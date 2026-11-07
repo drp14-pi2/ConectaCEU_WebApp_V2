@@ -9,6 +9,7 @@ import { DateHelper } from '/shared/helpers/date-helper.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { CreateClass } from '/shared/models/class.js'
 import { WeekDays } from '/shared/constants/week-days.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 const courseElement = document.querySelector('#course')
 
@@ -29,7 +30,7 @@ async function loadCourses() {
     const response = await CourseService.list(searchObject)
     
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -68,7 +69,7 @@ async function loadComponents() {
         const response = await CourseComponentService.list(courseElement.value)
 
         if (!response.ok) {
-            showMessage(await response.text())
+            showMessage(ApiHelper.getResponseError(await response.text()))
 
             return
         }
@@ -181,7 +182,7 @@ async function submitForm() {
     const response = await ClassService.create(formData)
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
         setLoading(submitButton, false)
 
         return

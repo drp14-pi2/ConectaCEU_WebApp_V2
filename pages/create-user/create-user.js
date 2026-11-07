@@ -21,6 +21,7 @@ import { storageKeys } from '/shared/constants/storage-keys.js'
 import { UserService } from '/shared/services/user-service.js'
 import { pageRouting } from '/shared/constants/page-routing.js'
 import { openPopup } from '/shared/components/popup.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 // Privacy policy
 const openPrivacyPolicyBtn = document.querySelector('#openPrivacyPolicyBtn')
@@ -87,7 +88,7 @@ async function setSexTypes() {
     const response = await ReferenceService.getSexTypes()
 
     if (!response.ok) {
-        await showMessage(await response.text())
+        await showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -107,7 +108,7 @@ async function setGenderTypes() {
     const response = await ReferenceService.getGenderTypes()
 
     if (!response.ok) {
-        await showMessage(await response.text())
+        await showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -127,7 +128,7 @@ async function setLegalRepresentativeDegrees() {
     const response = await ReferenceService.getLegalRepresentativeDegreeTypes()
 
     if (!response.ok) {
-        await showMessage(await response.text())
+        await showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -167,7 +168,7 @@ async function setEducationalUnits() {
         const response = await EducationalUnitService.get(loggedUser.educationalUnitId)
 
         if (!response.ok) {
-            await showMessage(await response.text())
+            await showMessage(ApiHelper.getResponseError(await response.text()))
 
             return
         }
@@ -183,7 +184,7 @@ async function setEducationalUnits() {
         const response = await EducationalUnitService.list()
 
         if (!response.ok) {
-            await showMessage(await response.text())
+            await showMessage(ApiHelper.getResponseError(await response.text()))
 
             return
         }
@@ -204,7 +205,7 @@ async function setUserTypes() {
     const response = await ReferenceService.getUserTypes()
 
     if (!response.ok) {
-        await showMessage(await response.text())
+        await showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -595,7 +596,7 @@ async function submitForm() {
 
     async function hangleResponse(createUserResponse) {
         if (!createUserResponse.ok) {
-            await showMessage(await createUserResponse.text())
+            await showMessage(ApiHelper.getResponseError(await createUserResponse.text()))
             setLoading(submitButton, false)
 
             return false

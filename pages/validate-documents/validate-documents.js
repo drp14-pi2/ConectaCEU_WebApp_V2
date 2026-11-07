@@ -1,7 +1,6 @@
 import { UserType } from '/shared/constants/user-type.js'
 import { ReferenceService } from '/shared/services/reference-service.js'
 import { UserService } from '/shared/services/user-service.js'
-import { DocumentService } from '/shared/services/document-service.js'
 import { AuthService } from '/shared/services/auth-service.js'
 import { showMessage }  from '/shared/components/toast.component.js'
 import { setLoading }  from '/shared/components/loading-button.js'
@@ -9,14 +8,14 @@ import { ListUsers } from '/shared/models/user.js'
 import { Validator } from '/shared/validation/validator.js'
 import { StringHelper } from '/shared/helpers/string-helper.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
-import { DocumentType } from '/shared/constants/document-type.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 // User types
 async function setUserTypes() {
     const response = await ReferenceService.getUserTypes()
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -244,7 +243,7 @@ async function searchItems() {
     const createUnitResponse = await UserService.list(searchBody)
     
     if (!createUnitResponse.ok) {
-        showMessage(await createUnitResponse.text())
+        showMessage(ApiHelper.getResponseError(await createUnitResponse.text()))
         setLoading(submitButton, false)
 
         return

@@ -4,6 +4,7 @@ import { EducationalUnitService } from "/shared/services/educational-unit-servic
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { StringHelper } from '/shared/helpers/string-helper.js'
 import { setLoading } from '/shared/components/loading-button.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 function getCreateEducationalUnit() {
     return new CreateEducationalUnit(
@@ -67,7 +68,7 @@ async function submitForm() {
     const createUnitResponse = await EducationalUnitService.create(createUnitBody)
     
     if (!createUnitResponse.ok) {
-        showMessage(await createUnitResponse.text())
+        showMessage(ApiHelper.getResponseError(await createUnitResponse.text()))
         setLoading(submitButton, false)
 
         return

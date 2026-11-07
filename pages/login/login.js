@@ -5,6 +5,7 @@ import { storageKeys } from '/shared/constants/storage-keys.js'
 import { setLoading } from '/shared/components/loading-button.js'
 import { showMessage } from '/shared/components/toast.component.js'
 import { openPopup } from '/shared/components/popup.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 // Privacy policy
 const openPrivacyPolicyBtn = document.querySelector('#openPrivacyPolicyBtn')
@@ -44,7 +45,7 @@ submitButton.addEventListener('click', async () => {
 
     if (!response.ok) {
         setLoading(submitButton, false)
-        showMessage(await response.text());
+        showMessage(ApiHelper.getResponseError(await response.text()));
     }
     else {
         const responseBody = await response.json()

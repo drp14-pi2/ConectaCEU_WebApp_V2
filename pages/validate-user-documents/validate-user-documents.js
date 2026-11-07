@@ -7,6 +7,7 @@ import { DocumentType } from '/shared/constants/document-type.js'
 import { DocumentValidationStatusType } from '/shared/constants/document-validation-status-type.js'
 import { openPopup } from '/shared/components/popup.js';
 import { setLoading } from '/shared/components/loading-button.js';
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 const params = new URLSearchParams(window.location.search);
 const userId = params.get('id');
@@ -32,7 +33,7 @@ async function setUserData() {
     const response = await UserService.get(userId)
 
     if (!response.ok) {
-        await showMessage(await response.text())
+        await showMessage(ApiHelper.getResponseError(await response.text()))
         location.href = pageRouting.validateDocuments
 
         return
@@ -77,7 +78,7 @@ async function getDocument(documentId) {
     const response = await DocumentService.get(documentId)
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
     }
 
     return await response.json();
@@ -110,7 +111,7 @@ async function rejectDocument(documentId) {
         const response = await DocumentService.validate(validationBody)
 
         if (!response.ok) {
-            showMessage(await response.text())
+            showMessage(ApiHelper.getResponseError(await response.text()))
 
             return
         }
@@ -144,7 +145,7 @@ async function acceptDocument(documentId) {
     const response = await DocumentService.validate(validationBody)
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -193,7 +194,7 @@ async function listPendingValidations() {
     const response = await DocumentService.listPendingValidations(userId)
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }

@@ -11,13 +11,14 @@ import { setLoading } from '/shared/components/loading-button.js'
 import { CreateCourse } from '/shared/models/course.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { CreateComponent } from '/shared/models/component.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 // Shift type
 async function setShiftTypes() {
     const response = await ReferenceService.getShiftTypes()
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -43,7 +44,7 @@ async function setEducationalUnits() {
         const response = await EducationalUnitService.get(loggedUser.educationalUnitId)
 
         if (!response.ok) {
-            await showMessage(await response.text())
+            await showMessage(ApiHelper.getResponseError(await response.text()))
 
             return
         }
@@ -59,7 +60,7 @@ async function setEducationalUnits() {
         const response = await EducationalUnitService.list()
 
         if (!response.ok) {
-            await showMessage(await response.text())
+            await showMessage(ApiHelper.getResponseError(await response.text()))
 
             return
         }
@@ -98,7 +99,7 @@ async function listEducators() {
     const response = await UserService.list(body)
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -376,7 +377,7 @@ async function submitForm() {
     const response = await CourseService.create(formData)
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
         setLoading(submitButton, false)
 
         return

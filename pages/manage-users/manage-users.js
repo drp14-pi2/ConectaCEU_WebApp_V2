@@ -9,12 +9,13 @@ import { Validator } from '/shared/validation/validator.js'
 import { StringHelper } from '/shared/helpers/string-helper.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { DocumentType } from '/shared/constants/document-type.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 async function setUserTypes() {
     const response = await ReferenceService.getUserTypes()
 
     if (!response.ok) {
-        showMessage(await response.text())
+        showMessage(ApiHelper.getResponseError(await response.text()))
 
         return
     }
@@ -270,7 +271,7 @@ async function searchItems() {
     const createUnitResponse = await UserService.list(searchBody)
     
     if (!createUnitResponse.ok) {
-        showMessage(await createUnitResponse.text())
+        showMessage(ApiHelper.getResponseError(await createUnitResponse.text()))
         setLoading(submitButton, false)
 
         return

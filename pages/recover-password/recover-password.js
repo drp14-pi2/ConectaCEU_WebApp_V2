@@ -2,6 +2,7 @@ import { pageRouting } from '/shared/constants/page-routing.js'
 import { config } from '/config.js'
 import { showMessage } from '/shared/components/toast.component.js'
 import { Validator } from '/shared/validation/validator.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 const params = new URLSearchParams(window.location.search);
 const urlToken = params.get('token');
@@ -52,7 +53,7 @@ submitButton.addEventListener('click', async () => {
 
     if (!response.ok) {
         submitButton.removeAttribute('disabled')
-        throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+        showMessage(ApiHelper.getResponseError(await response.text()));
     }
     else {
         const responseBody = await response.json()

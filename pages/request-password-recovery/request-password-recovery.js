@@ -2,6 +2,7 @@ import { pageRouting } from '/shared/constants/page-routing.js'
 import { config } from '/config.js'
 import { showMessage } from '/shared/components/toast.component.js'
 import { setLoading } from '/shared/components/loading-button.js'
+import { ApiHelper } from '/shared/helpers/api-helper.js'
 
 function isValidEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,7 +32,7 @@ async function sendRecoveryRequest() {
 
     if (!response.ok) {
         setLoading(submitButton, false)
-        showMessage(await response.text());
+        showMessage(ApiHelper.getResponseError(await response.text()))
     }
     else {
         const responseBody = await response.json()
