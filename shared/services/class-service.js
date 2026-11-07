@@ -16,4 +16,21 @@ export class ClassService {
             })
         })
     }
+
+    static list(listClasses) {
+        return fetch(`${config.apiUrl}/class/list`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                component_id: listClasses.componentId,
+                active: listClasses.active,
+                start_date: listClasses.startDate,
+                end_date: listClasses.endDate,
+                page: listClasses.page,
+                page_size: listClasses.pageSize
+            })
+        })
+    }
 }
