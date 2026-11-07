@@ -71,6 +71,7 @@ export class UserService {
                     active: searchBody.active,
                     educational_units_ids: searchBody.educationalUnitsIds,
                     has_pending_validations: searchBody.hasPendingValidations,
+                    user_ids: searchBody.userIds,
                     page: searchBody.page,
                     page_size: searchBody.pageSize
                 })

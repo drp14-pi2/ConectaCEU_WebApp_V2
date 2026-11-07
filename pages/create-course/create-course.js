@@ -93,6 +93,7 @@ async function listEducators() {
         true,
         loggedUser.educationalUnitId ? [ loggedUser.educationalUnitId ] : null,
         null,
+        null,
         1,
         100
     )

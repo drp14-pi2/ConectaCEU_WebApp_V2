@@ -56,6 +56,7 @@ function getSearchBody(formData, pageNumber, pageSize) {
         formData.userStatus ? formData.userStatus : null,
         null,
         null,
+        null,
         pageNumber,
         pageSize
     )

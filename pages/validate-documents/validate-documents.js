@@ -58,6 +58,7 @@ function getSearchBody(formData, pageNumber, pageSize) {
         null,
         educationalUnitId ? [educationalUnitId] : null,
         hasPendingValidation,
+        null,
         pageNumber,
         pageSize
     )
