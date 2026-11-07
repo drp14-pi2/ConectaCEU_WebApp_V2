@@ -15,7 +15,7 @@ async function setUserTypes() {
     const response = await ReferenceService.getUserTypes()
 
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
 
         return
     }
@@ -271,7 +271,7 @@ async function searchItems() {
     const createUnitResponse = await UserService.list(searchBody)
     
     if (!createUnitResponse.ok) {
-        showMessage(ApiHelper.getResponseError(await createUnitResponse.text()))
+        showMessage(await ApiHelper.getResponseError(createUnitResponse))
         setLoading(submitButton, false)
 
         return

@@ -68,7 +68,7 @@ async function submitForm() {
     const createUnitResponse = await EducationalUnitService.create(createUnitBody)
     
     if (!createUnitResponse.ok) {
-        showMessage(ApiHelper.getResponseError(await createUnitResponse.text()))
+        showMessage(await ApiHelper.getResponseError(createUnitResponse))
         setLoading(submitButton, false)
 
         return

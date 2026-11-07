@@ -30,7 +30,7 @@ async function loadCourses() {
     const response = await CourseService.list(searchObject)
     
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
 
         return
     }
@@ -69,7 +69,7 @@ async function loadComponents() {
         const response = await CourseComponentService.list(courseElement.value)
 
         if (!response.ok) {
-            showMessage(ApiHelper.getResponseError(await response.text()))
+            showMessage(await ApiHelper.getResponseError(response))
 
             return
         }
@@ -182,7 +182,7 @@ async function submitForm() {
     const response = await ClassService.create(formData)
 
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
         setLoading(submitButton, false)
 
         return

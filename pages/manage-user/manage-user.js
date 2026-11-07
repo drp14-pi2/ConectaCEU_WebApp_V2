@@ -31,7 +31,7 @@ async function setUserData() {
     const response = await UserService.get(userId)
 
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
         location.href = pageRouting.manageUsers
 
         return
@@ -116,7 +116,7 @@ async function submitForm() {
         const response = await UserService.deactivate(userId, reason)
 
         if (!response.ok) {
-            showMessage(ApiHelper.getResponseError(await response.text()))
+            showMessage(await ApiHelper.getResponseError(response))
 
             return
         }
@@ -131,7 +131,7 @@ async function submitForm() {
         const response = await UserService.activate(userId)
 
         if (!response.ok) {
-            showMessage(ApiHelper.getResponseError(await response.text()))
+            showMessage(await ApiHelper.getResponseError(response))
 
             return
         }

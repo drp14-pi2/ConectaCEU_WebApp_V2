@@ -18,7 +18,7 @@ async function setShiftTypes() {
     const response = await ReferenceService.getShiftTypes()
 
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
 
         return
     }
@@ -44,7 +44,7 @@ async function setEducationalUnits() {
         const response = await EducationalUnitService.get(loggedUser.educationalUnitId)
 
         if (!response.ok) {
-            await showMessage(ApiHelper.getResponseError(await response.text()))
+            await showMessage(await ApiHelper.getResponseError(response))
 
             return
         }
@@ -60,7 +60,7 @@ async function setEducationalUnits() {
         const response = await EducationalUnitService.list()
 
         if (!response.ok) {
-            await showMessage(ApiHelper.getResponseError(await response.text()))
+            await showMessage(await ApiHelper.getResponseError(response))
 
             return
         }
@@ -99,7 +99,7 @@ async function listEducators() {
     const response = await UserService.list(body)
 
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
 
         return
     }
@@ -377,7 +377,7 @@ async function submitForm() {
     const response = await CourseService.create(formData)
 
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
         setLoading(submitButton, false)
 
         return

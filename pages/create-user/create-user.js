@@ -88,7 +88,7 @@ async function setSexTypes() {
     const response = await ReferenceService.getSexTypes()
 
     if (!response.ok) {
-        await showMessage(ApiHelper.getResponseError(await response.text()))
+        await showMessage(await ApiHelper.getResponseError(response))
 
         return
     }
@@ -108,7 +108,7 @@ async function setGenderTypes() {
     const response = await ReferenceService.getGenderTypes()
 
     if (!response.ok) {
-        await showMessage(ApiHelper.getResponseError(await response.text()))
+        await showMessage(await ApiHelper.getResponseError(response))
 
         return
     }
@@ -128,7 +128,7 @@ async function setLegalRepresentativeDegrees() {
     const response = await ReferenceService.getLegalRepresentativeDegreeTypes()
 
     if (!response.ok) {
-        await showMessage(ApiHelper.getResponseError(await response.text()))
+        await showMessage(await ApiHelper.getResponseError(response))
 
         return
     }
@@ -168,7 +168,7 @@ async function setEducationalUnits() {
         const response = await EducationalUnitService.get(loggedUser.educationalUnitId)
 
         if (!response.ok) {
-            await showMessage(ApiHelper.getResponseError(await response.text()))
+            await showMessage(await ApiHelper.getResponseError(response))
 
             return
         }
@@ -184,7 +184,7 @@ async function setEducationalUnits() {
         const response = await EducationalUnitService.list()
 
         if (!response.ok) {
-            await showMessage(ApiHelper.getResponseError(await response.text()))
+            await showMessage(await ApiHelper.getResponseError(response))
 
             return
         }
@@ -205,7 +205,7 @@ async function setUserTypes() {
     const response = await ReferenceService.getUserTypes()
 
     if (!response.ok) {
-        await showMessage(ApiHelper.getResponseError(await response.text()))
+        await showMessage(await ApiHelper.getResponseError(response))
 
         return
     }
@@ -596,7 +596,7 @@ async function submitForm() {
 
     async function hangleResponse(createUserResponse) {
         if (!createUserResponse.ok) {
-            await showMessage(ApiHelper.getResponseError(await createUserResponse.text()))
+            await showMessage(await ApiHelper.getResponseError(createUserResponse))
             setLoading(submitButton, false)
 
             return false

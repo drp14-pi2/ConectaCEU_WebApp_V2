@@ -53,7 +53,7 @@ submitButton.addEventListener('click', async () => {
 
     if (!response.ok) {
         submitButton.removeAttribute('disabled')
-        showMessage(ApiHelper.getResponseError(await response.text()));
+        showMessage(await ApiHelper.getResponseError(response));
     }
     else {
         const responseBody = await response.json()

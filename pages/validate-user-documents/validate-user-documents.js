@@ -33,7 +33,7 @@ async function setUserData() {
     const response = await UserService.get(userId)
 
     if (!response.ok) {
-        await showMessage(ApiHelper.getResponseError(await response.text()))
+        await showMessage(await ApiHelper.getResponseError(response))
         location.href = pageRouting.validateDocuments
 
         return
@@ -78,7 +78,7 @@ async function getDocument(documentId) {
     const response = await DocumentService.get(documentId)
 
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
     }
 
     return await response.json();
@@ -111,7 +111,7 @@ async function rejectDocument(documentId) {
         const response = await DocumentService.validate(validationBody)
 
         if (!response.ok) {
-            showMessage(ApiHelper.getResponseError(await response.text()))
+            showMessage(await ApiHelper.getResponseError(response))
 
             return
         }
@@ -145,7 +145,7 @@ async function acceptDocument(documentId) {
     const response = await DocumentService.validate(validationBody)
 
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
 
         return
     }
@@ -194,7 +194,7 @@ async function listPendingValidations() {
     const response = await DocumentService.listPendingValidations(userId)
 
     if (!response.ok) {
-        showMessage(ApiHelper.getResponseError(await response.text()))
+        showMessage(await ApiHelper.getResponseError(response))
 
         return
     }

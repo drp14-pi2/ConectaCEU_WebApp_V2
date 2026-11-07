@@ -45,7 +45,7 @@ submitButton.addEventListener('click', async () => {
 
     if (!response.ok) {
         setLoading(submitButton, false)
-        showMessage(ApiHelper.getResponseError(await response.text()));
+        showMessage(await ApiHelper.getResponseError(response));
     }
     else {
         const responseBody = await response.json()
