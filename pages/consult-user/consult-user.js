@@ -87,6 +87,9 @@ async function getUser() {
 
     user = await response.json()
 
+    const userTypeDisplayElement = document.querySelector('#user-type-display')
+    userTypeDisplayElement.textContent = UserType.getName(user.user_type_id).toLowerCase()
+
     const fileInputElements = document.getElementsByClassName('view-file-container')
 
     // List user documents
