@@ -22,6 +22,10 @@ export class CourseService {
         })
     }
 
+    static async get(courseId) {
+        return fetch(`${config.apiUrl}/course/${courseId}`)
+    }
+
     static async list(searchObject) {
         const params = new URLSearchParams();
 

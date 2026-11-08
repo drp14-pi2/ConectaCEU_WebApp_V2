@@ -330,7 +330,7 @@ button:hover {
     border-left: 1px solid var(--black);
 }
 
-select:not(.input-with-select-container select) {
+select:not(.input-with-select-container select, .attendance-select) {
     background-color: var(--white);
     border: none;
     border-radius: 5px;

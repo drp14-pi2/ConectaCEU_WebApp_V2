@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/attendance/attendance.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/security/auth-guard.js"></script>
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
+    <script type="module" src="/pages/attendance/attendance.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <dynamic-content src="/shared/components/return-button.html"></dynamic-content>
+    <main>
+        <div class="base-background-shape"></div>
+        <div class="base-form-container">
+            <h1>Chamada</h1>
+            <div class="container-control">
+                <div class="date-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+                        <path d="M216 64C229.3 64 240 74.7 240 88L240 128L400 128L400 88C400 74.7 410.7 64 424 64C437.3 64 448 74.7 448 88L448 128L480 128C515.3 128 544 156.7 544 192L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 192C96 156.7 124.7 128 160 128L192 128L192 88C192 74.7 202.7 64 216 64zM216 176L160 176C151.2 176 144 183.2 144 192L144 240L496 240L496 192C496 183.2 488.8 176 480 176L216 176zM144 288L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 288L144 288z"/>
+                    </svg>
+                    <span type="date" name="date" id="date"></span>
+                </div>
+
+                <button type="button" class="print-attendance-list-template">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+                        <path d="M192 112L304 112L304 200C304 239.8 336.2 272 376 272L464 272L464 512C464 520.8 456.8 528 448 528L192 528C183.2 528 176 520.8 176 512L176 128C176 119.2 183.2 112 192 112zM352 131.9L444.1 224L376 224C362.7 224 352 213.3 352 200L352 131.9zM192 64C156.7 64 128 92.7 128 128L128 512C128 547.3 156.7 576 192 576L448 576C483.3 576 512 547.3 512 512L512 250.5C512 233.5 505.3 217.2 493.3 205.2L370.7 82.7C358.7 70.7 342.5 64 325.5 64L192 64zM248 320C234.7 320 224 330.7 224 344C224 357.3 234.7 368 248 368L392 368C405.3 368 416 357.3 416 344C416 330.7 405.3 320 392 320L248 320zM248 416C234.7 416 224 426.7 224 440C224 453.3 234.7 464 248 464L392 464C405.3 464 416 453.3 416 440C416 426.7 405.3 416 392 416L248 416z"/>
+                    </svg>
+                    Imprimir template
+                </button>
+            </div>
+            <div class="item-listing-container">
+                <div class="item-listing-result">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Nome</td>
+                                    <td>Documento</td>
+                                    <td>Celular</td>
+                                    <td>E-mail</td>
+                                    <td>Presença</td>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="button" id="button-submit-form">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
+</body>
+</html>

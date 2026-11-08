@@ -1,8 +1,8 @@
 import { config } from '/config.js'
 
 export class ClassService {
-    static create(createClass) {
-        return fetch(`${config.apiUrl}/class`, {
+    static async create(createClass) {
+        return await fetch(`${config.apiUrl}/class`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -17,8 +17,12 @@ export class ClassService {
         })
     }
 
-    static list(listClasses) {
-        return fetch(`${config.apiUrl}/class/list`, {
+    static async get(classId) {
+        return await fetch(`${config.apiUrl}/class/${classId}`)
+    }
+
+    static async list(listClasses) {
+        return await fetch(`${config.apiUrl}/class/list`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
