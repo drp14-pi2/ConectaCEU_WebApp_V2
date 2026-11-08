@@ -18,7 +18,15 @@ export class DocumentService {
     }
 
     static async get(id) {
-        return await fetch(`${config.apiUrl}/document/${id}`, { method: 'GET' })
+        return await fetch(`${config.apiUrl}/document/${id}`)
+    }
+
+    static async getUserDocuments(userId) {
+        return await fetch(`${config.apiUrl}/document/user/${userId}`)
+    }
+
+    static async getUserIdentityDocument(userId) {
+        return await fetch(`${config.apiUrl}/document/user/${userId}/identity/type`)
     }
 
     // Document validation
@@ -37,6 +45,6 @@ export class DocumentService {
     }
 
     static async listPendingValidations(userId) {
-        return await fetch(`${config.apiUrl}/document/validate/user/${userId}/pending`, { method: 'GET' })
+        return await fetch(`${config.apiUrl}/document/validate/user/${userId}/pending`)
     }
 }
