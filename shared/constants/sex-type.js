@@ -5,4 +5,15 @@ export class SexType {
     static isValid(sex) {
         return sex == this.FEMININE || sex == this.MASCULINE
     }
+
+    static getName(sex) {
+        switch (sex) {
+            case this.FEMININE:
+                return 'Feminino'
+            case this.MASCULINE:
+                return 'Masculino'
+            default:
+                return ''
+        }
+    }
 }

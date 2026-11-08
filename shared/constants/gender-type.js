@@ -12,4 +12,21 @@ export class GenderType {
             || gender === this.OTHER
             || gender === this.PREFER_NOT_TO_INFORM
     }
+
+    static getName(gender) {
+        switch (gender) {
+            case this.WOMAN:
+                return 'Mulher'
+            case this.MAN:
+                return 'Homem'
+            case this.NON_BINARY:
+                return 'Não binário'
+            case this.OTHER:
+                return 'Outro'
+            case this.PREFER_NOT_TO_INFORM:
+                return 'Prefiro não informar'
+            default:
+                return ''
+        }
+    }
 }
