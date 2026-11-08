@@ -16,4 +16,6 @@ export const pageRouting = {
     consult: `${config.appUrl}/pages/consult/consult.html`,
     consultClass: `${config.appUrl}/pages/consult-class/consult-class.html`,
     attendance: `${config.appUrl}/pages/attendance/attendance.html`,
+    consultEducator: `${config.appUrl}/pages/consult-educator/consult-educator.html`,
+    consultStudent: `${config.appUrl}/pages/consult-student/consult-student.html`,
 }
