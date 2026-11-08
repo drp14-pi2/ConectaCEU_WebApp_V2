@@ -1,3 +1,5 @@
+import { DocumentType } from '/shared/constants/document-type.js'
+
 export class FileHelper {
     static fileToBase64(file) {
         return new Promise((resolve, reject) => {
