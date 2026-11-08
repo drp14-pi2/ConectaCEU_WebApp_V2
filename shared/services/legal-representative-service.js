@@ -15,4 +15,8 @@ export class LegalRepresentativeService {
             })
         })
     }
+
+    static async getUserRepresentatives(userId) {
+        return await fetch(`${config.apiUrl}/representative/user/${userId}`)
+    }
 }
