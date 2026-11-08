@@ -10,6 +10,7 @@ import { StringHelper } from '/shared/helpers/string-helper.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { DocumentType } from '/shared/constants/document-type.js'
 import { ApiHelper } from '/shared/helpers/api-helper.js'
+import { StyleHelper } from '/shared/helpers/style-helper.js'
 
 async function setUserTypes() {
     const response = await ReferenceService.getUserTypes()
@@ -96,9 +97,7 @@ async function renderResults(users) {
     const resultContainer = document.querySelector('.item-listing-result')
 
     if (!users) {
-        if (getComputedStyle(resultContainer).display != 'none') {
-            resultContainer.style.display = 'none'
-        }
+        StyleHelper.setDisplay(resultContainer, 'none')
         
         return
     }

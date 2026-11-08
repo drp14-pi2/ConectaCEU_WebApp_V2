@@ -9,6 +9,7 @@ import { ApiHelper } from '/shared/helpers/api-helper.js'
 import { DateHelper } from '/shared/helpers/date-helper.js'
 import { showMessage } from '/shared/components/toast.component.js'
 import { ShiftType } from '/shared/constants/shift-type.js'
+import { StyleHelper } from '/shared/helpers/style-helper.js'
 
 const courseElement = document.querySelector('#course')
 const courseComponentElement = document.querySelector('#courseComponent')
@@ -73,17 +74,13 @@ courseElement.addEventListener('change', async () => {
     }
 
     if (courseElement.value) {
-        if (getComputedStyle(componentContainer).display != 'flex') {
-            componentContainer.style.display = 'flex'
-        }
+        StyleHelper.setDisplay(componentContainer, 'flex')
         selectedCourse = courses.find(x => x.id == courseElement.value)
 
         await listComponents()
     }
     else {
-        if (getComputedStyle(componentContainer).display != 'none') {
-            componentContainer.style.display = 'none'
-        }
+        StyleHelper.setDisplay(componentContainer, 'none')
 
         selectedCourse = {}
     }
@@ -116,9 +113,7 @@ async function renderResults(classes) {
     const resultContainer = document.querySelector('.item-listing-result')
 
     if (!classes) {
-        if (getComputedStyle(resultContainer).display != 'none') {
-            resultContainer.style.display = 'none'
-        }
+        StyleHelper.setDisplay(resultContainer, 'none')
         
         return
     }

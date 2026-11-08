@@ -22,6 +22,7 @@ import { UserService } from '/shared/services/user-service.js'
 import { pageRouting } from '/shared/constants/page-routing.js'
 import { openPopup } from '/shared/components/popup.js'
 import { ApiHelper } from '/shared/helpers/api-helper.js'
+import { StyleHelper } from '/shared/helpers/style-helper.js'
 
 // Privacy policy
 const openPrivacyPolicyBtn = document.querySelector('#openPrivacyPolicyBtn')
@@ -74,13 +75,7 @@ const authToken = sessionStorage.getItem(storageKeys.authToken)
 // Control user type selection based on logged user
 if (authToken) {
     const selectUserTypeElement = document.querySelector('.select-user-type')
-    
-    if (getComputedStyle(selectUserTypeElement).display == 'none') {
-        selectUserTypeElement.style.display = 'block'
-    }
-    else {
-        selectUserTypeElement.style.display == 'none'
-    }
+    StyleHelper.setDisplay(selectUserTypeElement, 'block')
 }
 
 // Assign select items

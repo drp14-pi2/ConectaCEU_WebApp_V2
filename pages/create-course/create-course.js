@@ -12,6 +12,7 @@ import { CreateCourse } from '/shared/models/course.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { CreateComponent } from '/shared/models/component.js'
 import { ApiHelper } from '/shared/helpers/api-helper.js'
+import { StyleHelper } from '/shared/helpers/style-helper.js'
 
 // Shift type
 async function setShiftTypes() {
@@ -132,9 +133,7 @@ selectResponsibleEducator1Element.addEventListener('change', async () => {
     const responsibleEducator2Element = document.querySelector('.responsible-educator-2')
 
     if (selectResponsibleEducator1Element.value) {
-        if (getComputedStyle(responsibleEducator2Element).display != 'flex') {
-            responsibleEducator2Element.style.display = 'flex'
-        }
+        StyleHelper.setDisplay(responsibleEducator2Element, 'flex')
 
         const responsibleEducator2SelectElement = document.querySelector('#responsible-educator-2')
 
@@ -143,9 +142,7 @@ selectResponsibleEducator1Element.addEventListener('change', async () => {
         }
     }
     else {
-        if (getComputedStyle(responsibleEducator2Element).display != 'none') {
-            responsibleEducator2Element.style.display = 'none'
-        }
+        StyleHelper.setDisplay(responsibleEducator2Element, 'none')
     }
 })
 

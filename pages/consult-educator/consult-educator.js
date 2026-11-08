@@ -8,6 +8,7 @@ import { Validator } from '/shared/validation/validator.js'
 import { StringHelper } from '/shared/helpers/string-helper.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { ApiHelper } from '/shared/helpers/api-helper.js'
+import { StyleHelper } from '/shared/helpers/style-helper.js'
 
 function getFormData() {
     return {
@@ -61,9 +62,7 @@ async function renderResults(users) {
     const resultContainer = document.querySelector('.item-listing-result')
 
     if (!users) {
-        if (getComputedStyle(resultContainer).display != 'none') {
-            resultContainer.style.display = 'none'
-        }
+        StyleHelper.setDisplay(resultContainer, 'none')
         
         return
     }

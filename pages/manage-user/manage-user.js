@@ -5,6 +5,7 @@ import { pageRouting } from '/shared/constants/page-routing.js'
 import { UserType } from '/shared/constants/user-type.js'
 import { DocumentType } from '/shared/constants/document-type.js'
 import { ApiHelper } from '/shared/helpers/api-helper.js'
+import { StyleHelper } from '/shared/helpers/style-helper.js'
 
 const params = new URLSearchParams(window.location.search);
 const userId = params.get('id');
@@ -78,9 +79,7 @@ async function setUserData() {
     if (isActive) {
         const reasonContainerElement = document.querySelector('.reason-container')
 
-        if (reasonContainerElement && getComputedStyle(reasonContainerElement).display != 'flex') {
-            reasonContainerElement.style.display = 'flex'
-        }
+        if (reasonContainerElement) StyleHelper.setDisplay(reasonContainerElement, 'flex')
     }
 
     return
