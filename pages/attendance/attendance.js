@@ -219,7 +219,6 @@ const submitButton = document.querySelector('#button-submit-form')
 async function submitForm() {
     const formData = getFormData()
     const formDataValidation = validateFormData(formData)
-    console.log(JSON.stringify(formData))
 
     if (formDataValidation.length > 0) {
         showMessage(ArrayHelper.arrayToString(formDataValidation))

@@ -3,7 +3,6 @@ import { UserType } from '/shared/constants/user-type.js'
 
 const loggedUser = AuthService.getLoggedUser()
 const consultEducatorsButton = document.querySelector('#consult-educators-button')
-console.log(loggedUser.userTypeId)
 
 if (loggedUser.userTypeId == UserType.COORDINATOR) {
     if (getComputedStyle(consultEducatorsButton).display != 'flex') {

@@ -374,7 +374,6 @@ async function submitForm() {
         return
     }
 
-    console.log(JSON.stringify(formData))
     const response = await CourseService.create(formData)
 
     if (!response.ok) {
