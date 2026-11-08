@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/consult-user/consult-user.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/security/create-user-guard.js"></script>
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
+    <script type="module" src="/pages/consult-user/consult-user.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <dynamic-content src="/shared/components/return-button.html"></dynamic-content>
+    <main>
+        <div class="base-background-shape"></div>
+        <div class="base-form-container">
+            <form>
+                <h1>Consultar <span id="user-type"></span></h1>
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="user-document">Documento</label>
+                        <div class="input-with-select-container">
+                            <select name="select-document-type" id="select-document-type"></select>
+                            <input type="text" name="user-document" id="user-document" maxlength="11" readonly>
+                        </div>
+                    </div>
+
+                    <div class="input-container file-input-container">
+                        <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                    </div>
+
+                    <div class="input-container">
+                        <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email" readonly>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="userName">Nome completo</label>
+                        <input type="text" name="userName" id="userName" maxlength="200" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="birthdate">Data de nascimento</label>
+                        <input type="date" name="birthdate" id="birthdate" readonly>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="phone">Celular</label>
+                        <input type="tel" name="phone" id="phone" maxlength="15" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="secondPhone">Celular secundário</label>
+                        <input type="tel" name="secondPhone" id="secondPhone" maxlength="15" readonly>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="sex">Sexo</label>
+                        <select name="sex" id="sex"></select>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="gender">Gênero</label>
+                        <select name="gender" id="gender"></select>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="school">Escola</label>
+                        <input type="text" name="school" id="school" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="zipCode">CEP</label>
+                        <input type="text" name="zipCode" id="zipCode" maxlength="9" readonly>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="street">Logradouro</label>
+                        <input type="text" name="street" id="street" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="addressNumber">Número</label>
+                        <input type="text" name="addressNumber" id="addressNumber" readonly>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="addressComplement">Complemento</label>
+                        <input type="text" name="addressComplement" id="addressComplement" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2">
+                    <div class="input-container">
+                        <label for="neighborhood">Bairro</label>
+                        <input type="text" name="neighborhood" id="neighborhood" readonly>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="educationalUnit">CEU</label>
+                        <select name="educationalUnit" id="educationalUnit"></select>
+                    </div>
+                </div>
+
+                <div class="form-row form-row-col-2 select-user-type">
+                    <div class="input-container">
+                        <label for="userType">Tipo usuário</label>
+                        <select name="userType" id="userType"></select>
+                    </div>
+                </div>
+
+                <section class="extra-form-data legal-representatives-container">
+                    <h2>Área do responsável (obrigatória somente se o aluno for menor de idade)</h2>
+
+                    <div class="inner-extra-form-data">
+                        <h3>Responsável 1</h3>
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container">
+                                <label for="representative-1-name">Nome completo</label>
+                                <input type="text" name="representative-1-name" id="representative-1-name" readonly>
+                            </div>
+
+                            <div class="input-container">
+                                <label for="representative-1-degree">Grau</label>
+                                <select name="representative-1-degree" id="representative-1-degree"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container">
+                                <label for="representative-1-document">Documento</label>
+                                <div class="input-with-select-container">
+                                    <select name="select-document-type" id="select-rep-1-document-type"></select>
+                                    <input type="text" name="representative-1-document" id="representative-1-document" maxlength="11" readonly>
+                                </div>
+                            </div>
+
+                            <div class="input-container file-input-container">
+                                <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                            </div>
+                        </div>
+
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container file-input-container">
+                                <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                            </div>
+
+                            <div class="input-container file-input-container">
+                                <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="inner-extra-form-data">
+                        <h3>Responsável 2</h3>
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container">
+                                <label for="representative-2-name">Nome completo</label>
+                                <input type="text" name="representative-2-name" id="representative-2-name" readonly>
+                            </div>
+
+                            <div class="input-container">
+                                <label for="representative-2-degree">Grau</label>
+                                <select name="representative-2-degree" id="representative-2-degree"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container">
+                                <label for="representative-2-document">Documento</label>
+                                <div class="input-with-select-container">
+                                    <select name="select-rep-2-document-type" id="select-rep-2-document-type"></select>
+                                    <input type="text" name="representative-2-document" id="representative-2-document" maxlength="11" readonly>
+                                </div>
+                            </div>
+
+                            <div class="input-container file-input-container">
+                                <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                            </div>
+                        </div>
+
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container file-input-container">
+                                <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                            </div>
+
+                            <div class="input-container file-input-container">
+                                <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="extra-form-data health-certificate-container">
+                    <h2>Atestado de saúde (obrigatória somente se o aluno tiver 70+ anos)</h2>
+
+                    <div class="inner-extra-form-data">
+                        <div class="form-row form-row-col-2">
+                            <div class="input-container file-input-container">
+                                <dynamic-content src="/shared/components/view-file-button.html"></dynamic-content>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
+</body>
+</html>
