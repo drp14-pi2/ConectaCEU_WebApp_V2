@@ -9,7 +9,6 @@ import { StringHelper } from '/shared/helpers/string-helper.js'
 import { ArrayHelper } from '/shared/helpers/array-helper.js'
 import { ApiHelper } from '/shared/helpers/api-helper.js'
 
-try{
 function getFormData() {
     return {
         userName: document.querySelector('#userName').value ?? null,
@@ -167,4 +166,3 @@ async function submitForm() {
     return
 }
 submitButton.addEventListener('click', async () => await submitForm())
-} catch (e) { console.log(e) }
