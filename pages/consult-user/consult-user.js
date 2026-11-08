@@ -447,3 +447,10 @@ async function getUser() {
     }
 }
 await getUser()
+
+
+// Student document emission buttons
+if (user.user_type_id == UserType.STUDENT) {
+    const documentEmissionContainer = document.querySelector('.document-emission-container')
+    StyleHelper.setDisplay(documentEmissionContainer, 'flex')
+}
