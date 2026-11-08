@@ -92,21 +92,6 @@ function validateFormData(formData) {
     return errors
 }
 
-async function getUserIdentityDocument(userId) {
-    const response = await DocumentService.getUserIdentityDocument(userId)
-
-    if (response.ok) {
-        const responseBody = await response.json()
-        const firstDocument = responseBody[0]
-
-        if (firstDocument.document_type_id) {
-            return DocumentType.getName(firstDocument.document_type_id)
-        }
-    }
-    
-    return ''
-}
-
 async function renderResults(users) {
     const resultContainer = document.querySelector('.item-listing-result')
 
@@ -131,11 +116,6 @@ async function renderResults(users) {
         const userNameCell = document.createElement('td')
         userNameCell.textContent = user.name
         trowElement.appendChild(userNameCell)
-
-        // Document type
-        const documentTypeCell = document.createElement('td')
-        documentTypeCell.textContent = await getUserIdentityDocument(user.id)
-        trowElement.appendChild(documentTypeCell)
 
         // Document
         const documentCell = document.createElement('td')
