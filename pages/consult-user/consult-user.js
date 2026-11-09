@@ -454,3 +454,20 @@ if (user.user_type_id == UserType.STUDENT) {
     const documentEmissionContainer = document.querySelector('.document-emission-container')
     StyleHelper.setDisplay(documentEmissionContainer, 'flex')
 }
+
+const studentCardButtonElement = document.querySelector('#student-card-button')
+studentCardButtonElement.addEventListener('click', async () => {
+    const response = await DocumentService.getUserDocumentByType(userId, DocumentType.StudentCard)
+
+    if (!response.ok) {
+        showMessage(await ApiHelper.getResponseError(response))
+
+        return
+    }
+
+    const studentCard = (await response.json())[0]
+    openPopup({
+        title: DocumentType.getName(DocumentType.StudentCard),
+        content: FileHelper.renderDocumentNode(studentCard)
+    })
+})
