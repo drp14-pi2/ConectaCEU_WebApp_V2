@@ -453,21 +453,26 @@ await getUser()
 if (user.user_type_id == UserType.STUDENT) {
     const documentEmissionContainer = document.querySelector('.document-emission-container')
     StyleHelper.setDisplay(documentEmissionContainer, 'flex')
-}
 
-const studentCardButtonElement = document.querySelector('#student-card-button')
-studentCardButtonElement.addEventListener('click', async () => {
-    const response = await DocumentService.getUserDocumentByType(userId, DocumentType.StudentCard)
+    // Student card
+    const studentCardButtonElement = document.querySelector('#student-card-button')
+    studentCardButtonElement.addEventListener('click', async () => {
+        const response = await DocumentService.getUserDocumentByType(userId, DocumentType.StudentCard)
 
-    if (!response.ok) {
-        showMessage(await ApiHelper.getResponseError(response))
+        if (!response.ok) {
+            showMessage(await ApiHelper.getResponseError(response))
 
-        return
-    }
+            return
+        }
 
-    const studentCard = (await response.json())[0]
-    openPopup({
-        title: DocumentType.getName(DocumentType.StudentCard),
-        content: FileHelper.renderDocumentNode(studentCard)
+        const studentCard = (await response.json())[0]
+        openPopup({
+            title: DocumentType.getName(DocumentType.StudentCard),
+            content: FileHelper.renderDocumentNode(studentCard)
+        })
     })
-})
+
+    // Student registration
+    const studentRegistrationButtonElement = document.querySelector('#user-registration-button')
+    studentRegistrationButtonElement.addEventListener('click', () => {})
+}
