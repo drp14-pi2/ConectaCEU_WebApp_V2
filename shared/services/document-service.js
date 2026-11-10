@@ -29,8 +29,22 @@ export class DocumentService {
         return await fetch(`${config.apiUrl}/document/user/${userId}/type/${documentTypeId}`)
     }
 
-    static async getManagementDocumentTemplate(documentTypeId) {
-        return await fetch(`${config.apiUrl}/document/management/type/${documentTypeId}`)
+    static async getManagementDocumentTemplate(documentTypeId, component_id, month) {
+        const params = new URLSearchParams();
+
+        if (component_id) {
+            params.set('component_id', component_id);
+        }
+
+        if (month) {
+            params.set('month', month);
+        }
+
+        const resource = params.size
+            ? `${config.apiUrl}/document/management/type/${documentTypeId}?${params}`
+            : `${config.apiUrl}/document/management/type/${documentTypeId}`
+
+        return await fetch(resource)
     }
 
     static async getUserIdentityDocument(userId) {
