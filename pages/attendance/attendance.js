@@ -2,6 +2,7 @@ import { AttendanceService } from '/shared/services/attendance-service.js'
 import { AuthService } from '/shared/services/auth-service.js'
 import { CourseService } from '/shared/services/course-service.js'
 import { ClassService } from '/shared/services/class-service.js'
+import { DocumentService } from '/shared/services/document-service.js'
 import { EnrollmentService } from '/shared/services/enrollment-service.js'
 import { UserService } from '/shared/services/user-service.js'
 import { ApiHelper } from '/shared/helpers/api-helper.js'
@@ -11,11 +12,15 @@ import { showMessage } from '/shared/components/toast.component.js'
 import { pageRouting } from '/shared/constants/page-routing.js'
 import { ListUsers } from '/shared/models/user.js'
 import { UserType } from '/shared/constants/user-type.js'
+import { DocumentType } from '/shared/constants/document-type.js'
+import { openPopup } from '/shared/components/popup.js'
+import { FileHelper } from '/shared/helpers/file-helper.js'
 
 const params = new URLSearchParams(window.location.search);
 const courseId = params.get('course');
 const classId = params.get('class');
 let course = {}
+let classFound = {}
 
 // Get course
 async function getCourse() {
@@ -35,7 +40,6 @@ async function getCourse() {
 }
 await getCourse()
 
-
 // Get class
 async function getClass() {
     const response = await ClassService.get(classId)
@@ -50,12 +54,32 @@ async function getClass() {
         }
     }
 
-    const classFound = await response.json()
+    classFound = await response.json()
 
     const dateInput = document.querySelector('#date')
     dateInput.textContent = DateHelper.toDateDisplay(classFound.date)
 }
 await getClass()
+
+
+// Attendance list template
+const printAttendanceListTemplateButtonElement = document.querySelector('#print-attendance-list-template')
+printAttendanceListTemplateButtonElement.addEventListener('click', async () => {
+    const currentMonth = new Date().getMonth() + 1
+    const response = await DocumentService.getManagementDocumentTemplate(DocumentType.AttendanceListTemplate, classFound.course_component_id, currentMonth)
+
+    if (!response.ok) {
+        showMessage(await ApiHelper.getResponseError(response))
+
+        return
+    }
+
+    const responseBody = await response.json()
+    openPopup({
+        title: DocumentType.getName(DocumentType.AttendanceListTemplate),
+        content: FileHelper.renderDocumentNode(responseBody)
+    })
+})
 
 
 // List users
