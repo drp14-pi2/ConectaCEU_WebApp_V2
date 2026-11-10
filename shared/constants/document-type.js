@@ -11,6 +11,7 @@ export class DocumentType {
     static HealthCertificateTemplate = 10
     static AttendanceListTemplate = 11
     static UserEnrollments = 12
+    static UserSubscriptionForm = 13
 
     static isIdentityDocumentType(number) {
         return number == this.CPF
@@ -44,6 +45,8 @@ export class DocumentType {
                 return 'Template lista de chamada'
             case DocumentType.UserEnrollments:
                 return 'Grade curricular'
+            case DocumentType.UserSubscriptionForm:
+                return 'Ficha de inscrição do usuário'
             default:
                 return ''
         }

@@ -493,5 +493,19 @@ if (user.user_type_id == UserType.STUDENT) {
 
     // Student registration
     const studentRegistrationButtonElement = document.querySelector('#user-registration-button')
-    studentRegistrationButtonElement.addEventListener('click', () => {})
+    studentRegistrationButtonElement.addEventListener('click', async () => {
+        const response = await DocumentService.getUserSubscriptionForm(userId)
+
+        if (!response.ok) {
+            showMessage(await ApiHelper.getResponseError(response))
+
+            return
+        }
+
+        const responseBody = await response.json()
+        openPopup({
+            title: DocumentType.getName(DocumentType.UserSubscriptionForm),
+            content: FileHelper.renderDocumentNode(responseBody)
+        })
+    })
 }

@@ -47,6 +47,10 @@ export class DocumentService {
         return await fetch(resource)
     }
 
+    static async getUserSubscriptionForm(userId) {
+        return await fetch(`${config.apiUrl}/document/user/${userId}/subcription/form`)
+    }
+
     static async getUserIdentityDocument(userId) {
         return await fetch(`${config.apiUrl}/document/user/${userId}/identity/type`)
     }
