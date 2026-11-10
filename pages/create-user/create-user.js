@@ -23,6 +23,7 @@ import { pageRouting } from '/shared/constants/page-routing.js'
 import { openPopup } from '/shared/components/popup.js'
 import { ApiHelper } from '/shared/helpers/api-helper.js'
 import { StyleHelper } from '/shared/helpers/style-helper.js'
+import { DocumentService } from '/shared/services/document-service.js'
 
 // Privacy policy
 const openPrivacyPolicyBtn = document.querySelector('#openPrivacyPolicyBtn')
@@ -76,6 +77,25 @@ const authToken = sessionStorage.getItem(storageKeys.authToken)
 if (authToken) {
     const selectUserTypeElement = document.querySelector('.select-user-type')
     StyleHelper.setDisplay(selectUserTypeElement, 'block')
+
+    // Subcription physical file
+    const subcriptionFileButtonElement = document.querySelector('#subscription-file')
+    StyleHelper.setDisplay(subcriptionFileButtonElement, 'flex')
+    subcriptionFileButtonElement.addEventListener('click', async () => {
+        const response = await DocumentService.getManagementDocumentTemplate(DocumentType.RegisterUserFormTemplate)
+
+        if (!response.ok) {
+            showMessage(await ApiHelper.getResponseError(response))
+
+            return
+        }
+
+        const responseBody = await response.json()
+        openPopup({
+            title: DocumentType.getName(DocumentType.RegisterUserFormTemplate),
+            content: FileHelper.renderDocumentNode(responseBody)
+        })
+    })
 }
 
 // Assign select items

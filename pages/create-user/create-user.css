@@ -1,5 +1,22 @@
 .legal-representatives-container,
 .health-certificate-container,
-.select-user-type {
+.select-user-type,
+#subscription-file {
     display: none;
+}
+
+.download-button-row {
+    display: flex;
+}
+
+.download-button-row button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    min-width: 240px;
+}
+
+.download-button-row button svg {
+    width: 2em;
 }
