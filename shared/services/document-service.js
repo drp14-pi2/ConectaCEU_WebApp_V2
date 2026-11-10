@@ -29,6 +29,10 @@ export class DocumentService {
         return await fetch(`${config.apiUrl}/document/user/${userId}/type/${documentTypeId}`)
     }
 
+    static async getManagementDocumentTemplate(documentTypeId) {
+        return await fetch(`${config.apiUrl}/document/management/type/${documentTypeId}`)
+    }
+
     static async getUserIdentityDocument(userId) {
         return await fetch(`${config.apiUrl}/document/user/${userId}/identity/type`)
     }
