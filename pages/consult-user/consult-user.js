@@ -3,6 +3,7 @@ import { AddressService } from '/shared/services/address-service.js'
 import { EducationalUnitService } from '/shared/services/educational-unit-service.js'
 import { DocumentService } from '/shared/services/document-service.js'
 import { LegalRepresentativeService } from '/shared/services/legal-representative-service.js'
+import { ReportService } from '/shared/services/report-service.js'
 import { showMessage } from '/shared/components/toast.component.js'
 import { ApiHelper } from '/shared/helpers/api-helper.js'
 import { pageRouting } from '/shared/constants/page-routing.js'
@@ -469,6 +470,24 @@ if (user.user_type_id == UserType.STUDENT) {
         openPopup({
             title: DocumentType.getName(DocumentType.StudentCard),
             content: FileHelper.renderDocumentNode(studentCard)
+        })
+    })
+
+    // Student enrollments
+    const userEnrollmentsButtonElement = document.querySelector('#user-enrollments')
+    userEnrollmentsButtonElement.addEventListener('click', async () => {
+        const response = await ReportService.getUserEnrollments(userId)
+
+        if (!response.ok) {
+            showMessage(await ApiHelper.getResponseError(response))
+
+            return
+        }
+
+        const responseBody = await response.json()
+        openPopup({
+            title: DocumentType.getName(DocumentType.UserEnrollments),
+            content: FileHelper.renderDocumentNode(responseBody)
         })
     })
 
