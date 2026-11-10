@@ -96,6 +96,25 @@ if (authToken) {
             content: FileHelper.renderDocumentNode(responseBody)
         })
     })
+
+    // Health certificate template
+    const healthCertificateTemplateButtonElement = document.querySelector('#health-certificate-template')
+    StyleHelper.setDisplay(healthCertificateTemplateButtonElement, 'flex')
+    healthCertificateTemplateButtonElement.addEventListener('click', async () => {
+        const response = await DocumentService.getManagementDocumentTemplate(DocumentType.HealthCertificateTemplate)
+
+        if (!response.ok) {
+            showMessage(await ApiHelper.getResponseError(response))
+
+            return
+        }
+
+        const responseBody = await response.json()
+        openPopup({
+            title: DocumentType.getName(DocumentType.HealthCertificateTemplate),
+            content: FileHelper.renderDocumentNode(responseBody)
+        })
+    })
 }
 
 // Assign select items

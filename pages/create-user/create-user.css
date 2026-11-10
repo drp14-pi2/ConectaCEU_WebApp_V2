@@ -7,6 +7,7 @@
 
 .download-button-row {
     display: flex;
+    justify-content: center;
 }
 
 .download-button-row button {
@@ -15,6 +16,7 @@
     justify-content: center;
     width: 20%;
     min-width: 240px;
+    margin: 10px;
 }
 
 .download-button-row button svg {
