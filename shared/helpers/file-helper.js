@@ -31,7 +31,7 @@ export class FileHelper {
             const iframe = document.createElement('iframe')
             iframe.src = dataUrl
             iframe.className = 'doc-render-pdf'
-            iframe.title = DocumentType.getName(doc.document_type_id)
+            iframe.title = doc.document_type_id ? DocumentType.getName(doc.document_type_id) : ''
             container.appendChild(iframe)
         } else {
             // unknown / unsupported — offer a download link
