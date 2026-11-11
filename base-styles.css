@@ -506,12 +506,25 @@ input[type="date"] {
 
 .return-button {
     color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-left: 50px;
     width: 100px;
 }
 
 .return-button svg {
-    width: 50%;
+    width: 2em;
+}
+
+#logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#logout-button svg {
+    width: 2em;
 }
 
 .toast {
@@ -679,5 +692,11 @@ textarea {
     .form-row .input-container {
         align-self: center;
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .return-button, #logout-button {
+        width: 50px;
     }
 }
