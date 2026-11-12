@@ -521,6 +521,10 @@ input[type="date"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    right: 10px;
+    top: 25px;
+    box-shadow: 0 0 5px var(--dark-blue);
 }
 
 #logout-button svg {
