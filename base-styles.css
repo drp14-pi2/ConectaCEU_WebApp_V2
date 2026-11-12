@@ -49,6 +49,7 @@ body {
 }
 
 header {
+    background-color: var(--medium-blue);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -509,7 +510,7 @@ input[type="date"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 50px;
+    margin: 10px 10px 10px 50px;
     width: 100px;
 }
 
