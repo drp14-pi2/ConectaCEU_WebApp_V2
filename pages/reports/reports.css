@@ -1,0 +1,103 @@
+.background-shape {
+    background-color: var(--medium-blue);
+    border-radius: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    height: 50%;
+    z-index: -1;
+    margin-bottom: 30vh;
+}
+
+main {
+    position: relative;
+    height: 100vh;
+}
+
+.main-buttons {
+    line-height: 0.5em;
+    text-align: center;
+    margin: 150px auto 20px auto;
+    width: 80%;
+}
+
+.main-buttons-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+}
+
+.main-buttons-row a {
+    margin: 10px;
+}
+
+.main-button {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light-blue);
+    border-radius: 40px;
+    font-weight: 600;
+    min-height: 170px;
+    max-height: 170px;
+    padding: 10px;
+    min-width: 170px;
+    max-width: 170px;
+}
+
+.main-button:hover {
+    background-color: var(--dark-blue);
+    transition: 150ms linear;
+}
+
+.main-button:hover p,
+.main-button:hover .main-button-icon path {
+    color: var(--light-blue);
+}
+
+.main-button p {
+    line-height: 1.2em;
+}
+
+.main-button p, .main-button-icon path {
+    color: var(--dark-blue);
+}
+
+.main-button-icon {
+    max-width: 50%;
+}
+
+.main-button-icon path {
+    font-family: 'OpenSansRegular';
+}
+
+.main-button-icon {
+    height: 70%;
+    width: 70%;
+}
+
+@media screen and (max-width: 620px) {
+    .background-shape {
+        height: 70vh;
+        margin-bottom: 10vh;
+    }
+
+    .main-buttons-row {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .main-buttons {
+        margin-top: 100px;
+    }
+}

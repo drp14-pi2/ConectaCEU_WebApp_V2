@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/reports/reports.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/security/auth-guard.js"></script>
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
+    <script type="module" src="/pages/reports/reports.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <dynamic-content src="/shared/components/return-button.html"></dynamic-content>
+    <main>
+        <div class="background-shape"></div>
+        <div class="main-buttons-container">
+            <h1>Relatórios</h1>
+            
+            <div class="main-buttons">
+                <div class="main-buttons-row">
+                    <a href="/pages/reports/students-by-course/students-by-course.html">
+                        <div class="main-button">
+                            <p>Alunos matriculados por curso</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="main-button-icon">
+                                <path d="M240 192C240 147.8 275.8 112 320 112C364.2 112 400 147.8 400 192C400 236.2 364.2 272 320 272C275.8 272 240 236.2 240 192zM448 192C448 121.3 390.7 64 320 64C249.3 64 192 121.3 192 192C192 262.7 249.3 320 320 320C390.7 320 448 262.7 448 192zM144 544C144 473.3 201.3 416 272 416L368 416C438.7 416 496 473.3 496 544L496 552C496 565.3 506.7 576 520 576C533.3 576 544 565.3 544 552L544 544C544 446.8 465.2 368 368 368L272 368C174.8 368 96 446.8 96 544L96 552C96 565.3 106.7 576 120 576C133.3 576 144 565.3 144 552L144 544z"/>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <a href="#">
+                        <div class="main-button">
+                            <p>Vagas por curso</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="main-button-icon">
+                                <path d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z"/>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
+</body>
+</html>
