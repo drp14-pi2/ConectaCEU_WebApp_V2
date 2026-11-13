@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/base-styles.css">
+    <link rel="stylesheet" href="/pages/broadcast/broadcast.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/shared/assets/img/Mini Logo ConectaCEU.png">
+    <script type="module" src="/shared/security/auth-guard.js"></script>
+    <script type="module" src="/shared/components/dynamic-content.js" defer></script>
+    <script type="module" src="/pages/broadcast/broadcast.js" defer></script>
+    <title>ConectaCEU</title>
+</head>
+<body>
+    <dynamic-content src="/shared/components/header.html"></dynamic-content>
+    <dynamic-content src="/shared/components/return-button.html"></dynamic-content>
+    <main>
+        <div class="base-background-shape"></div>
+        <div class="base-form-container">
+            <h1>Enviar comunicados</h1>
+            <form class="search-form">
+                <div class="broadcast-means">
+                    <fieldset class="checkbox-input-container">
+                        <label><input type="checkbox" name="broadcast-mean" value="1"> E-mail</label>
+                    </fieldset>
+                </div>
+
+                <div class="input-container">
+                    <label for="subject">Assunto <span class="color-red">*</span></label>
+                    <input type="text" name="subject" id="subject" placeholder="Escreva um assunto...">
+                </div>
+
+                <div class="input-container message-container">
+                    <label for="message">Mensagem <span class="color-red">*</span></label>
+                    <textarea name="message" id="message" placeholder="Escreva uma mensagem..."></textarea>
+                </div>
+
+                <div class="document-row">
+                    <div class="document-container">
+                        <label>Documento 1</label>
+                        <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                    </div>
+                    
+                    <div class="document-container">
+                        <label>Documento 2</label>
+                        <dynamic-content src="/shared/components/form-file-input.html"></dynamic-content>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="button" id="button-submit-form">Entrar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <dynamic-content src="/shared/components/footer.html"></dynamic-content>
+</body>
+</html>

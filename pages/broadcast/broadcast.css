@@ -1,0 +1,24 @@
+.broadcast-means {
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+
+.checkbox-input-container {
+    justify-content: center;
+}
+
+.document-row {
+    display: flex;
+    justify-content: center;
+}
+
+.document-container {
+    margin: 10px;
+}
+
+@media screen and (max-width: 870px) {
+    .document-row {
+        flex-direction: column;
+    }
+}
