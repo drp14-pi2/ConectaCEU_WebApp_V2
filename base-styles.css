@@ -198,6 +198,11 @@ button:hover {
     transition: var(--base-transition);
 }
 
+.button-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .button-row {
     display: flex;
     justify-content: center;
@@ -239,7 +244,7 @@ button:hover {
     width: 98%;
 }
 
-.search-button {
+.search-button, .download-button {
     justify-content: center;
     align-items: center;
     display: flex;
@@ -248,7 +253,7 @@ button:hover {
     width: 50px;
 }
 
-.search-button svg {
+.search-button svg, .download-button svg {
     width: 50%;
 }
 

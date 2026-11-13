@@ -113,3 +113,29 @@ async function submitForm() {
     await renderResults(reportData)
 }
 submitButton.addEventListener('click', async () => await submitForm())
+
+// Download
+const downloadButton = document.querySelector('.download-button')
+async function download(){
+    const courseId = courseElement?.value
+    const loggedUser = AuthService.getLoggedUser()
+    const educationalUnitId = loggedUser?.educationalUnitId
+    const response = await ReportService.getStudentsByCourseXlsx(courseId, educationalUnitId)
+
+    if (!response.ok) {
+        showMessage(await ApiHelper.getResponseError(response))
+
+        return
+    }
+
+    const blob = await response.blob()
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = 'alunos_por_curso.xlsx'
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    URL.revokeObjectURL(url)
+}
+downloadButton.addEventListener('click', async () => await download())
