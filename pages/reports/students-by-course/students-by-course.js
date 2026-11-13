@@ -66,7 +66,7 @@ async function renderResults(reportData) {
 
         // Shift type
         const shiftTypeCell = document.createElement('td')
-        shiftTypeCell.textContent = ShiftType.getName(reportRow.shift_type_id)
+        shiftTypeCell.textContent = reportRow.shift_type_name
         trowElement.appendChild(shiftTypeCell)
 
         // Student name
