@@ -85,7 +85,7 @@ export class AuthService {
         return JSON.parse(userString)
     }
 
-    static async logout(manualRequest) {
+    static logout(manualRequest) {
         sessionStorage.clear()
 
         if (!manualRequest) showMessage('Sessão expirada', 3000)
