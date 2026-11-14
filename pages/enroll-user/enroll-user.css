@@ -1,0 +1,11 @@
+.active-enrollments {
+    display: flex;
+}
+
+.cancel-button {
+    background-color: var(--red);
+}
+
+.cancel-button:hover {
+    background-color: var(--dark-red);
+}

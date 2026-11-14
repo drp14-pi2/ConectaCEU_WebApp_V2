@@ -18,4 +18,6 @@ export const pageRouting = {
     attendance: `${config.appUrl}/pages/attendance/attendance.html`,
     consultEducator: `${config.appUrl}/pages/consult-educator/consult-educator.html`,
     consultStudent: `${config.appUrl}/pages/consult-student/consult-student.html`,
+    enrollUsers: `${config.appUrl}/pages/enroll-users/enroll-users.html`,
+    enrollUser: `${config.appUrl}/pages/enroll-user/enroll-user.html`
 }
