@@ -96,15 +96,15 @@ async function getUser() {
     if (!response.ok) {
         showMessage(await ApiHelper.getResponseError(response))
 
-        // if (document.referrer) {
-        //     const origin =  new URL(document.referrer).origin
+        if (document.referrer) {
+            const origin =  new URL(document.referrer).origin
 
-        //     if (origin === pageRouting.consultEducator || origin === pageRouting.consultStudent) {
-        //         history.back()
-        //     }
-        // } else {
-        //     location.href = pageRouting.root
-        // }
+            if (origin === pageRouting.consultEducator || origin === pageRouting.consultStudent) {
+                history.back()
+            }
+        } else {
+            location.href = pageRouting.root
+        }
 
         return
     }
