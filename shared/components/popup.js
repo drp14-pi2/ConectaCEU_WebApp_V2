@@ -72,12 +72,18 @@ export function openPopup({ title = '', content = '', buttons = [], onClose: cb 
 
     // populate action buttons (before the close button, or after — your choice)
     const btnRow = popup.querySelector('.popup-btn-row')
-    for (const { label, onClick, variant } of buttons) {
+    for (const { label, onClick, variants } of buttons) {
         const b = document.createElement('button')
         b.type = 'button'
         b.textContent = label
         b.classList.add('popup-action')
-        if (variant) b.classList.add(variant)
+
+        if (variants) {
+            for (const variant of variants) {
+                b.classList.add(variant)
+            }
+        }
+
         b.addEventListener('click', async () => {
         if (b.disabled) return
         b.disabled = true
