@@ -2,6 +2,7 @@ import { AuthService } from '/shared/services/auth-service.js'
 import { CourseService } from '/shared/services/course-service.js'
 import { UserService } from '/shared/services/user-service.js'
 import { CourseComponentService } from '/shared/services/course-component-service.js'
+import { EnrollmentService } from '/shared/services/enrollment-service.js'
 import { ClassService } from '/shared/services/class-service.js'
 import { ListCourses } from '/shared/models/course.js'
 import { ListClasses } from '/shared/models/class.js'
@@ -9,33 +10,61 @@ import { ApiHelper } from '/shared/helpers/api-helper.js'
 import { DateHelper } from '/shared/helpers/date-helper.js'
 import { showMessage } from '/shared/components/toast.component.js'
 import { ShiftType } from '/shared/constants/shift-type.js'
+import { UserType } from '/shared/constants/user-type.js'
 import { StyleHelper } from '/shared/helpers/style-helper.js'
 
 const courseElement = document.querySelector('#course')
 const courseComponentElement = document.querySelector('#courseComponent')
 let courses = []
 let selectedCourse = {}
+let educators = []
 
 // List courses
 async function listCourses() {
     const loggedUser = AuthService.getLoggedUser()
-    const query = new ListCourses(
-        null,
-        true,
-        null,
-        null,
-        loggedUser.educationalUnitId,
-        1,
-        500)
-    const response = await CourseService.list(query)
 
-    if (!response.ok) {
-        showMessage(await ApiHelper.getResponseError(response))
+    if (loggedUser.userTypeId == UserType.STUDENT) {
+        const enrollmentsResponse = await EnrollmentService.getUserEnrollments(loggedUser.id)
 
-        return
+        if (!enrollmentsResponse.ok) {
+            showMessage(await ApiHelper.getResponseError(response))
+
+            return
+        }
+
+        const enrollments = await enrollmentsResponse.json()
+
+        for (const enrollment of enrollments) {
+            const courseResponse = await CourseService.get(enrollment.course_id)
+
+            if (!courseResponse.ok) {
+                showMessage(await ApiHelper.getResponseError(courseResponse))
+
+                return
+            }
+
+            courses.push(await courseResponse.json())
+        }
     }
+    else {
+        const query = new ListCourses(
+            null,
+            true,
+            null,
+            null,
+            loggedUser.educationalUnitId,
+            1,
+            500)
+        const response = await CourseService.list(query)
 
-    courses = await response.json()
+        if (!response.ok) {
+            showMessage(await ApiHelper.getResponseError(response))
+
+            return
+        }
+
+        courses = await response.json()
+    }
 
     for (const course of courses) {
         const option = document.createElement('option')
@@ -89,7 +118,8 @@ courseElement.addEventListener('change', async () => {
 
 // List educators
 async function listEducators() {
-    let educators = []
+    if (educators.length > 0) return educators
+
     let educatorIds = [selectedCourse.responsible_educator_1]
 
     if (selectedCourse.responsible_educator_2) {
