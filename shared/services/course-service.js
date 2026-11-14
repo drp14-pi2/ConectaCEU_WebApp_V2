@@ -2,7 +2,7 @@ import { config } from '/config.js'
 
 export class CourseService {
     static async create(createCourseBody) {
-        return fetch(`${config.apiUrl}/course`, {
+        return await fetch(`${config.apiUrl}/course`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -23,7 +23,7 @@ export class CourseService {
     }
 
     static async get(courseId) {
-        return fetch(`${config.apiUrl}/course/${courseId}`)
+        return await fetch(`${config.apiUrl}/course/${courseId}`)
     }
 
     static async list(searchObject) {
@@ -52,8 +52,8 @@ export class CourseService {
         params.set('page', searchObject.page);
         params.set('page_size', searchObject.pageSize);
 
-        const resource = params.size ? `${config.apiUrl}/course` : `${config.apiUrl}/course?${params}`
+        const resource = params.size ? `${config.apiUrl}/course?${params}` : `${config.apiUrl}/course`
 
-        return fetch(resource)
+        return await fetch(resource)
     }
 }
