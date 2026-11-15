@@ -13,6 +13,7 @@ import { showMessage } from '/shared/components/toast.component.js'
 import { ShiftType } from '/shared/constants/shift-type.js'
 import { UserType } from '/shared/constants/user-type.js'
 import { AttendanceType } from '/shared/constants/attendance-type.js'
+import { DocumentValidationStatusType } from '/shared/constants/document-validation-status-type.js'
 import { StyleHelper } from '/shared/helpers/style-helper.js'
 import { FileHelper } from '/shared/helpers/file-helper.js'
 import { openPopup } from '/shared/components/popup.js'
@@ -31,7 +32,7 @@ async function listCourses() {
         const enrollmentsResponse = await EnrollmentService.getUserEnrollments(loggedUser.id)
 
         if (!enrollmentsResponse.ok) {
-            showMessage(await ApiHelper.getResponseError(response))
+            showMessage(await ApiHelper.getResponseError(enrollmentsResponse))
 
             return
         }
@@ -142,6 +143,16 @@ async function listEducators() {
 }
 
 
+// Get absense justification status
+async function getJustificationStatus(attendanceId) {
+    const response = await AttendanceService.getJustificationStatus(attendanceId)
+
+    if (!response.ok) return
+
+    return (await response.json())?.status
+}
+
+
 // Render results
 async function renderResults(classes) {
     const resultContainer = document.querySelector('.item-listing-result')
@@ -153,6 +164,37 @@ async function renderResults(classes) {
     }
 
     const theadElement = document.querySelector('thead > tr')
+    theadElement.replaceChildren()
+
+    // Total seats header
+    const totalSeatsHeader = document.createElement('td')
+    totalSeatsHeader.textContent = 'Total vagas'
+    theadElement.appendChild(totalSeatsHeader)
+
+    // Seats used header
+    const seatsUsedHeader = document.createElement('td')
+    seatsUsedHeader.textContent = 'Vagas em uso'
+    theadElement.appendChild(seatsUsedHeader)
+
+    // Available seats header
+    const availableSeatsHeader = document.createElement('td')
+    availableSeatsHeader.textContent = 'Vagas disponíveis'
+    theadElement.appendChild(availableSeatsHeader)
+
+    // Educator header
+    const educatorHeader = document.createElement('td')
+    educatorHeader.textContent = 'Docente'
+    theadElement.appendChild(educatorHeader)
+
+    // Date header
+    const dateHeader = document.createElement('td')
+    dateHeader.textContent = 'Data'
+    theadElement.appendChild(dateHeader)
+
+    // Shift header
+    const shiftHeader = document.createElement('td')
+    shiftHeader.textContent = 'Turno'
+    theadElement.appendChild(shiftHeader)
 
     if (isLoggedUserStudent) {
         const attendanceCell = document.createElement('td')
@@ -233,6 +275,15 @@ async function renderResults(classes) {
         // Create button
         const actionButtonElement = document.createElement('button')
         actionButtonElement.classList.add('actionButton')
+
+        if (attendance) {
+            const justificationStatus = await getJustificationStatus(attendance.id)
+
+            if (justificationStatus && justificationStatus != DocumentValidationStatusType.rejected) {
+                actionButtonElement.disabled = true
+                actionButtonElement.classList.add('disabled')
+            }
+        }
         
         // Create button cell
         const actionButtonCell = document.createElement('td')

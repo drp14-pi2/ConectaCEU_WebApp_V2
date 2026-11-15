@@ -30,4 +30,8 @@ export class AttendanceService {
             })
         })
     }
+
+    static async getJustificationStatus(attendanceId) {
+        return await fetch(`${config.apiUrl}/attendance/${attendanceId}/justification/status`)
+    }
 }
